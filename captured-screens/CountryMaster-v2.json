@@ -1,0 +1,152 @@
+{
+  "screen": "CountryMaster",
+  "label": "Country Master",
+  "preSelects": {},
+  "fields": [
+    {
+      "id": "countryCode",
+      "type": "text",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "Country Code",
+      "label": "Country Code"
+    },
+    {
+      "id": "countryName",
+      "type": "text",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "Country Name",
+      "label": "Country Name"
+    },
+    {
+      "id": "countryAbbrevation",
+      "type": "text",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "Country Abbreviation",
+      "label": "Country Abbreviation"
+    },
+    {
+      "id": "numCountyCd",
+      "type": "text",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "Numeric Country Code",
+      "label": "Numeric Country Code"
+    },
+    {
+      "id": "countryType",
+      "type": "select",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "",
+      "label": "Country Type"
+    },
+    {
+      "id": "isdCode",
+      "type": "select",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "",
+      "label": "ISD Code"
+    },
+    {
+      "id": "zone",
+      "type": "select",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "",
+      "label": "Zone"
+    },
+    {
+      "id": "region",
+      "type": "select",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "",
+      "label": "Region"
+    },
+    {
+      "id": "restrictedY",
+      "type": "radio",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "",
+      "label": "Yes"
+    },
+    {
+      "id": "restrictedN",
+      "type": "radio",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "",
+      "label": "Yes"
+    },
+    {
+      "id": "gracePrdY",
+      "type": "radio",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "",
+      "label": "Yes"
+    },
+    {
+      "id": "gracePrdN",
+      "type": "radio",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "",
+      "label": "Yes"
+    },
+    {
+      "id": "gracePrd",
+      "type": "text",
+      "disabled": true,
+      "readonly": false,
+      "placeholder": "Grace Period",
+      "label": "Grace Period"
+    },
+    {
+      "id": "ecgcCoverY",
+      "type": "radio",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "",
+      "label": "Yes"
+    },
+    {
+      "id": "ecgcCoverN",
+      "type": "radio",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "",
+      "label": "Yes"
+    },
+    {
+      "id": "isAplhanumericY",
+      "type": "radio",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "",
+      "label": "Yes"
+    },
+    {
+      "id": "isAplhanumericN",
+      "type": "radio",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "",
+      "label": "Yes"
+    },
+    {
+      "id": "pinLength",
+      "type": "text",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "Pincode Length",
+      "label": "Pincode Length"
+    }
+  ],
+  "saveSelector": "button#saveCustomer"
+}

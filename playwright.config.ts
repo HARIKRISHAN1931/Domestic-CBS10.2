@@ -1,0 +1,38 @@
+import { defineConfig, devices } from '@playwright/test';
+import { config } from './src/framework/config/config';
+
+export default defineConfig({
+  testDir: './src/modules',
+  testMatch: '**/*.spec.ts',
+  globalSetup: './src/framework/config/global-setup.ts',
+  fullyParallel: true,
+  forbidOnly: !!process.env.CI,
+  retries: process.env.CI ? 2 : 0,
+  workers: process.env.CI ? 4 : 2,
+  timeout: 120_000,
+  expect: { timeout: 10_000 },
+
+  reporter: [
+    ['html', { outputFolder: 'reports/html', open: 'never' }],
+    ['allure-playwright', { outputFolder: 'allure-results' }],
+    ['list'],
+  ],
+
+  use: {
+    baseURL: config.baseUrl,
+    trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
+    video: 'on-first-retry',
+    actionTimeout: 15_000,
+    navigationTimeout: 30_000,
+  },
+
+  projects: [
+    {
+      name: 'chromium',
+      use: { ...devices['Desktop Chrome'] },
+    },
+  ],
+
+  outputDir: 'test-results',
+});

@@ -1,0 +1,16 @@
+node_modules/
+dist/
+test-results/
+allure-results/
+allure-report/
+reports/
+screenshots/
+videos/
+logs/
+auth-state.json
+.env
+.env.dev
+.env.qa
+.env.uat
+.env.prod
+*.log

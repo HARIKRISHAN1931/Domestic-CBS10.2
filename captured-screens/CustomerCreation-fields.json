@@ -1,0 +1,36 @@
+{
+  "capturedAt": "2026-07-26T14:11:56.397Z",
+  "screen": "CustomerCreation_Retail",
+  "tabs": [
+    {
+      "tab": "Tab1_BasicDetails_Blank",
+      "fields": [],
+      "radioGroups": {},
+      "checkboxes": []
+    },
+    {
+      "tab": "Tab1_BasicDetails_AfterCategory",
+      "fields": [],
+      "radioGroups": {},
+      "checkboxes": []
+    },
+    {
+      "tab": "Tab2_ContactDetails",
+      "fields": [],
+      "radioGroups": {},
+      "checkboxes": []
+    },
+    {
+      "tab": "Tab3_AdditionalDetails",
+      "fields": [],
+      "radioGroups": {},
+      "checkboxes": []
+    },
+    {
+      "tab": "Tab4_DocumentDetails",
+      "fields": [],
+      "radioGroups": {},
+      "checkboxes": []
+    }
+  ]
+}

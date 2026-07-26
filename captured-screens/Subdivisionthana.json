@@ -1,0 +1,620 @@
+{
+  "screen": "Subdivisionthana",
+  "label": "Sub-Division/Thana",
+  "fields": [
+    {
+      "id": "menuSearchBox",
+      "name": "",
+      "type": "text",
+      "placeholder": "Menu search",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "country",
+      "name": "country",
+      "type": "select",
+      "placeholder": "",
+      "label": "Country Code",
+      "disabled": false,
+      "maxlength": ""
+    },
+    {
+      "id": "state",
+      "name": "state",
+      "type": "select",
+      "placeholder": "",
+      "label": "State",
+      "disabled": false,
+      "maxlength": ""
+    },
+    {
+      "id": "cityCd",
+      "name": "cityCd",
+      "type": "select",
+      "placeholder": "",
+      "label": "District Code",
+      "disabled": false,
+      "maxlength": ""
+    },
+    {
+      "id": "areaCd",
+      "name": "areaCd",
+      "type": "text",
+      "placeholder": "Sub-Division/Thana Code",
+      "label": "Sub-Division/Thana Code",
+      "disabled": true,
+      "maxlength": "6",
+      "options": []
+    },
+    {
+      "id": "areaDesc",
+      "name": "areaDesc",
+      "type": "text",
+      "placeholder": "Sub-Division/Thana Desc",
+      "label": "Sub-Division/Thana Desc",
+      "disabled": true,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "lockloginId",
+      "name": "lockloginId",
+      "type": "text",
+      "placeholder": "Enter username here",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "lockpwd",
+      "name": "lockpwd",
+      "type": "password",
+      "placeholder": "Enter your password here",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "searchBox",
+      "name": "search",
+      "type": "text",
+      "placeholder": "Enter keyword here",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "level1",
+      "name": "",
+      "type": "select",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": ""
+    },
+    {
+      "id": "level2",
+      "name": "",
+      "type": "select",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": ""
+    },
+    {
+      "id": "qmenul1l2",
+      "name": "qmenul1l2",
+      "type": "select",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": ""
+    },
+    {
+      "id": "branchCode",
+      "name": "branchCode",
+      "type": "text",
+      "placeholder": "",
+      "label": "Branch Code",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "branchName",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "Branch Name",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "okButtonforShowDiffPopUp",
+      "name": "okButtonforShowDiffPopUp",
+      "type": "button",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "createdBy123",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "Created By",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "createdDate",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "Created Date",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "createdTime",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "Created Time",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "lastmodifBy",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "Last Modified By",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "lastmodifDate",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "Last Modified Date",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "lastmodifTime",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "Last Modified Time",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "status",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "Status",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "rev",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "REV",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "rejectedReson",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "Rejected Reason",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "memberCode1",
+      "name": "memberCode1",
+      "type": "text",
+      "placeholder": "Enter customer number here",
+      "label": "Introducer's Customer Number",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "memberFullName1",
+      "name": "memberFullName1",
+      "type": "text",
+      "placeholder": "Enter customer name here",
+      "label": "Introducer's customer name",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "refDocNo1",
+      "name": "refDocNo1",
+      "type": "text",
+      "placeholder": "Enter document reference here",
+      "label": "ID Proof Number",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "memberDOB1",
+      "name": "memberDOB1",
+      "type": "text",
+      "placeholder": "Enter customer date of birth here",
+      "label": "Date Of Birth",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "search",
+      "name": "search",
+      "type": "button",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "okForPopUp",
+      "name": "okForPopUp",
+      "type": "button",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "moduleCode1",
+      "name": "moduleCode1",
+      "type": "text",
+      "placeholder": "Enter module number here",
+      "label": "Module Code",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "moduleName1",
+      "name": "moduleName1",
+      "type": "text",
+      "placeholder": "Enter module name here",
+      "label": "Module Name",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "searchModule",
+      "name": "searchModule",
+      "type": "button",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "okForModule",
+      "name": "okForModule",
+      "type": "button",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "productCode1",
+      "name": "productCode1",
+      "type": "text",
+      "placeholder": "Enter product code here",
+      "label": "Product",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "productName1",
+      "name": "productName1",
+      "type": "text",
+      "placeholder": "Enter product name here",
+      "label": "Product Name",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "searchProduct",
+      "name": "searchProduct",
+      "type": "button",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "okForProduct",
+      "name": "okForProduct",
+      "type": "button",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "schemeCode1",
+      "name": "schemeCode1",
+      "type": "text",
+      "placeholder": "Enter scheme code here",
+      "label": "Scheme Code",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "schemeName1",
+      "name": "schemeName1",
+      "type": "text",
+      "placeholder": "Enter scheme name here",
+      "label": "Scheme Name",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "searchScheme",
+      "name": "searchScheme",
+      "type": "button",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "okForScheme",
+      "name": "okForScheme",
+      "type": "button",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "custGroupOkForPopUp",
+      "name": "custGroupOkForPopUp",
+      "type": "button",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "custGroupOkForPopUp",
+      "name": "custGroupOkForPopUp",
+      "type": "button",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "AccountSearchBox",
+      "name": "",
+      "type": "textbox",
+      "placeholder": "Enter Keywords",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "memberCodeSearch",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "memberNameSearch",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "phoneNoSearch",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "panNoSearch",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "dobSearch",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "venderCode",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "venderName",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "ifscCodeSearch",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "applicationNoSearch",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "BlockCardSearchBox",
+      "name": "",
+      "type": "textbox",
+      "placeholder": "Enter Keywords",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "cardNoSearch",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "UserMasterSearchBox",
+      "name": "",
+      "type": "textbox",
+      "placeholder": "Enter Keywords",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "EmployeeMasterSearchBox",
+      "name": "",
+      "type": "textbox",
+      "placeholder": "Enter Keywords",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "CenterMasterSearchBox",
+      "name": "",
+      "type": "textbox",
+      "placeholder": "Enter Keywords",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "BranchMasterSearchBox",
+      "name": "",
+      "type": "textbox",
+      "placeholder": "Enter Keywords",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "GroupMasterSearchBox",
+      "name": "",
+      "type": "textbox",
+      "placeholder": "Enter Keywords",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "BICCodeSearchBox",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    }
+  ]
+}

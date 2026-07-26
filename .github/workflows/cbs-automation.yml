@@ -1,0 +1,116 @@
+name: CBS Automation Tests
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '0 2 * * *'
+
+env:
+  ENV: qa
+
+jobs:
+  smoke:
+    name: Smoke Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run smoke tests
+        run: npm run test:smoke
+        env:
+          BASE_URL: ${{ secrets.QA_BASE_URL }}
+          DB_HOST: ${{ secrets.QA_DB_HOST }}
+          DB_NAME: ${{ secrets.QA_DB_NAME }}
+          DB_USER: ${{ secrets.QA_DB_USER }}
+          DB_PASSWORD: ${{ secrets.QA_DB_PASSWORD }}
+          AUTH_USERNAME: ${{ secrets.QA_AUTH_USERNAME }}
+          AUTH_PASSWORD: ${{ secrets.QA_AUTH_PASSWORD }}
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: smoke-results
+          path: |
+            reports/html/
+            allure-results/
+            test-results/
+
+  regression:
+    name: Regression Tests
+    runs-on: ubuntu-latest
+    needs: smoke
+    strategy:
+      matrix:
+        shard: [1, 2, 3, 4]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps chromium
+
+      - name: Run regression shard ${{ matrix.shard }}
+        run: npx playwright test --grep @regression --shard=${{ matrix.shard }}/4
+        env:
+          BASE_URL: ${{ secrets.QA_BASE_URL }}
+          DB_HOST: ${{ secrets.QA_DB_HOST }}
+          DB_NAME: ${{ secrets.QA_DB_NAME }}
+          DB_USER: ${{ secrets.QA_DB_USER }}
+          DB_PASSWORD: ${{ secrets.QA_DB_PASSWORD }}
+          AUTH_USERNAME: ${{ secrets.QA_AUTH_USERNAME }}
+          AUTH_PASSWORD: ${{ secrets.QA_AUTH_PASSWORD }}
+
+      - name: Upload shard results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: regression-shard-${{ matrix.shard }}
+          path: allure-results/
+
+  publish-report:
+    name: Publish Allure Report
+    runs-on: ubuntu-latest
+    needs: regression
+    if: always()
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download all shard results
+        uses: actions/download-artifact@v4
+        with:
+          pattern: regression-shard-*
+          merge-multiple: true
+          path: allure-results
+
+      - name: Generate Allure report
+        run: |
+          npm install -g allure-commandline
+          allure generate allure-results --clean -o allure-report
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: allure-report

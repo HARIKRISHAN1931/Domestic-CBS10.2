@@ -1,0 +1,120 @@
+{
+  "screen": "TenantGroupMaster",
+  "label": "Tenant Group Master",
+  "preSelects": {},
+  "fields": [
+    {
+      "id": "institutionId",
+      "type": "text",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "Group Tenant ID",
+      "label": "Group Tenant ID"
+    },
+    {
+      "id": "institutionName",
+      "type": "text",
+      "disabled": true,
+      "readonly": false,
+      "placeholder": "Group Tenant Name",
+      "label": "Group Tenant Name"
+    },
+    {
+      "id": "address1",
+      "type": "text",
+      "disabled": true,
+      "readonly": false,
+      "placeholder": "Group Tenant Address1",
+      "label": "Group Tenant Address1"
+    },
+    {
+      "id": "address2",
+      "type": "text",
+      "disabled": true,
+      "readonly": false,
+      "placeholder": "Group Tenant Address2",
+      "label": "Group Tenant Address2"
+    },
+    {
+      "id": "address3",
+      "type": "text",
+      "disabled": true,
+      "readonly": false,
+      "placeholder": "Group Tenant Address3",
+      "label": "Group Tenant Address3"
+    },
+    {
+      "id": "country",
+      "type": "select",
+      "disabled": true,
+      "readonly": false,
+      "placeholder": "",
+      "label": "Country Code"
+    },
+    {
+      "id": "state",
+      "type": "select",
+      "disabled": true,
+      "readonly": false,
+      "placeholder": "",
+      "label": "State"
+    },
+    {
+      "id": "city",
+      "type": "select",
+      "disabled": true,
+      "readonly": false,
+      "placeholder": "",
+      "label": "District"
+    },
+    {
+      "id": "pinCode",
+      "type": "text",
+      "disabled": true,
+      "readonly": false,
+      "placeholder": "Enter postal code",
+      "label": "Postal Code"
+    },
+    {
+      "id": "timeZone",
+      "type": "select",
+      "disabled": true,
+      "readonly": false,
+      "placeholder": "",
+      "label": "TimeZone"
+    },
+    {
+      "id": "tenantRegistrationDate",
+      "type": "text",
+      "disabled": true,
+      "readonly": true,
+      "placeholder": "",
+      "label": "Tenant Registration Date"
+    },
+    {
+      "id": "tenantStatus",
+      "type": "select",
+      "disabled": true,
+      "readonly": false,
+      "placeholder": "",
+      "label": "Tenant Status"
+    },
+    {
+      "id": "tenantDeregistrationDate",
+      "type": "text",
+      "disabled": true,
+      "readonly": true,
+      "placeholder": "",
+      "label": "Tenant Deregistration Date"
+    },
+    {
+      "id": "tenantDeregistrationReason",
+      "type": "textarea",
+      "disabled": true,
+      "readonly": false,
+      "placeholder": "Tenant Deregistration Reason",
+      "label": "Deregistration Reason"
+    }
+  ],
+  "saveSelector": "#btnSave"
+}

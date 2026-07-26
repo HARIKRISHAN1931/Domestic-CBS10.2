@@ -1,0 +1,64 @@
+{
+  "screen": "DistrictMaster",
+  "label": "District Master",
+  "preSelects": {},
+  "fields": [
+    {
+      "id": "countryCode",
+      "type": "select",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "",
+      "label": "Country Code"
+    },
+    {
+      "id": "stateCode",
+      "type": "select",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "",
+      "label": "State"
+    },
+    {
+      "id": "districtCode",
+      "type": "text",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "Enter District Code Here",
+      "label": "District Code"
+    },
+    {
+      "id": "districtName",
+      "type": "text",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "Enter District Name Here",
+      "label": "District Name"
+    },
+    {
+      "id": "numCityCode",
+      "type": "text",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "Enter Numeric District Code",
+      "label": "Numeric District Code"
+    },
+    {
+      "id": "censusDistCode",
+      "type": "text",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "Enter Census District code",
+      "label": "Census District Code"
+    },
+    {
+      "id": "subDistCode",
+      "type": "text",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "Enter Sub District code",
+      "label": "Sub District Code"
+    }
+  ],
+  "saveSelector": "button#saveCustomer"
+}

@@ -1,0 +1,25 @@
+{
+  "cookies": [
+    {
+      "name": "JSESSIONID",
+      "value": "231F27D73D03EB45C27A67645FAF09F5",
+      "domain": "172.21.0.39",
+      "path": "/Kiya.aiCBS-10.2.0",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "http://172.21.0.39:7999",
+      "localStorage": [
+        {
+          "name": "openpages",
+          "value": "1785077986928"
+        }
+      ]
+    }
+  ]
+}

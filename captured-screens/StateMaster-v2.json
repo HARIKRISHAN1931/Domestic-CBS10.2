@@ -1,0 +1,56 @@
+{
+  "screen": "StateMaster",
+  "label": "State Master",
+  "preSelects": {},
+  "fields": [
+    {
+      "id": "countryCode",
+      "type": "select",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "",
+      "label": "Country Code"
+    },
+    {
+      "id": "countryName",
+      "type": "text",
+      "disabled": false,
+      "readonly": true,
+      "placeholder": "",
+      "label": "Country Name"
+    },
+    {
+      "id": "stateCode",
+      "type": "text",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "State Code",
+      "label": "State Code"
+    },
+    {
+      "id": "gstCode",
+      "type": "text",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "GST Code",
+      "label": "GST Code"
+    },
+    {
+      "id": "stateName",
+      "type": "text",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "State Name",
+      "label": "State Name"
+    },
+    {
+      "id": "numstateCode",
+      "type": "text",
+      "disabled": false,
+      "readonly": false,
+      "placeholder": "Numeric State Code",
+      "label": "Numeric State Code"
+    }
+  ],
+  "saveSelector": "button#saveCustomer"
+}

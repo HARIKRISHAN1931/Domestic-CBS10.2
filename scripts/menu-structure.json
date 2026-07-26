@@ -1,0 +1,3510 @@
+[
+  {
+    "id": "Masters",
+    "label": "Masters",
+    "subSections": [
+      {
+        "id": "customermgmt",
+        "label": "Customer Management",
+        "items": [
+          {
+            "id": "GROUPMASTER",
+            "label": "Group Master"
+          },
+          {
+            "id": "SMSSERVICEMST",
+            "label": "SMSSERVICEMST Menu(Not Registered)"
+          },
+          {
+            "id": "CUSTOMER",
+            "label": "Customer Creation-Retail"
+          },
+          {
+            "id": "CORPCUSTOMER",
+            "label": "Customer Creation - Corporate"
+          },
+          {
+            "id": "CUSTFAMILYDETAILS",
+            "label": "Family Details"
+          },
+          {
+            "id": "FOREXCUSTDETAILS",
+            "label": "Customer Forex Details"
+          },
+          {
+            "id": "CUST360",
+            "label": "CUSTOMER 360"
+          },
+          {
+            "id": "DOCUMENTVIEW",
+            "label": "Document View"
+          },
+          {
+            "id": "CUSTOMERBANKDETAILS",
+            "label": "Customer Bank Details"
+          },
+          {
+            "id": "IT_RETURNDETAILS",
+            "label": "IT Return Details For Customer Number"
+          },
+          {
+            "id": "MEMBERSHIPAPPLICATION",
+            "label": "Membership Application Form"
+          },
+          {
+            "id": "BLACKLISTINGOFCUSTOMERS",
+            "label": "Blacklisting Of Customers"
+          },
+          {
+            "id": "206ABUPLOAD",
+            "label": "206ABUPLOAD"
+          },
+          {
+            "id": "15GSUBMISSION",
+            "label": "15 G/H Submission"
+          },
+          {
+            "id": "FORMNO60",
+            "label": "Form No 60 Master"
+          },
+          {
+            "id": "CUSTOMERKYCMST",
+            "label": "Customer Re-KYC"
+          },
+          {
+            "id": "CUSTDOCVIEW",
+            "label": "Customer Document View"
+          },
+          {
+            "id": "DECEASEDCLAIM",
+            "label": "Deceased Claim Master"
+          }
+        ]
+      },
+      {
+        "id": "customerLimitMgmt",
+        "label": "Customer Limit Management",
+        "items": [
+          {
+            "id": "VALIDLIMITCATEGORY",
+            "label": "Valid Limit Category"
+          },
+          {
+            "id": "CUSTLIMITMASTER",
+            "label": "Customer Limit Master"
+          },
+          {
+            "id": "CUSTLIMITMASTER1",
+            "label": "Customer Limit Master"
+          },
+          {
+            "id": "CUSTLIMITSETUP",
+            "label": "Customer Liability Setup"
+          },
+          {
+            "id": "TDSREVCUSTMST",
+            "label": "TDSREVCUSTMST"
+          }
+        ]
+      },
+      {
+        "id": "accountmgmt",
+        "label": "Accounts Management",
+        "items": [
+          {
+            "id": "PRDACNOMST",
+            "label": "Customer Account Creation"
+          },
+          {
+            "id": "ACCOUNTDOCUMENTCONFIGUARATION",
+            "label": "Account Document"
+          },
+          {
+            "id": "ACCOUNTSTATEMENT",
+            "label": "Statement of Account"
+          },
+          {
+            "id": "BALANCEVIEW",
+            "label": "Balance Enquiry"
+          },
+          {
+            "id": "PRDACNOMSTINTERNAL",
+            "label": "Internal Account Creation"
+          },
+          {
+            "id": "MT900Mst",
+            "label": "MT900Mst Menu(Not Registered)"
+          },
+          {
+            "id": "MT910Mst",
+            "label": "MT910Mst Menu(Not Registered)"
+          },
+          {
+            "id": "WELCOMEKIT",
+            "label": "WELCOMEKIT Menu(Not Registered)"
+          },
+          {
+            "id": "CASATRNFPRCSS",
+            "label": "CASA TRNF PRCSS"
+          },
+          {
+            "id": "NOMINEEMST",
+            "label": "Account Nominee Details"
+          },
+          {
+            "id": "POWEROFATTORNEYMST",
+            "label": "Power Of Attorney"
+          },
+          {
+            "id": "ACCOUNTTRANSFER",
+            "label": "ACCOUNTTRANSFER Menu(Not Registered)"
+          },
+          {
+            "id": "OLDACCOUNTSEARCH",
+            "label": "OLDACCOUNTSEARCH"
+          },
+          {
+            "id": "CUSTUNIFICATION",
+            "label": "CUSTUNIFICATION"
+          }
+        ]
+      },
+      {
+        "id": "photoandsign",
+        "label": "Signature and Photo Management",
+        "items": [
+          {
+            "id": "PhotoAndSignCreation",
+            "label": "Signature and Photo Capture"
+          },
+          {
+            "id": "SignatureMandate",
+            "label": "Signature and Photo Mandate Management"
+          },
+          {
+            "id": "SIGNPHOTOMANDATE",
+            "label": "SIGNPHOTOMANDATE Menu(Not Registered)"
+          },
+          {
+            "id": "PhotoAndSignAuthorization",
+            "label": "Signature and Photo Bulk Authorization"
+          }
+        ]
+      },
+      {
+        "id": "SECURITYRECEIPT",
+        "label": "Trust Management",
+        "items": [
+          {
+            "id": "TRUSTONBOARDING",
+            "label": "Trust Creation"
+          },
+          {
+            "id": "SRISSUE",
+            "label": "SR Creation"
+          }
+        ]
+      },
+      {
+        "id": "instrumentMst",
+        "label": "Cheque/Instrument Master",
+        "items": [
+          {
+            "id": "INSTRUMENT",
+            "label": "Instrument Stock"
+          },
+          {
+            "id": "INSTRUMENTACCOUNT",
+            "label": "Instrument Issue Master"
+          },
+          {
+            "id": "STOPPAY",
+            "label": "Stop Pay Instrument"
+          },
+          {
+            "id": "REVOKEINSTRUMENT",
+            "label": "Revoke Instrument"
+          },
+          {
+            "id": "PERSONALCHEQUEB00K",
+            "label": "Personal Cheque Book"
+          },
+          {
+            "id": "FATEOFCHEQUE",
+            "label": "Fate Of Cheque"
+          },
+          {
+            "id": "PASSBOOKSTOCK",
+            "label": "Fate Of Cheque"
+          },
+          {
+            "id": "SEQUENTIALFILE",
+            "label": "Print Cheque Book Request"
+          },
+          {
+            "id": "CHECKBOOKUPLOAD",
+            "label": "Cheque Book Upload"
+          },
+          {
+            "id": "ISSUEDCHEQUEBOOKS",
+            "label": "Issued Cheque Books Detail"
+          },
+          {
+            "id": "UNUSEDCHEQUES",
+            "label": "UnUsed Cheques Detail"
+          },
+          {
+            "id": "POSITIVEPAYMST",
+            "label": "Positive Pay (Secure Cheque Payments)"
+          }
+        ]
+      },
+      {
+        "id": "td",
+        "label": "Term Deposit Management",
+        "items": [
+          {
+            "id": "TDINTERESTPAYOUT",
+            "label": "TD Interest Payout"
+          },
+          {
+            "id": "TERMDEPOSITCONTRACTD",
+            "label": "Term Deposit Contract"
+          },
+          {
+            "id": "TERMDEPOSITCONTRACTDSR",
+            "label": "TD Contract Creation for Special Rate"
+          },
+          {
+            "id": "MATDISINSTR",
+            "label": "TD Maturity Disposal new"
+          },
+          {
+            "id": "TERMDEPOSITCANCELLATION",
+            "label": "TERMDEPOSITCANCELLATION Menu(Not Registered)"
+          },
+          {
+            "id": "TDINTERESTMATURITYDISPOALMST",
+            "label": "Maturity Disposal Instructions"
+          },
+          {
+            "id": "TDDEPOSITQUERY",
+            "label": "Term Deposit Receipts Query"
+          }
+        ]
+      },
+      {
+        "id": "StandingInstructionsMst",
+        "label": "Standing Instructions & Lien",
+        "items": [
+          {
+            "id": "StandingInstructions",
+            "label": "Standing Instructions Master"
+          },
+          {
+            "id": "CANCELSI",
+            "label": "Standing Instruction Cancellation"
+          },
+          {
+            "id": "LIENEARMARKING",
+            "label": "Term Deposit Lien/Ear Marking Master"
+          },
+          {
+            "id": "LIENEARMARKINGCAN",
+            "label": "Term Deposit Lien/Ear Marking Cancel"
+          },
+          {
+            "id": "LIENEARMARKINGCANVIEW",
+            "label": "LIENEARMARKINGCANVIEW Menu(Not Registered)"
+          }
+        ]
+      },
+      {
+        "id": "SWEEPMst",
+        "label": "Sweep Deposits",
+        "items": [
+          {
+            "id": "SWEEPDEPOSITMST",
+            "label": "Sweep Deposit Master"
+          },
+          {
+            "id": "SWEEPLINKACCOUNT",
+            "label": "Sweep Link for an Account"
+          }
+        ]
+      },
+      {
+        "id": "currentAccount",
+        "label": "Cash Credit & Overdrafts",
+        "items": [
+          {
+            "id": "CCODLimitMst",
+            "label": "CC OD Limit Creation"
+          },
+          {
+            "id": "DPRDETAILS",
+            "label": "Drawing Power Register"
+          },
+          {
+            "id": "DPPARAM_MASTER",
+            "label": "DP PARAMETER MASTER"
+          },
+          {
+            "id": "CCREVIEWMASTER",
+            "label": "CC REVIEW MASTER"
+          },
+          {
+            "id": "CCODADHOCLIMIT",
+            "label": "CCOD Adhoc Limit"
+          },
+          {
+            "id": "P013042",
+            "label": "Account Status Updation Process"
+          },
+          {
+            "id": "CCODINSURANCE",
+            "label": "Insurance Details Master (View)"
+          }
+        ]
+      },
+      {
+        "id": "advancesAgainstEquitySharesSecurities",
+        "label": "Advances against Equity Shares/Securities",
+        "items": [
+          {
+            "id": "DPRSHARESREGISTER",
+            "label": "DP Register Shares"
+          }
+        ]
+      },
+      {
+        "id": "fdloan",
+        "label": "Loan against Fixed Deposits",
+        "items": [
+          {
+            "id": "LOANAGAINSTDEPOSITAPPLN",
+            "label": "Loan Against Term Deposits"
+          },
+          {
+            "id": "ADVAGAINSTGOVTSECURITY",
+            "label": "ADVAGAINSTGOVTSECURITY Menu(Not Registered)"
+          }
+        ]
+      },
+      {
+        "id": "goldloan",
+        "label": "Loan against Gold",
+        "items": [
+          {
+            "id": "APPRAISERMST",
+            "label": "Appraiser Master"
+          },
+          {
+            "id": "GoldLoanApplnMst",
+            "label": "Gold Loan Application"
+          },
+          {
+            "id": "PACKETPRDAPPRAISERDTLS",
+            "label": "Gold Valuation"
+          }
+        ]
+      },
+      {
+        "id": "termLoans",
+        "label": "Term Loans",
+        "items": [
+          {
+            "id": "LOANLIMIT",
+            "label": "Loan Limit Details"
+          },
+          {
+            "id": "LOANRESCHEDULEPROCESS",
+            "label": "Reschedule Process"
+          },
+          {
+            "id": "LENDERDTLS",
+            "label": "Lender Details"
+          },
+          {
+            "id": "ANCHORDTLS",
+            "label": "Anchor Details"
+          },
+          {
+            "id": "SOURCEOFFUNDMST",
+            "label": "SOURCEOFFUNDMST Menu(Not Registered)"
+          },
+          {
+            "id": "LOANCLOSURE",
+            "label": "LOANCLOSURE"
+          },
+          {
+            "id": "SOURCEOFFUNDTAGUNTAG",
+            "label": "SOURCEOFFUNDTAGUNTAG Menu(Not Registered)"
+          },
+          {
+            "id": "MULTITRANCHDISBURSE",
+            "label": "MULTITRANCHDISBURSE Menu"
+          },
+          {
+            "id": "POCTAXMASTER",
+            "label": "TAX Master"
+          },
+          {
+            "id": "SLABRATEMAINTENANCE",
+            "label": "SLABRATEMAINTENANCE Menu(Not Registered)"
+          },
+          {
+            "id": "LOANRESTRUCTUREPROCESS",
+            "label": "Restructure Process"
+          }
+        ]
+      },
+      {
+        "id": "PDCMASTER",
+        "label": "Post Dated Cheques",
+        "items": [
+          {
+            "id": "PDCDetails",
+            "label": "Post Dated Cheque Details"
+          },
+          {
+            "id": "PDCSTATUSPRESENT",
+            "label": "PDC Status Presentation Screen"
+          },
+          {
+            "id": "PDCSTATUSRETURN",
+            "label": "Instrument Bounce Status Update Screen"
+          },
+          {
+            "id": "PDCSTATUSCANCEL",
+            "label": "Security Cheque Cancellation"
+          }
+        ]
+      },
+      {
+        "id": "loans",
+        "label": "Loans and Advances General masters",
+        "items": [
+          {
+            "id": "CCODBASICDETAILS",
+            "label": "CCOD/Loans Basic Details"
+          },
+          {
+            "id": "LOANSECURITY",
+            "label": "Loan Security (Collaterals)"
+          },
+          {
+            "id": "LOANSURETYMST",
+            "label": "Loan Guarantor Details"
+          },
+          {
+            "id": "COLLATERALTOACCLINKAGE",
+            "label": "COLLATERALTOACCLINKAGE Menu(Not Registered)"
+          },
+          {
+            "id": "DIRECTORDETAILS",
+            "label": "Director Details"
+          },
+          {
+            "id": "DIRECTORRELATIVE",
+            "label": "Director Relative"
+          },
+          {
+            "id": "REPOSSESION",
+            "label": "Repossesion Master"
+          },
+          {
+            "id": "LOANCOLLATERAL",
+            "label": "Loan Collateral Details"
+          }
+        ]
+      },
+      {
+        "id": "NPAMGMT",
+        "label": "NPA Management",
+        "items": [
+          {
+            "id": "NPAACCOUNTSTATUS",
+            "label": "Loan NPA Marking/Confirmation"
+          }
+        ]
+      },
+      {
+        "id": "remittanceMst",
+        "label": "Local Remittances",
+        "items": [
+          {
+            "id": "REMITTANCESTOCK",
+            "label": "Remittance Stock Master"
+          },
+          {
+            "id": "LOSTSTOLENINSTRUMENT",
+            "label": "Lost/Stolen Remittance Master"
+          },
+          {
+            "id": "DEFAULTBENEFICIARYNAMEMST",
+            "label": "Default Beneficiary Name Master"
+          },
+          {
+            "id": "RemittanceFreeLeavesParam",
+            "label": "Free Leaves Parameter"
+          },
+          {
+            "id": "RECONCILIATION",
+            "label": "RECONCILIATION"
+          }
+        ]
+      },
+      {
+        "id": "Locker",
+        "label": "Safe Deposit Vaults(Lockers)",
+        "items": [
+          {
+            "id": "LOCKERWAITINGREGISTER",
+            "label": "Locker Waiting Register"
+          },
+          {
+            "id": "LOCKERISSUEREG",
+            "label": "Locker Issue Master"
+          },
+          {
+            "id": "LOCKEROPERATIONMST",
+            "label": "Locker Operation Master"
+          },
+          {
+            "id": "LOCKERBREAKOPENREGISTER",
+            "label": "Locker Break Open Register"
+          },
+          {
+            "id": "LOCKERFREEZMST",
+            "label": "Locker Freeze Master"
+          },
+          {
+            "id": "LOCKERENTREGISTERMST",
+            "label": "LOCKERENTREGISTERMST"
+          },
+          {
+            "id": "LOCKERSURRENDERMST",
+            "label": "Locker Surrender Master"
+          },
+          {
+            "id": "LOCKERISSUEREG1",
+            "label": "Locker Issue Data Entry Master"
+          }
+        ]
+      },
+      {
+        "id": "pigmy",
+        "label": "Daily Deposits",
+        "items": [
+          {
+            "id": "PIGMYAGENTMST",
+            "label": "DDS Agent Master"
+          },
+          {
+            "id": "PIGMYCUSTAGENTLINKMST",
+            "label": "DDS Customer Agent Link Master"
+          },
+          {
+            "id": "AGENTREGMSTR",
+            "label": "Agent Registration Master"
+          },
+          {
+            "id": "DDSCOMMISSIONPARAMMST",
+            "label": "DDS Amount Wise Commission Percentage Parameter"
+          }
+        ]
+      },
+      {
+        "id": "shares",
+        "label": "Shares",
+        "items": [
+          {
+            "id": "SHAREAPPMST",
+            "label": "Share Application And Cancellation Master"
+          },
+          {
+            "id": "SHAREMEMBERMAINTAIN",
+            "label": "Share Member maintenance Master"
+          },
+          {
+            "id": "SHAREDIVTRFINST",
+            "label": "Share Dividend Transfer Instruction"
+          },
+          {
+            "id": "SHAREALLOTMENT",
+            "label": "Share Allotment"
+          },
+          {
+            "id": "SHARECLOSURE",
+            "label": "SHARECLOSURE"
+          },
+          {
+            "id": "manualShareAllotment",
+            "label": "manualShareAllotment"
+          },
+          {
+            "id": "AGMATTENDANCEDETAILS",
+            "label": "AGM Attendance Details"
+          },
+          {
+            "id": "SHARENOMINEEMST",
+            "label": "Share Nominee Master"
+          },
+          {
+            "id": "NOMINALMEMBERSHIP",
+            "label": "Nominal Membership Master"
+          },
+          {
+            "id": "PHOTOACTDTLS",
+            "label": "PHOTOACTDTLS Menu(Not Registered)"
+          },
+          {
+            "id": "DividentMaster",
+            "label": "Dividend Master"
+          }
+        ]
+      },
+      {
+        "id": "FixedAssetParameterMst",
+        "label": "Fixed assets & Vendor management",
+        "items": [
+          {
+            "id": "SUPPLIERMST",
+            "label": "Vendor Master"
+          },
+          {
+            "id": "ASSETREQUISITION",
+            "label": "Asset Requisition Master"
+          },
+          {
+            "id": "PURCHASEORDER",
+            "label": "Purchase Order"
+          },
+          {
+            "id": "INVOICEMSTDTLS",
+            "label": "Invoice Master"
+          },
+          {
+            "id": "FAALLOCATION",
+            "label": "Fixed Asset Allocation"
+          },
+          {
+            "id": "FIXEDASSETDETAILS",
+            "label": "Fixed Asset Details"
+          },
+          {
+            "id": "FATAGALLOCATION",
+            "label": "Fixed Asset Tag Allocation"
+          },
+          {
+            "id": "INVOICEGENRATION",
+            "label": "Invoice Generation"
+          },
+          {
+            "id": "FIXEDASSETTRXN",
+            "label": "Fixed Asset Transaction"
+          },
+          {
+            "id": "INVOICESETTLE",
+            "label": "AP Invoice Settlement"
+          },
+          {
+            "id": "INVOICEMSTDTLSNEW",
+            "label": "INVOICEMSTDTLSNEW Menu(Not Registered)"
+          }
+        ]
+      },
+      {
+        "id": "AP/AR Management",
+        "label": "Account Payables & Receivables",
+        "items": [
+          {
+            "id": "EXPENSE",
+            "label": "Expense Master"
+          },
+          {
+            "id": "INVOICEMST",
+            "label": "Invoice Master"
+          },
+          {
+            "id": "APARORIGINATION",
+            "label": "Origination"
+          },
+          {
+            "id": "APARSETTLEREVERSE",
+            "label": "AP/AR Settlement"
+          }
+        ]
+      },
+      {
+        "id": "CallBorrowingParamFile",
+        "label": "Interbank Lending and Borrowing",
+        "items": [
+          {
+            "id": "INTERBANKBORROWINGMST",
+            "label": "Interbank Borrowing Master"
+          },
+          {
+            "id": "INTERBANKLENDING",
+            "label": "Interbank Lending"
+          },
+          {
+            "id": "INTERBANKLENDINGCLOSURE",
+            "label": "Interbank Lending Closure"
+          },
+          {
+            "id": "INTERBANKBORROWINGCLOSUREMST",
+            "label": "Interbank Borrowing Closure"
+          }
+        ]
+      },
+      {
+        "id": "depositwithotherbanks",
+        "label": "Deposit with Other Banks",
+        "items": [
+          {
+            "id": "IBLCUSTDETAILS",
+            "label": "Customer Details For Interbank Deposits"
+          },
+          {
+            "id": "IBLRECEIPTS",
+            "label": "IBL RECEIPTS"
+          },
+          {
+            "id": "IBLINTRPAY",
+            "label": "IBL INT PAYMENT"
+          },
+          {
+            "id": "DEPOSINTCALCPROCESS",
+            "label": "IBL RECEIPTS INTEREST CALCUATION"
+          },
+          {
+            "id": "IBLRECEIPTSCLOSURE",
+            "label": "IBL RECEIPTS CLOSURE"
+          },
+          {
+            "id": "IBLRECEIPTSRENEWAL",
+            "label": "IBL RECEIPTS RENEWAL"
+          }
+        ]
+      },
+      {
+        "id": "TreasuryBills&Bonds",
+        "label": "Treasury Bonds & Securities",
+        "items": [
+          {
+            "id": "CUSTOMERORDERMST",
+            "label": "Customer Order Master"
+          },
+          {
+            "id": "DEALPURCHASE",
+            "label": "Deal Pad For Bond & Securities Purchase"
+          },
+          {
+            "id": "DEALSALE",
+            "label": "Deal Pad For Bond & Securities Sale"
+          },
+          {
+            "id": "DEALPENDFORCONFIRM",
+            "label": "Deals Pending For Confirmation"
+          },
+          {
+            "id": "GOIBNDS",
+            "label": "GOIBNDS Menu(Not Registered)"
+          }
+        ]
+      },
+      {
+        "id": "CLEANCHEQUE",
+        "label": "Foreign Cheques",
+        "items": [
+          {
+            "id": "630004MST",
+            "label": "Foreign Cheque Primary Details"
+          },
+          {
+            "id": "CLEANCHEQUETICKETENTRY",
+            "label": "Cash Letter Master"
+          },
+          {
+            "id": "CLEANCHEQUEVALUEDATE",
+            "label": "Value Date Entry"
+          }
+        ]
+      },
+      {
+        "id": "BANKGUARANTEEMst",
+        "label": "Letter of Guarantee",
+        "items": [
+          {
+            "id": "BGCOMMON",
+            "label": "BG Common(IFN760_COV)"
+          },
+          {
+            "id": "BGAMEND",
+            "label": "BG Amend(IFN767)"
+          },
+          {
+            "id": "ADVICEOFREDUCTION",
+            "label": "Advice Of Reduction (IFN769)"
+          }
+        ]
+      },
+      {
+        "id": "IMPORTBILLS",
+        "label": "Import Bills",
+        "items": [
+          {
+            "id": "DOCDETAILS",
+            "label": "Documentary Details"
+          },
+          {
+            "id": "FXIMPORTINVOICEDETAILS",
+            "label": "Invoice Details"
+          },
+          {
+            "id": "DiscrepancyDetails",
+            "label": "Instruction Details"
+          },
+          {
+            "id": "GOODCLAUSEIMPORT",
+            "label": "Good Clause"
+          },
+          {
+            "id": "IMPDISPOSALINSTRMST",
+            "label": "Disposal Instruction"
+          },
+          {
+            "id": "BILLOFENTRYDETAILS",
+            "label": "Bill Of Entry Details"
+          },
+          {
+            "id": "TRANSPORTDOC",
+            "label": "Transport Documents"
+          },
+          {
+            "id": "BILLENTRYENQUIRY",
+            "label": "Bill Of Entry Enquiry"
+          },
+          {
+            "id": "BILLHISTORY",
+            "label": "History View With Vouchers"
+          },
+          {
+            "id": "DELIVERYORDERENTRY",
+            "label": "Delivery Instruction/Shipping Guarantee"
+          }
+        ]
+      },
+      {
+        "id": "ExportLC",
+        "label": "Export Letter of Credit",
+        "items": [
+          {
+            "id": "LCISSUE",
+            "label": "Advising of LC"
+          },
+          {
+            "id": "EXLCAMEND",
+            "label": "Amendment Of LC"
+          },
+          {
+            "id": "EXLCCLOSED",
+            "label": "Closure Of LC"
+          }
+        ]
+      },
+      {
+        "id": "ExportBillsMst",
+        "label": "Export Bills",
+        "items": [
+          {
+            "id": "EXPORTPRIMARYDETAILS",
+            "label": "Export Bill Lodgement under LC"
+          },
+          {
+            "id": "DOCDETAILSEXPORT",
+            "label": "Documentary Details"
+          },
+          {
+            "id": "EXPDISPOSALINSTRMST",
+            "label": "Disposal Instruction"
+          },
+          {
+            "id": "FXEXPORTINVOICEDETAILS",
+            "label": "Invoice Details"
+          },
+          {
+            "id": "EXPORTTRANSPORTDOC",
+            "label": "Export Transport Documents"
+          },
+          {
+            "id": "FOBDIARY",
+            "label": "FOB Diary"
+          },
+          {
+            "id": "GOODSRECEIPTDETAILS",
+            "label": "Goods Receipt Details"
+          },
+          {
+            "id": "VIEWEXPORTSBILLHISTORY",
+            "label": "Export Bill History View"
+          }
+        ]
+      },
+      {
+        "id": "PACKAGECREDIT",
+        "label": "Packing Credits",
+        "items": [
+          {
+            "id": "PCPRIMARYDETAILS",
+            "label": "Packing Credit Order Details"
+          },
+          {
+            "id": "DisbursementDetails",
+            "label": "Disbursement Details"
+          },
+          {
+            "id": "PCHISTORY",
+            "label": "PC Hot Key"
+          }
+        ]
+      },
+      {
+        "id": "ForexDealsMst",
+        "label": "Forex Deals",
+        "items": [
+          {
+            "id": "FORWARDRATEMST",
+            "label": "Forward Rate Master"
+          },
+          {
+            "id": "DEALCUSTLIMITMST",
+            "label": "Deal Customer Limit Master"
+          },
+          {
+            "id": "DELERPADMST",
+            "label": "Dealer Pad Master"
+          },
+          {
+            "id": "FXDCUSTCURACCT",
+            "label": "Customer Currency Account Mapping"
+          },
+          {
+            "id": "DEALCUSTGRPLINK",
+            "label": "Group Link Master"
+          }
+        ]
+      },
+      {
+        "id": "MFC",
+        "label": "Merchant Forward Contract",
+        "items": [
+          {
+            "id": "MFCCUSTOMERDPMST",
+            "label": "Customer Drawing Power Master"
+          },
+          {
+            "id": "MFCPRIMARY",
+            "label": "MFC Primary Master"
+          },
+          {
+            "id": "MFCDIARY",
+            "label": "MFC Diary"
+          }
+        ]
+      },
+      {
+        "id": "FXVOSTROMST",
+        "label": "Vostro",
+        "items": [
+          {
+            "id": "VOSTRODESIGNATEDCONFIG",
+            "label": "Vostro Designated Branches"
+          },
+          {
+            "id": "VOSTRODETAILS",
+            "label": "Vostro Master Details"
+          },
+          {
+            "id": "VOSTRODDISSUE",
+            "label": "Vostro DD Issue Register"
+          }
+        ]
+      },
+      {
+        "id": "IFRS",
+        "label": "IFRS",
+        "items": [
+          {
+            "id": "POD",
+            "label": "Probability of Default"
+          },
+          {
+            "id": "ECL",
+            "label": "Expected Credit Loss(Provision)"
+          },
+          {
+            "id": "LGD",
+            "label": "Loss Given Default"
+          }
+        ]
+      },
+      {
+        "id": "BULKGRPMEETDAYCHANGEMASTER",
+        "label": "BULK MEETING",
+        "items": [
+          {
+            "id": "COLLECTIONDATESHIFTCHANGE",
+            "label": "Collection Date Shift Change"
+          }
+        ]
+      },
+      {
+        "id": "KCCMASTER",
+        "label": "KCC",
+        "items": [
+          {
+            "id": "PACSMASTER",
+            "label": "PACS Details"
+          },
+          {
+            "id": "MEMBERLINKAGEMASTER",
+            "label": "Member Account Linkage"
+          },
+          {
+            "id": "KCCLOANSANCTION",
+            "label": "KCC Loan Sanction"
+          },
+          {
+            "id": "CROPTYPRPARAM",
+            "label": "Crop Type Parameter"
+          },
+          {
+            "id": "KCCLOANDISBURSE",
+            "label": "KCC Loan Disbursement"
+          },
+          {
+            "id": "KCCREPAYMENT",
+            "label": "KCC Loan Repayment"
+          },
+          {
+            "id": "PACSSUMMARY",
+            "label": "PACSSUMMARY Menu(Not Registered)"
+          },
+          {
+            "id": "LOANLSRECY",
+            "label": "LOANLSRECY Menu(Not Registered)"
+          },
+          {
+            "id": "KCCAPPROVAL",
+            "label": "KCCAPPROVAL Menu(Not Registered)"
+          },
+          {
+            "id": "CROPWISEMAINTENANCE",
+            "label": "CROPWISEMAINTENANCE"
+          },
+          {
+            "id": "KCCSHAREPARAMETER",
+            "label": "Loan Share Percentage Parameter"
+          }
+        ]
+      },
+      {
+        "id": "CARDMGMT",
+        "label": "CARD MANAGEMENT",
+        "items": [
+          {
+            "id": "INSTACARD",
+            "label": "Insta Card Upload"
+          },
+          {
+            "id": "CARDHONDOVERTOBRANCH",
+            "label": "Card Handover To Branch"
+          },
+          {
+            "id": "ATMLM",
+            "label": "ATM Link Master"
+          },
+          {
+            "id": "BLOCKINSTACARD",
+            "label": "Block Insta Card"
+          },
+          {
+            "id": "SEQGENFORINSTACARD",
+            "label": "Sequential Generation for Insta/Personalised cards"
+          },
+          {
+            "id": "SLCA",
+            "label": "Personalized Card Application"
+          },
+          {
+            "id": "PERSONALIZEDCARD",
+            "label": "Personalized Card Upload"
+          },
+          {
+            "id": "MICROATMMASTER",
+            "label": "ATM/Micro ATM Master"
+          },
+          {
+            "id": "PERBLOCKINSTACARD",
+            "label": "Block Personalize Card Master"
+          }
+        ]
+      },
+      {
+        "id": "SCHEDULEPOST",
+        "label": "SCHEDULE POSTING",
+        "items": [
+          {
+            "id": "SCHEUPLOADENTRY",
+            "label": "Schedule Entry Upload Master"
+          },
+          {
+            "id": "SCHEUPENTRY",
+            "label": "Schedule Posting One Time Entry [Manual]"
+          },
+          {
+            "id": "SCHEDULEUPLOADMST",
+            "label": "Schedule Upload"
+          },
+          {
+            "id": "SCHEDULEPOSTMST",
+            "label": "Schedule Posting Master"
+          },
+          {
+            "id": "SCHEDULEVOUCHER",
+            "label": "Schedule Voucher Generation"
+          }
+        ]
+      },
+      {
+        "id": "GSTHSNMASTER",
+        "label": "GST/HSN MANAGEMENT",
+        "items": [
+          {
+            "id": "HSNSACGST",
+            "label": "HSNSACGST"
+          },
+          {
+            "id": "CUSTANDGSTNUMLINK",
+            "label": "Customer And GST Number Link"
+          },
+          {
+            "id": "MANUALCHARGES",
+            "label": "MANUAL CHARGES"
+          },
+          {
+            "id": "GSTACCTPARAM",
+            "label": "GST Account Parameters"
+          },
+          {
+            "id": "GSTMANUALEXPENSE",
+            "label": "GST Manual Expense Master"
+          },
+          {
+            "id": "CREDITNOTEEXPENSE",
+            "label": "Credit Note Expenses"
+          },
+          {
+            "id": "GSTUPLOAD",
+            "label": "RBI/NPCI GST Upload"
+          }
+        ]
+      },
+      {
+        "id": "DBTL",
+        "label": "NACH",
+        "items": [
+          {
+            "id": "DBTLReg",
+            "label": "DBTL Registration"
+          },
+          {
+            "id": "DBTLFILEUPLOAD",
+            "label": "DBTL File Upload"
+          },
+          {
+            "id": "FILEGENERATIONDBTL",
+            "label": "Response File Generation"
+          },
+          {
+            "id": "NACHUPLOADLINK",
+            "label": "CBDT Sequential Handling"
+          }
+        ]
+      },
+      {
+        "id": "SUBSIDY",
+        "label": "Subsidy Details",
+        "items": [
+          {
+            "id": "SUBSIDYDTLS",
+            "label": "Subsidy Details"
+          },
+          {
+            "id": "SUBSIDPARA",
+            "label": "Subsidy Parameter Creation"
+          },
+          {
+            "id": "SUBSIDYINTEREST",
+            "label": "Subsidy Interest Master"
+          },
+          {
+            "id": "SUBSIDYRECOVERY",
+            "label": "SUBSIDYRECOVERY"
+          }
+        ]
+      },
+      {
+        "id": "PMSCHEMES",
+        "label": "PM Insurance Scheme",
+        "items": [
+          {
+            "id": "PMBY",
+            "label": "Pradhan Mantri Bima Yojana(Parameters)"
+          },
+          {
+            "id": "PMBYRegistration",
+            "label": "Pradhan Mantri Bima Yojana Registration"
+          },
+          {
+            "id": "AllocationOfLot",
+            "label": "Allocation Of Lot No"
+          },
+          {
+            "id": "seqGenCustcreditLic",
+            "label": "Subscriber File Generation for APY"
+          },
+          {
+            "id": "UPDATEUTR",
+            "label": "UPDATEUTR"
+          }
+        ]
+      },
+      {
+        "id": "APY",
+        "label": "Atal pension Yojana",
+        "items": [
+          {
+            "id": "APYPARAMETER",
+            "label": "Atal Pension Yojana Parameter"
+          },
+          {
+            "id": "APYSlabAmount",
+            "label": "APYSlabAmount Menu(Not Registered)"
+          },
+          {
+            "id": "APYPRANUPLOAD",
+            "label": "PRAN No. Entry Master"
+          },
+          {
+            "id": "APYAPPLICATION",
+            "label": "Atal Pension Yojana Application"
+          },
+          {
+            "id": "APYPENALTY",
+            "label": "APYPENALTY"
+          },
+          {
+            "id": "APYSeqGenFile",
+            "label": "APYSeqGenFile Menu(Not Registered)"
+          },
+          {
+            "id": "APYClosure",
+            "label": "APYClosure Menu(Not Registered)"
+          },
+          {
+            "id": "APYClosureApplication",
+            "label": "APYClosureApplication Menu(Not Registered)"
+          }
+        ]
+      },
+      {
+        "id": "CKYC",
+        "label": "CKYC",
+        "items": [
+          {
+            "id": "CKYCDATAENTRY",
+            "label": "CKYC Data Entry Master"
+          },
+          {
+            "id": "CKYCZIPGEN",
+            "label": "CKYC Zip Generation"
+          },
+          {
+            "id": "CIBILLINKMST",
+            "label": "CIBIL/CKYC Link Master"
+          }
+        ]
+      },
+      {
+        "id": "NABARDBORROW",
+        "label": "Nabard Borrowing",
+        "items": [
+          {
+            "id": "BORROWPRIMDTLS",
+            "label": "PRIMARY DETAILS"
+          },
+          {
+            "id": "DISBURSEMENTDTLS",
+            "label": "NABARD Disbursement Details"
+          },
+          {
+            "id": "PRODUCTMAPPING",
+            "label": "Product Mapping Master"
+          },
+          {
+            "id": "BORRACTCLS",
+            "label": "Borrowing Account Closing Maintainance"
+          },
+          {
+            "id": "LIENEARMARK",
+            "label": "LIENEARMARK Menu(Not Registered)"
+          }
+        ]
+      },
+      {
+        "id": "ECCSSHG",
+        "label": "ECCS/SHG",
+        "items": [
+          {
+            "id": "ECCSREG",
+            "label": "ECCS/SHG Details"
+          },
+          {
+            "id": "ECCSLOANAPl",
+            "label": "ECCS/SHG Loan Application Process"
+          },
+          {
+            "id": "ECCSMEMBERONBOARDING",
+            "label": "ECCS/SHG Member Onboarding(Group Customer)"
+          },
+          {
+            "id": "ECCSSHGUPLOAD",
+            "label": "ECCS/SHG UPLOAD Entry Master"
+          },
+          {
+            "id": "ECCSLOANDISB",
+            "label": "ECCS/SHG Loan Disbursement Process"
+          },
+          {
+            "id": "ECCSCOLLECTION",
+            "label": "ECCS/SHG Collection"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Configuration",
+    "label": "Configurations",
+    "subSections": [
+      {
+        "id": "INTERESTPARAMETERS",
+        "label": "Interest Parameters",
+        "items": [
+          {
+            "id": "GENINDEXRATE",
+            "label": "General Index Rate"
+          },
+          {
+            "id": "INTERESTOFFSET",
+            "label": "Interest Offset Parameter"
+          }
+        ]
+      },
+      {
+        "id": "productConfig",
+        "label": "GL & Product Management",
+        "items": [
+          {
+            "id": "GLMGMT",
+            "label": "General Ledger"
+          },
+          {
+            "id": "PRODUCTMGMT",
+            "label": "Product Management"
+          },
+          {
+            "id": "PRODUCTSCHEMEMST",
+            "label": "Product Schemes"
+          },
+          {
+            "id": "DOCUMENTCONFIGURATION",
+            "label": "Document Configuration"
+          }
+        ]
+      },
+      {
+        "id": "SWEEPConfig",
+        "label": "Sweep Deposits",
+        "items": [
+          {
+            "id": "SWEEPDEPOPARAM",
+            "label": "Sweep Deposits Parameters"
+          }
+        ]
+      },
+      {
+        "id": "tdconfig",
+        "label": "CASA & Term Deposit Management",
+        "items": [
+          {
+            "id": "CASAPARAM",
+            "label": "CASA Parameters"
+          },
+          {
+            "id": "DEPOSITPARAMETERMST",
+            "label": "Deposit Parameter"
+          },
+          {
+            "id": "RDPARAM",
+            "label": "Term Deposit Parameter For RD"
+          },
+          {
+            "id": "TDINTERESTOVERDUEMST",
+            "label": "Term Deposit Overdue Interest Master"
+          },
+          {
+            "id": "TDSPARAMETER",
+            "label": "TDS Parameter Details"
+          },
+          {
+            "id": "TDINTERESTMST",
+            "label": "Interest Master"
+          },
+          {
+            "id": "RECEIPTSTOCK",
+            "label": "Receipt Stock Master"
+          },
+          {
+            "id": "LOANCLEARINGPARAM",
+            "label": "Term Loans/Deposit Clearing Parameter"
+          },
+          {
+            "id": "CUSTWISETDSEXP",
+            "label": "Customer Wise TDS Exemption"
+          },
+          {
+            "id": "GLOBALTDSPARAM",
+            "label": "Global TDS Parameter"
+          },
+          {
+            "id": "TDS_PARAMETER",
+            "label": "Checking Account TDS Parameter (194N)"
+          },
+          {
+            "id": "RDPENALRATEENTRYMSTR",
+            "label": "RD Penal Rate ntry Master"
+          }
+        ]
+      },
+      {
+        "id": "Advances",
+        "label": "Advances against Equity Shares/Securities",
+        "items": [
+          {
+            "id": "DPRSHARES",
+            "label": "DP Company Shares"
+          },
+          {
+            "id": "DPRSHARESRATEMST",
+            "label": "DP Company Shares Rate"
+          }
+        ]
+      },
+      {
+        "id": "loanagnstgoldConfig",
+        "label": "Loan against Gold",
+        "items": [
+          {
+            "id": "GOLDLOANRATEMST",
+            "label": "Gold Rate Configuration"
+          }
+        ]
+      },
+      {
+        "id": "termloanConfig",
+        "label": "Term Loans",
+        "items": [
+          {
+            "id": "PARAMSLOAN",
+            "label": "Loan Parameters"
+          },
+          {
+            "id": "LOANACCNTSECPARAM",
+            "label": "Loan Account Secondary Parameter"
+          },
+          {
+            "id": "BranchWiseCollectionHolidayMaster",
+            "label": "BranchWise Collection Holiday Master"
+          },
+          {
+            "id": "PRDSCHMST",
+            "label": "PRDSCHMST Menu(Not Registered)"
+          }
+        ]
+      },
+      {
+        "id": "PDCConfig",
+        "label": "Post Dated Cheques",
+        "items": [
+          {
+            "id": "PDCACCPARAM",
+            "label": "Post Dated Cheque Accounting Parameter"
+          }
+        ]
+      },
+      {
+        "id": "NPAMGMTConfig",
+        "label": "NPA",
+        "items": [
+          {
+            "id": "ASSETCODEMST",
+            "label": "Asset Code Master"
+          },
+          {
+            "id": "ParamsNPAProvision",
+            "label": "Params NPA Provision"
+          },
+          {
+            "id": "SECURITYDEPRECIATION",
+            "label": "Security Depreciation Parameter Master"
+          },
+          {
+            "id": "RULESETMST",
+            "label": "Rule Set Master"
+          },
+          {
+            "id": "RULECONDITION",
+            "label": "Rule Condition Master"
+          },
+          {
+            "id": "RULETEMPLATEMST",
+            "label": "Rule Template"
+          }
+        ]
+      },
+      {
+        "id": "remittanceConfig",
+        "label": "Local Remittances",
+        "items": [
+          {
+            "id": "RECONPRODUCTPARAMETER",
+            "label": "Remittance Product Parameter"
+          },
+          {
+            "id": "BANKBRANCHDIR",
+            "label": "Correspondent Bank Branch Master"
+          },
+          {
+            "id": "REMITINSTRUMENTLIMIT",
+            "label": "Remittance Instrument Limits"
+          },
+          {
+            "id": "LastAssignNoMaintenance",
+            "label": "Last Assigned Number Maintenance"
+          }
+        ]
+      },
+      {
+        "id": "lockerConfig",
+        "label": "Safe Deposit Vaults(Lockers)",
+        "items": [
+          {
+            "id": "LOCKERTYPE",
+            "label": "Locker Type Register"
+          },
+          {
+            "id": "LOCKERKEY",
+            "label": "Locker Number & Key Register"
+          },
+          {
+            "id": "NEWKEYALLOTMENT",
+            "label": "Locker Key Updation/Interchange"
+          },
+          {
+            "id": "LOCKERPARAMETER",
+            "label": "Locker Parameter"
+          }
+        ]
+      },
+      {
+        "id": "DDConfig",
+        "label": "Daily Deposits",
+        "items": [
+          {
+            "id": "DAILYDEPOSITEPARAMMST",
+            "label": "Daily Deposit Parameter"
+          }
+        ]
+      },
+      {
+        "id": "FixedAssetParameterConfig",
+        "label": "Fixed assets & Vendor management",
+        "items": [
+          {
+            "id": "FAPARAMETERS",
+            "label": "Fix Assets Parameter"
+          },
+          {
+            "id": "FADEPRICIATION",
+            "label": "Fixed Asset Depreciation Parameter"
+          },
+          {
+            "id": "ASSETMAPPING",
+            "label": "Asset Account Mapping Master"
+          }
+        ]
+      },
+      {
+        "id": "passbookconfig",
+        "label": "Printing",
+        "items": [
+          {
+            "id": "PASSBOOKELEMENT",
+            "label": "Passbook Element Definition"
+          },
+          {
+            "id": "PASSBOOKLINEDEFENITION",
+            "label": "Passbook Line Definition"
+          },
+          {
+            "id": "PASSBOOKPAGEDEFINITION",
+            "label": "Passbook Page Definition"
+          },
+          {
+            "id": "PASSBOOKSTRUCTUREDEFINITION",
+            "label": "Passbook Structure Definition"
+          }
+        ]
+      },
+      {
+        "id": "InterBankBorrowingConfig",
+        "label": "Interbank Lending and Borrowing",
+        "items": [
+          {
+            "id": "IBLPARAM",
+            "label": "Interbank Lending Parameter"
+          },
+          {
+            "id": "INTERBANKBORROWINGPARAM",
+            "label": "Interbank Borrowing Parameter"
+          }
+        ]
+      },
+      {
+        "id": "CHARGESPARAMConfig",
+        "label": "Charges",
+        "items": [
+          {
+            "id": "MINBALCHARGEPARAMS",
+            "label": "Minimum Balance Charge Amount"
+          },
+          {
+            "id": "FOLIOCHARGE",
+            "label": "Folio Charges"
+          },
+          {
+            "id": "CHEQUEISSUECHARGE",
+            "label": "Cheque Book Issue Charge"
+          },
+          {
+            "id": "INWORDOUTWORDCHEQUECHARGES",
+            "label": "Cheque Return Charges(Inward/Outward)"
+          },
+          {
+            "id": "EARLYCLOSERCHARGE",
+            "label": "Early Closure Charges"
+          },
+          {
+            "id": "REMCHARGESPARAM",
+            "label": "Remittance Charges"
+          },
+          {
+            "id": "DUPSTATEMENTANDPASSBOOKCHARGE",
+            "label": "Duplicate Statement/Passbook Charges"
+          },
+          {
+            "id": "LOANCHARGES",
+            "label": "Loan Charges Parameter"
+          },
+          {
+            "id": "LOANNOTICECHARGEMST",
+            "label": "Loan Notice Charges"
+          },
+          {
+            "id": "LOCKERCHARGEMST",
+            "label": "Locker Charges"
+          },
+          {
+            "id": "RTGSChargesMst",
+            "label": "RTGS/NEFT Charges Amount Parameter"
+          },
+          {
+            "id": "OUPCHARGEMST",
+            "label": "Out Of Pocket Charges"
+          },
+          {
+            "id": "GSTCHARGESPARAM",
+            "label": "GST Charges Parameter"
+          },
+          {
+            "id": "VOS",
+            "label": "Value Of Supply"
+          },
+          {
+            "id": "ACCOUNTWISECHARGESEXMMST",
+            "label": "Account-Wise Charges Exemption"
+          },
+          {
+            "id": "COMMANCHARGE",
+            "label": "Common Charge"
+          },
+          {
+            "id": "GLOBALFEES",
+            "label": "Global Fees Master"
+          }
+        ]
+      },
+      {
+        "id": "TreasuryBills&BondsConfig",
+        "label": "Treasury Bonds & Securities",
+        "items": [
+          {
+            "id": "BONDDETAILS",
+            "label": "Bond Basic Details"
+          },
+          {
+            "id": "DEALER",
+            "label": "Dealer Master"
+          },
+          {
+            "id": "BROKER",
+            "label": "Broker Master"
+          },
+          {
+            "id": "ISSUER",
+            "label": "Counter Party/Issuer Master"
+          },
+          {
+            "id": "BROKERAGERATE",
+            "label": "Brokerage Rate Master"
+          },
+          {
+            "id": "REFNOGEN",
+            "label": "Reference Number Generation"
+          },
+          {
+            "id": "LASTASSIGNNO",
+            "label": "Last Assign Number Maintenance"
+          },
+          {
+            "id": "INVESTMENTLIMITMST",
+            "label": "Investment Limit Master"
+          },
+          {
+            "id": "BONDSECURITY",
+            "label": "Securities Model Level Parameter"
+          }
+        ]
+      },
+      {
+        "id": "sharesConfig",
+        "label": "Shares",
+        "items": [
+          {
+            "id": "SHRMEMHOLDINGPARAM",
+            "label": "Shares Parameter"
+          },
+          {
+            "id": "SHAREDIVRATEMST",
+            "label": "Shares Dividend Rate Master"
+          }
+        ]
+      },
+      {
+        "id": "FxGeneralParamConfig",
+        "label": "Forex General Parameters",
+        "items": [
+          {
+            "id": "NOSTROMST",
+            "label": "Nostro Master"
+          },
+          {
+            "id": "PASSPORTMASTER",
+            "label": "Passport Master"
+          },
+          {
+            "id": "PURPOSECODEMST",
+            "label": "Purpose Code Master"
+          },
+          {
+            "id": "PORTMASTER",
+            "label": "Port Master"
+          },
+          {
+            "id": "COMMODITYCODEMASTER",
+            "label": "Commodity Master"
+          },
+          {
+            "id": "DOCUMENTCODEMASTER",
+            "label": "Document Code Master"
+          },
+          {
+            "id": "DISPOSALINSTRMST",
+            "label": "Disposal Instruction"
+          },
+          {
+            "id": "ECGCRATEMST",
+            "label": "ECGC Premium Rate Master"
+          },
+          {
+            "id": "EXPENSESOUPMST",
+            "label": "Expenses(OUP) Master"
+          },
+          {
+            "id": "REASONCODEMASTER",
+            "label": "XOS Reason Code Master"
+          },
+          {
+            "id": "BILLCHARGESMST",
+            "label": "Remittance/Bills Commission Parameters"
+          },
+          {
+            "id": "INTERESTTABLEMST",
+            "label": "Interest Table"
+          },
+          {
+            "id": "DRAWEEBENMASTER",
+            "label": "Drawee/Beneficiary Master"
+          },
+          {
+            "id": "SwiftQueries",
+            "label": "Swift Queries Template"
+          },
+          {
+            "id": "SwiftAnswers",
+            "label": "Swift Answers Template"
+          },
+          {
+            "id": "SwiftQA",
+            "label": "Swift Queries(N95)"
+          },
+          {
+            "id": "SwiftNAnswers",
+            "label": "Swift Answers(N96)"
+          }
+        ]
+      },
+      {
+        "id": "Foreign Currency Cash",
+        "label": "Foreign Currency Buy and Sell",
+        "items": [
+          {
+            "id": "FOREIGNCURRENCYCASHPARM",
+            "label": "Foreign Currency Cash Parameter"
+          },
+          {
+            "id": "FXCURCASHCOMISSION",
+            "label": "Foreign Currency Cash Commission Master"
+          }
+        ]
+      },
+      {
+        "id": "Remittance Master",
+        "label": "Foreign Remittance",
+        "items": [
+          {
+            "id": "ACCOUNTINGHEAD",
+            "label": "Foreign Remittance Accounting Head (MT 103)"
+          },
+          {
+            "id": "REMITPRIMARYDTLS",
+            "label": "Remittance Primary Details"
+          },
+          {
+            "id": "REMITTANCEFIRCNUM",
+            "label": "Remittance FIRC Number"
+          },
+          {
+            "id": "REMITTANCEAMEND",
+            "label": "Remittance Cancellations"
+          },
+          {
+            "id": "BULKINWARDCRHANDLE",
+            "label": "Bulk Inward Credit Handling"
+          }
+        ]
+      },
+      {
+        "id": "CCMODULEPARAMConfig",
+        "label": "Foreign Cheques",
+        "items": [
+          {
+            "id": "CCMODULEPARAM",
+            "label": "Foreign Cheque Parameter"
+          }
+        ]
+      },
+      {
+        "id": "BGTYPE",
+        "label": "Letter of Guarantee",
+        "items": [
+          {
+            "id": "BGTYPEPARAM",
+            "label": "Letter of Guarantee Type Parameter"
+          },
+          {
+            "id": "BGMODULELVLPARAM",
+            "label": "Letter of Guarantee Module Level Parameter"
+          },
+          {
+            "id": "BGCOMMPARAM",
+            "label": "Letter of Guarantee Commission Parameter"
+          },
+          {
+            "id": "BGCHARGESMST",
+            "label": "LG Charges Master"
+          }
+        ]
+      },
+      {
+        "id": "FXLCPARAMConfig",
+        "label": "Import Letter of Credit",
+        "items": [
+          {
+            "id": "LCTYPEPARAMCONFIG",
+            "label": "LC Type Parameter"
+          },
+          {
+            "id": "LCACCPARAMCONFIG",
+            "label": "Import LC Accounting Heads Parameter"
+          }
+        ]
+      },
+      {
+        "id": "IMPORTBILL",
+        "label": "Import Bills",
+        "items": [
+          {
+            "id": "BILLTYPEPARAM",
+            "label": "Bill Type Parameter"
+          },
+          {
+            "id": "IMPORTBILLPARAM",
+            "label": "Import Bills Parameter"
+          }
+        ]
+      },
+      {
+        "id": "EXPORTBILLCONFIG",
+        "label": "Export Bills",
+        "items": [
+          {
+            "id": "EXPORTBILLTYPEPARAM",
+            "label": "Bill Type Parameter"
+          },
+          {
+            "id": "EXPORTBILLPARAM",
+            "label": "Export Accounting Head"
+          }
+        ]
+      },
+      {
+        "id": "PACKAGECREDITCONFIG",
+        "label": "Packing Credits",
+        "items": [
+          {
+            "id": "PACKAGECREDITPARAM",
+            "label": "Packing Credit Parameter"
+          }
+        ]
+      },
+      {
+        "id": "FOREXCONFG",
+        "label": "Forex Deals",
+        "items": [
+          {
+            "id": "DEALBROKERMST",
+            "label": "Deal Broker Master"
+          },
+          {
+            "id": "FOREXPARAM",
+            "label": "Parameter File For Dealing"
+          },
+          {
+            "id": "BROKERAGEPARAM",
+            "label": "Brokerage Parameter"
+          }
+        ]
+      },
+      {
+        "id": "VOSTROCONFIGURATION",
+        "label": "Vostro Config",
+        "items": [
+          {
+            "id": "VOSTROPARAMETERSCONFIG",
+            "label": "Vostro Parameters"
+          }
+        ]
+      },
+      {
+        "id": "CLEARINGCONFIG",
+        "label": "Clearing",
+        "items": [
+          {
+            "id": "CLEARINPARAMGCONFIG",
+            "label": "Clearing Type Parameter"
+          },
+          {
+            "id": "CLEARINGINWARDPARAMCONFIG",
+            "label": "Inward Clearing Parameter Configuration"
+          },
+          {
+            "id": "LOTPARAMETER",
+            "label": "Lot No Parameter Configuration"
+          },
+          {
+            "id": "IORETURNREASONCODE",
+            "label": "Inward/Outward Return Reason Code"
+          }
+        ]
+      },
+      {
+        "id": "globalloanconfig",
+        "label": "Loan Configuration",
+        "items": [
+          {
+            "id": "LOANAGAINSTDEPOSITPARAM",
+            "label": "Loan Against Deposit Param"
+          },
+          {
+            "id": "LOANCYCLEPARAM",
+            "label": "Loan Cycle Parameter"
+          },
+          {
+            "id": "LOANCYCLEOFFSETPARAM",
+            "label": "Cycle Wise Offset Rate"
+          },
+          {
+            "id": "CustomerwiseOffsetMaster",
+            "label": "Customer Wise Offset Master"
+          }
+        ]
+      },
+      {
+        "id": "RTGSNEFTConfig",
+        "label": "RTGS/NEFT",
+        "items": [
+          {
+            "id": "RTGSNEFTCONFIGURATION",
+            "label": "RTGS/NEFT Configuration"
+          }
+        ]
+      },
+      {
+        "id": "INVESTMENTConfig",
+        "label": "Deposit with Other Banks",
+        "items": [
+          {
+            "id": "INVSTPARAM",
+            "label": "Deposit with Other Bank Parameter"
+          }
+        ]
+      },
+      {
+        "id": "receiptconfig",
+        "label": "Receipt Config",
+        "items": [
+          {
+            "id": "PRINTELEMENT",
+            "label": "Printing Element"
+          },
+          {
+            "id": "PRINTTEMPLATE",
+            "label": "Printing Template Details"
+          }
+        ]
+      },
+      {
+        "id": "MFCCONFIG",
+        "label": "Merchant Forward Contract",
+        "items": [
+          {
+            "id": "MFCPARAMETER",
+            "label": "MFC Parameter"
+          }
+        ]
+      },
+      {
+        "id": "BANKASSURCCONFIG",
+        "label": "Bancassurance",
+        "items": [
+          {
+            "id": "ISPONBOARDING",
+            "label": "ISP Onboarding"
+          },
+          {
+            "id": "AGENCYDTLS",
+            "label": "Agency Master"
+          },
+          {
+            "id": "AGENTMASTER",
+            "label": "Agent Master"
+          },
+          {
+            "id": "ISSUANCE",
+            "label": "Car Insurance Issuance Master"
+          },
+          {
+            "id": "BANKCOMISSION",
+            "label": "Commission Parameter"
+          },
+          {
+            "id": "BANCASSURANCEPRDPARAM",
+            "label": "Bancassurance Product Params"
+          },
+          {
+            "id": "HELTHINSURANCE",
+            "label": "Health Insurance"
+          },
+          {
+            "id": "LIFEINSURANCE",
+            "label": "Life insurance Issuance"
+          }
+        ]
+      },
+      {
+        "id": "INVOICEFACTCONFIG",
+        "label": "Invoice Factoring",
+        "items": [
+          {
+            "id": "INVOICEFACTORING",
+            "label": "Invoice Factoring and Discounting Parameter"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Administration",
+    "label": "Administration",
+    "subSections": [
+      {
+        "id": "setupAdm",
+        "label": "Tenant And Branch Management",
+        "items": [
+          {
+            "id": "TENANTGROUPMST",
+            "label": "Tenant Group Master"
+          },
+          {
+            "id": "TENANTMST",
+            "label": "Tenant Master"
+          },
+          {
+            "id": "BRANCHMGMT",
+            "label": "Branch Management"
+          },
+          {
+            "id": "AREAMASTER",
+            "label": "Sub-Division/Thana"
+          },
+          {
+            "id": "MUNICIPALITYBLOCKMASTER",
+            "label": "Block/Municipal Master"
+          },
+          {
+            "id": "VILLAGEMASTER",
+            "label": "Village Master"
+          },
+          {
+            "id": "URBANMASTER",
+            "label": "Urban Master"
+          },
+          {
+            "id": "BRTOBRMAP",
+            "label": "Branch To Branch Data Mapping"
+          },
+          {
+            "id": "IFSCMST",
+            "label": "IFSC Master"
+          },
+          {
+            "id": "COUNTRYMST",
+            "label": "Country Master"
+          },
+          {
+            "id": "STATEMST",
+            "label": "State Master"
+          },
+          {
+            "id": "DISTRICTMST",
+            "label": "District Master"
+          }
+        ]
+      },
+      {
+        "id": "usermgmtAdm",
+        "label": "User Management",
+        "items": [
+          {
+            "id": "PASSWORDPOLICY",
+            "label": "Password Policy"
+          },
+          {
+            "id": "USERROLESMST",
+            "label": "User Roles"
+          },
+          {
+            "id": "EMPLOYEEMST",
+            "label": "Employee Master"
+          },
+          {
+            "id": "USERMGMT",
+            "label": "User Master"
+          },
+          {
+            "id": "RESETPWD",
+            "label": "Reset Password / Assign New Password"
+          },
+          {
+            "id": "CHANGEPASSWORD",
+            "label": "Change Password"
+          },
+          {
+            "id": "UNLOCKUSER",
+            "label": "Unlock User"
+          },
+          {
+            "id": "USERLOGINSUSPEND",
+            "label": "Suspend/Resume User Login Details"
+          },
+          {
+            "id": "RESETLOGGEDINUSER",
+            "label": "RESET LOCKED USER"
+          },
+          {
+            "id": "FORGOTPASSWORD",
+            "label": "Forgot Password"
+          },
+          {
+            "id": "USERWISEMULTIBRANCH",
+            "label": "User-wise Multi Branch Access Rights Master"
+          },
+          {
+            "id": "USERREGD",
+            "label": "REGISTERIMEIMST"
+          },
+          {
+            "id": "LEAVEMASTER",
+            "label": "User Leave Master"
+          },
+          {
+            "id": "USERAUTHENABLEDISABLE",
+            "label": "USERAUTHENABLEDISABLE Menu(Not Registered)"
+          },
+          {
+            "id": "USERGRPCHNG",
+            "label": "USERGRPCHNG Menu(Not Registered)"
+          }
+        ]
+      },
+      {
+        "id": "menuManagementAdm",
+        "label": "Menu Management",
+        "items": [
+          {
+            "id": "MENUMST",
+            "label": "Menu Master"
+          },
+          {
+            "id": "ALLMENU2MST",
+            "label": "Role Menu Mapping"
+          },
+          {
+            "id": "ALLMENUMST",
+            "label": "Role Menu Action Mapping"
+          },
+          {
+            "id": "RPTDIRECTORY",
+            "label": "Reports Directory"
+          },
+          {
+            "id": "ROLEBASEDQUICKMENU",
+            "label": "Role Based Quick Menu"
+          }
+        ]
+      },
+      {
+        "id": "dashboardmgmt",
+        "label": "Dashboard Management",
+        "items": [
+          {
+            "id": "PORTLETMST",
+            "label": "Portlet Master"
+          },
+          {
+            "id": "DASHBOARDLOGINROLEPORTLET",
+            "label": "Dashboard Login Role Map"
+          }
+        ]
+      },
+      {
+        "id": "calandholmgmt",
+        "label": "Calendar And Holiday Management",
+        "items": [
+          {
+            "id": "CALENDERMST",
+            "label": "Calendar Maintenance"
+          },
+          {
+            "id": "HOLIDAY",
+            "label": "Holiday Management"
+          },
+          {
+            "id": "BRANCHHOLIDAYS",
+            "label": "Branch Holiday Mapping"
+          }
+        ]
+      },
+      {
+        "id": "currencyAdm",
+        "label": "Currency Management",
+        "items": [
+          {
+            "id": "CURRENCYMST",
+            "label": "Currency Master"
+          },
+          {
+            "id": "MULTICURRENCY",
+            "label": "Multi Currency Master"
+          },
+          {
+            "id": "BGRATETYPE",
+            "label": "Rate Type Master"
+          },
+          {
+            "id": "CURRENCYDAILYRATE",
+            "label": "Currency Daily Rate Master"
+          },
+          {
+            "id": "DAILYRATEMST",
+            "label": "Daily Rate Master"
+          },
+          {
+            "id": "CROSSCURRENCY",
+            "label": "Cross Currency Master"
+          },
+          {
+            "id": "CURRENCYMASTER",
+            "label": "Currency Rate Margin"
+          }
+        ]
+      },
+      {
+        "id": "applicationmgmt",
+        "label": "Application Management",
+        "items": [
+          {
+            "id": "APPCONFIG",
+            "label": "Application Configuration"
+          },
+          {
+            "id": "systemParameters",
+            "label": "System Parameter Master"
+          },
+          {
+            "id": "EXCEPTIONDETAILS",
+            "label": "Global Exception Details"
+          },
+          {
+            "id": "GLOBALEXCEPTIONDETAILS",
+            "label": "Group Exception Details"
+          },
+          {
+            "id": "BATCHMST",
+            "label": "Batch Master"
+          },
+          {
+            "id": "SEQUENCENOMST",
+            "label": "Sequence Number"
+          },
+          {
+            "id": "LOOKUP",
+            "label": "LookUp Management"
+          },
+          {
+            "id": "INSTRUMENTCONFIG",
+            "label": "Instrument Configuration Master"
+          },
+          {
+            "id": "TAXMASTER",
+            "label": "Tax Master"
+          },
+          {
+            "id": "PRDACNOCONFIG",
+            "label": "Account Number Config"
+          },
+          {
+            "id": "DATAPORT",
+            "label": "Data Porting Table Mapping Master"
+          },
+          {
+            "id": "DATAPORTUTILITY",
+            "label": "Data Porting Utility"
+          }
+        ]
+      },
+      {
+        "id": "transactionConfig",
+        "label": "Transaction Management",
+        "items": [
+          {
+            "id": "ACTIVITYMST",
+            "label": "Activity Master"
+          },
+          {
+            "id": "TRNCODE",
+            "label": "global.lbl.D009043.trnCodeMapping="
+          },
+          {
+            "id": "TXNSCREENELEMENT",
+            "label": "Txn Screen Element Config"
+          },
+          {
+            "id": "TXNSCREENMAPPER",
+            "label": "Txn Screen Mapper"
+          },
+          {
+            "id": "USERTRNACCESS",
+            "label": "User Transaction Access"
+          },
+          {
+            "id": "TRNWORKFLOW",
+            "label": "Transaction Workflow Master"
+          },
+          {
+            "id": "TXNLIMITCONFIG",
+            "label": "TXNLIMITCONFIG Menu(Not Registered)"
+          },
+          {
+            "id": "PRODSCHEMELVLCONFIG",
+            "label": "PRODSCHEMELVLCONFIG Menu(Not Registered)"
+          }
+        ]
+      },
+      {
+        "id": "smsAdm",
+        "label": "SMS",
+        "items": [
+          {
+            "id": "EBANKCUSTMST",
+            "label": "Electronic Banking Customer Master"
+          },
+          {
+            "id": "LOANCLSACCQUERY",
+            "label": "Loan Account Closure Help"
+          },
+          {
+            "id": "SENDBULKSMS",
+            "label": "Send Bulk SMS"
+          }
+        ]
+      },
+      {
+        "id": "TracerAdm",
+        "label": "Tracer Notification",
+        "items": [
+          {
+            "id": "TracerMst",
+            "label": "Tracer Creation"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Processes",
+    "label": "Process",
+    "subSections": [
+      {
+        "id": "printProcess",
+        "label": "Printing",
+        "items": [
+          {
+            "id": "PASSBOOK",
+            "label": "PASSBOOK Menu(Not Registered)"
+          },
+          {
+            "id": "REMITTANCEPRINTING",
+            "label": "REMITTANCEPRINTING Menu(Not Registered)"
+          },
+          {
+            "id": "RENDERTEMPLATE",
+            "label": "Print Receipt"
+          },
+          {
+            "id": "BULKPRINT",
+            "label": "BULKPRINT"
+          },
+          {
+            "id": "KCCPASSBOOK",
+            "label": "KCCPASSBOOK Menu(Not Registered)"
+          }
+        ]
+      },
+      {
+        "id": "dailyactivty",
+        "label": "Day Process",
+        "items": [
+          {
+            "id": "DAYBEGINPROCESS",
+            "label": "BEGIN OF DAY"
+          },
+          {
+            "id": "DAYENDPROCESS",
+            "label": "END OF DAY"
+          },
+          {
+            "id": "TRANSACTIONQUEUECLOSE",
+            "label": "Transaction Queue Close Seal Process"
+          },
+          {
+            "id": "BRANCHHANDOVER",
+            "label": "Branch Handover Process"
+          },
+          {
+            "id": "BATCHPROCESSING",
+            "label": "Batch Fund Effect Sepcific"
+          },
+          {
+            "id": "DYNAMICCBL",
+            "label": "Dynamic CBL"
+          }
+        ]
+      },
+      {
+        "id": "BANK&NOSTROREC",
+        "label": "Bank and Nostro Reconciliation",
+        "items": [
+          {
+            "id": "DYNAMICLOADERCONFG",
+            "label": "Statement Upload Configuration"
+          },
+          {
+            "id": "COMPANYMASTER",
+            "label": "Company Master"
+          },
+          {
+            "id": "AUTORECONRULES",
+            "label": "Auto Reconciliation - Rules"
+          },
+          {
+            "id": "CORRBNKDTLS",
+            "label": "Correspondent Bank Account Details Master"
+          },
+          {
+            "id": "LEDGERRECORDCREATION",
+            "label": "Transaction Download From CBS"
+          },
+          {
+            "id": "AUTORECONPROCESS",
+            "label": "Auto Reconciliation Process"
+          },
+          {
+            "id": "MANUALRECONPROCESS",
+            "label": "Force Manual Reconciliation Process"
+          },
+          {
+            "id": "FILEUPLOADPEOCESS",
+            "label": "Statement Upload Process"
+          },
+          {
+            "id": "STATEMENTUPLOAD",
+            "label": "Manual Statement Upload Process"
+          },
+          {
+            "id": "RECONEQUIRY",
+            "label": "Reconciliation Enquiry"
+          }
+        ]
+      },
+      {
+        "id": "CENTRALIZEDPROCESS",
+        "label": "Centralized Process",
+        "items": [
+          {
+            "id": "JOBEXECUTION",
+            "label": "Job Execution Master"
+          },
+          {
+            "id": "CentralizeLoadConsole",
+            "label": "Job Console"
+          },
+          {
+            "id": "PROCESSDEINITION",
+            "label": "Process Definition"
+          },
+          {
+            "id": "PRCSSGRPMST",
+            "label": "Process Grouping Master"
+          },
+          {
+            "id": "CENTPRCSSTATUS",
+            "label": "Centralized Process Monitoring"
+          },
+          {
+            "id": "CENTRALIZEPROCESS",
+            "label": "CENTRALIZEPROCESS"
+          },
+          {
+            "id": "REPORTREQUESTENQUIRY",
+            "label": "Report Request Enquiry"
+          },
+          {
+            "id": "NOTIFISCHEDULEMANAGER",
+            "label": "Notification Schedule Manager"
+          },
+          {
+            "id": "SPEXEC",
+            "label": "SPEXEC Menu(Not Registered)"
+          }
+        ]
+      },
+      {
+        "id": "loanrecoveryprocess",
+        "label": "global.menu.processes.loanrecoveryprocess",
+        "items": [
+          {
+            "id": "LOANINTSUBMST",
+            "label": "Loan Interest Subvention"
+          },
+          {
+            "id": "LOANSUBSIDY",
+            "label": "Loan Subsidy Master"
+          }
+        ]
+      },
+      {
+        "id": "SALARYFILEUPLOADPROCESS",
+        "label": "External Files Upload and Downloads",
+        "items": [
+          {
+            "id": "SALARYFILEUPLOAD",
+            "label": "External Files Upload and Downloads"
+          },
+          {
+            "id": "CUSTLIMITMSTFILEUPLOAD",
+            "label": "Customer Limit File Upload"
+          },
+          {
+            "id": "CUSTFILEUPLOAD",
+            "label": "Customer Creation File Upload"
+          },
+          {
+            "id": "PROPCOLLATERALFILEUPLOAD",
+            "label": "Loan Collateral File Upload"
+          },
+          {
+            "id": "EXCESSAMOUNTMST",
+            "label": "Excess Amount Master"
+          },
+          {
+            "id": "SFTPMANUALUPLOAD",
+            "label": "SFTPMANUALUPLOAD Menu(Not Registered)"
+          },
+          {
+            "id": "LOANREPAYMSTPROCESS",
+            "label": "LOANREPAYMSTPROCESS Menu(Not Registered)"
+          },
+          {
+            "id": "BULKDISBURSELOAN",
+            "label": "Bulk Disbursement of Loan"
+          },
+          {
+            "id": "FILEUPLOAD",
+            "label": "File Upload"
+          }
+        ]
+      },
+      {
+        "id": "CIBILRATING",
+        "label": "Cibil Rating",
+        "items": [
+          {
+            "id": "SEQGENCUSTINFOSYSTEM",
+            "label": "Sequence Gen For Customer Credit Information System"
+          }
+        ]
+      },
+      {
+        "id": "EBRC",
+        "label": "E-BRC",
+        "items": [
+          {
+            "id": "e-BRC",
+            "label": "e-BRC"
+          }
+        ]
+      },
+      {
+        "id": "EDPMS",
+        "label": "EDPMS",
+        "items": [
+          {
+            "id": "IRM",
+            "label": "IRM XML Generation"
+          },
+          {
+            "id": "PRN",
+            "label": "Payment XML Generation"
+          },
+          {
+            "id": "ROD",
+            "label": "ROD XML Generation"
+          },
+          {
+            "id": "FIRC",
+            "label": "FIRC XML Generation"
+          }
+        ]
+      },
+      {
+        "id": "IDPMS",
+        "label": "IDPMS",
+        "items": [
+          {
+            "id": "BOE",
+            "label": "BOE Import Data"
+          },
+          {
+            "id": "ORM",
+            "label": "ORM XML Generation"
+          }
+        ]
+      },
+      {
+        "id": "NPAPROCESS",
+        "label": "NPA",
+        "items": [
+          {
+            "id": "NPAPROCESSEXECUTION",
+            "label": "NPA Execution Process"
+          }
+        ]
+      },
+      {
+        "id": "TreasuryBills&BondsProcess",
+        "label": "Treasury Bonds & Securities",
+        "items": [
+          {
+            "id": "DEALPADSETTLEMENT",
+            "label": "Dealpad Settlement Process"
+          },
+          {
+            "id": "DEALPADSETTLEMENTSALE",
+            "label": "Dealpad Settlement Process for Sale"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Reports",
+    "label": "Report",
+    "subSections": [
+      {
+        "id": "CCODRPT",
+        "label": "CC and OD",
+        "items": [
+          {
+            "id": "RN1300005",
+            "label": "DP Expiry Listing"
+          },
+          {
+            "id": "RN0100022",
+            "label": "RN0100022 Menu(Not Registered)"
+          }
+        ]
+      },
+      {
+        "id": "LoansRpt",
+        "label": "Loans",
+        "items": [
+          {
+            "id": "RN0100026",
+            "label": "RN0100026 Menu(Not Registered)"
+          },
+          {
+            "id": "RN0100030",
+            "label": "RN0100030 Menu(Not Registered)"
+          },
+          {
+            "id": "NG030031",
+            "label": "LOAN ACCOUNT STATEMENT"
+          }
+        ]
+      },
+      {
+        "id": "Daily Reports1",
+        "label": "Daily Transaction Reports",
+        "items": [
+          {
+            "id": "RN0400008",
+            "label": "Statement of Debit Balance after Day end"
+          },
+          {
+            "id": "RN9900014",
+            "label": "Unauthorised Account List"
+          },
+          {
+            "id": "RN0400007",
+            "label": "Statement of Debit Balance before Day end"
+          },
+          {
+            "id": "RN0200005 ",
+            "label": "RN0200005 Menu(Not Registered)"
+          },
+          {
+            "id": "RN9900018",
+            "label": "List of Pending Day ends"
+          },
+          {
+            "id": "RN9900016",
+            "label": "Unfinish Transaction Report"
+          },
+          {
+            "id": "RN0100002 ",
+            "label": "RN0100002 Menu(Not Registered)"
+          },
+          {
+            "id": "RN0100001",
+            "label": "Scroll Printing Account Wise Report"
+          },
+          {
+            "id": "NG099035",
+            "label": "GL Statement"
+          },
+          {
+            "id": "RN9900015",
+            "label": "Unauthorize Transaction Report"
+          },
+          {
+            "id": "NG099021",
+            "label": "Day Book Report New"
+          },
+          {
+            "id": "NG099010",
+            "label": "Supplementary Report"
+          }
+        ]
+      },
+      {
+        "id": "TermDepositRep",
+        "label": "Term Deposit",
+        "items": [
+          {
+            "id": "RN0400002",
+            "label": "Statement of Account For TD"
+          },
+          {
+            "id": "RN2000008",
+            "label": "RN2000008 Menu(Not Registered)"
+          },
+          {
+            "id": "RN2000010",
+            "label": "RN2000010 Menu(Not Registered)"
+          },
+          {
+            "id": "RN2000011",
+            "label": "RN2000011 Menu(Not Registered)"
+          },
+          {
+            "id": "RN2000012",
+            "label": "RN2000012 Menu(Not Registered)"
+          },
+          {
+            "id": "RN0100003",
+            "label": "RN0100003 Menu(Not Registered)"
+          },
+          {
+            "id": "NG020023",
+            "label": "Statement of TD Accounts"
+          }
+        ]
+      },
+      {
+        "id": "CTSClearingRpt",
+        "label": "Clearing",
+        "items": [
+          {
+            "id": "RN0300004",
+            "label": "Outward Clearing Register Summary"
+          },
+          {
+            "id": "RN0300003",
+            "label": "Inward Clearing Register Summary"
+          },
+          {
+            "id": "ACHDetails",
+            "label": "ACHDetails Menu(Not Registered)"
+          },
+          {
+            "id": "ACHSummary",
+            "label": "ACHSummary Menu(Not Registered)"
+          }
+        ]
+      },
+      {
+        "id": "CASARpt",
+        "label": "CASA",
+        "items": [
+          {
+            "id": "RN0400009",
+            "label": "RN0400009 Menu(Not Registered)"
+          },
+          {
+            "id": "RN0100029",
+            "label": "RN0100029 Menu(Not Registered)"
+          },
+          {
+            "id": "NG020027",
+            "label": "Statement of CASA Accounts"
+          }
+        ]
+      },
+      {
+        "id": "CASHRpt",
+        "label": "Cash",
+        "items": [
+          {
+            "id": "RN0200001",
+            "label": "DAILY - CASH POSITION - WITH DENOMINATION"
+          },
+          {
+            "id": "RN0200007",
+            "label": "Cashier Wise Denomination Report Detail"
+          },
+          {
+            "id": "RN0200010",
+            "label": "Daily Cash Position"
+          },
+          {
+            "id": "RN0100033",
+            "label": "RN0100033 Menu(Not Registered)"
+          }
+        ]
+      },
+      {
+        "id": "ALLOKRPTS",
+        "label": "All Ok Reports",
+        "items": [
+          {
+            "id": "RN0600002",
+            "label": "Any Day Balance for Term Deposit"
+          },
+          {
+            "id": "RN0600007",
+            "label": "All Ok Checking Account Report"
+          },
+          {
+            "id": "RN0600001",
+            "label": "Any Day Balance for Checking Account"
+          },
+          {
+            "id": "RN0600003",
+            "label": "Any Day Balance for Term Loan"
+          },
+          {
+            "id": "RN0600004",
+            "label": "ALL OK Loan Jotting Report"
+          }
+        ]
+      },
+      {
+        "id": "PackingCredit",
+        "label": "Packing Credit",
+        "items": [
+          {
+            "id": "R580004",
+            "label": "PC Disbursement Details Customer-wise."
+          },
+          {
+            "id": "R580006",
+            "label": "Statement of Overdue Packing Credit"
+          },
+          {
+            "id": "R580008",
+            "label": "Statement of Packing Credit Account"
+          },
+          {
+            "id": "R580009",
+            "label": "Reminder For Overdue Packing Credit"
+          },
+          {
+            "id": "R580010",
+            "label": "Party-wise PC Wise Liability Of Register"
+          },
+          {
+            "id": "R580011",
+            "label": "PC Liquidation advice"
+          },
+          {
+            "id": "R580029",
+            "label": "PC Disbursement Advice"
+          },
+          {
+            "id": "R580036",
+            "label": "PC Crystallization Listing Report"
+          },
+          {
+            "id": "R580038",
+            "label": "PC Crystallization Recovery Report"
+          },
+          {
+            "id": "R580035",
+            "label": "PC Crystallization Advice"
+          },
+          {
+            "id": "R580037",
+            "label": "PC Crystallization Recovery Advice"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "Transaction",
+    "label": "Transaction",
+    "subSections": [
+      {
+        "id": "viewEnquiry",
+        "label": "View and Inquiry",
+        "items": [
+          {
+            "id": "EMIQUERY",
+            "label": "EMI Query"
+          },
+          {
+            "id": "LOANACCOUNTINFORMATION",
+            "label": "Loan Account Information"
+          },
+          {
+            "id": "TDPREMATUREVIEW",
+            "label": "TD Pre-Mature Closure Help"
+          },
+          {
+            "id": "LOANACCOUNTCLOSUREHELP",
+            "label": "Loan Account Closure Help"
+          },
+          {
+            "id": "CHECKACCOUNTINFORMATION",
+            "label": "CHECKACCOUNTINFORMATION"
+          },
+          {
+            "id": "VIEWBATCH",
+            "label": "VIEW BATCH DIRECTORY"
+          }
+        ]
+      },
+      {
+        "id": "dailyDeposits",
+        "label": "Daily Deposits",
+        "items": [
+          {
+            "id": "DAILYDEPOSITCOLLECTIONENTRY",
+            "label": "Daily Deposit Collection Entry Master"
+          },
+          {
+            "id": "DAILYDEPOSITCOLLEAUTHREJ",
+            "label": "Daily Deposit Collection Authorization/Rejection Master"
+          },
+          {
+            "id": "AGENTTRFUTIL",
+            "label": "Agent Transfer Utility"
+          }
+        ]
+      },
+      {
+        "id": "denominationTrxn",
+        "label": "Teller Vault/Cash Management",
+        "items": [
+          {
+            "id": "VAULT",
+            "label": "Vault Creation"
+          },
+          {
+            "id": "VAULTUSERACCESS",
+            "label": "Vault User Access Rights"
+          },
+          {
+            "id": "VAULTDENOMINATIONBALANCE",
+            "label": "Vault Denomination Balance"
+          },
+          {
+            "id": "DENOMINATIONTXN",
+            "label": "Transfer/Exchange Denominations"
+          },
+          {
+            "id": "CASHBALDASHBOARD",
+            "label": "Cashier Balance Dashboard"
+          },
+          {
+            "id": "FCYBS",
+            "label": "Foreign Currency Buy Sell"
+          }
+        ]
+      },
+      {
+        "id": "txnentry",
+        "label": "Transactions Entry - Cash and Transfer",
+        "items": [
+          {
+            "id": "VOUCHER",
+            "label": "Transaction Entry"
+          },
+          {
+            "id": "DORMTRFR",
+            "label": "Dormant Transfer Master"
+          },
+          {
+            "id": "LOANTRN",
+            "label": "LOANTRN Menu(Not Registered)"
+          },
+          {
+            "id": "REMITTANCERECONENTRY",
+            "label": "Remittance Unreconciled Entry(View)"
+          },
+          {
+            "id": "CCODTRANSACTION",
+            "label": "CCODTRANSACTION Menu(Not Registered)"
+          }
+        ]
+      },
+      {
+        "id": "trnAuth",
+        "label": "Transaction Authorize",
+        "items": [
+          {
+            "id": "TXNAUTH",
+            "label": "Authorize Transaction"
+          },
+          {
+            "id": "TXNAUTHDENO",
+            "label": "Authorize Transaction (Denomination)"
+          }
+        ]
+      },
+      {
+        "id": "trnView",
+        "label": "Transactions View",
+        "items": [
+          {
+            "id": "VOUCHERBROWSE",
+            "label": "Browse Transaction"
+          }
+        ]
+      },
+      {
+        "id": "trnCancel",
+        "label": "Transactions Cancel",
+        "items": [
+          {
+            "id": "VOUCHERCANCEL",
+            "label": "Cancel Transaction"
+          },
+          {
+            "id": "BULKVCRCANCELPROC",
+            "label": "Bulk Cancel Vouchers"
+          }
+        ]
+      },
+      {
+        "id": "OutwardTrxn",
+        "label": "Outward Clearing",
+        "items": [
+          {
+            "id": "OUTWARDCLG",
+            "label": "Outward Clearing Entry"
+          },
+          {
+            "id": "OUTWARDFILEUPLOAD",
+            "label": "Outward File Upload"
+          },
+          {
+            "id": "OUTWARDXMLFILEUPLOAD",
+            "label": "XML Return File Upload"
+          },
+          {
+            "id": "OUTWARDDOWNLOAD",
+            "label": "global.menu.outward.file.download"
+          }
+        ]
+      },
+      {
+        "id": "InwardTrxn",
+        "label": "Inward Clearing",
+        "items": [
+          {
+            "id": "INWARDFILEUPLOAD",
+            "label": "Inward File Upload Process"
+          },
+          {
+            "id": "INWARDREJECTIONHANDLING",
+            "label": "Inward Refer To Branch(Authorise)"
+          },
+          {
+            "id": "INWARDVERIFICATION",
+            "label": "Verification and Authorization"
+          },
+          {
+            "id": "INWARDRETURNSEQ",
+            "label": "Inward Return Sequential File"
+          },
+          {
+            "id": "INSTRUMENTUPDATEDETAILS",
+            "label": "INSTRUMENTUPDATEDETAILS"
+          },
+          {
+            "id": "BRANCHCHANGEUTILITY",
+            "label": "BRANCHCHANGEUTILITY"
+          },
+          {
+            "id": "TRANSACTIONCANCELLATION",
+            "label": "TRANSACTIONCANCELLATION"
+          },
+          {
+            "id": "INWARDREFTOBRANCH",
+            "label": "Inward Refer To Branch"
+          }
+        ]
+      },
+      {
+        "id": "AchFileUploadTrxn",
+        "label": "ACH Clearing",
+        "items": [
+          {
+            "id": "ACHFILEUPLOAD",
+            "label": "ACH File Upload"
+          },
+          {
+            "id": "ACHTXNHANDLINGPROCESS",
+            "label": "ACH Txn Handling Process"
+          },
+          {
+            "id": "ACHRTNFILEGEN",
+            "label": "ACH Return File Generation"
+          }
+        ]
+      },
+      {
+        "id": "RTGSTrxn",
+        "label": "RTGS and NEFT",
+        "items": [
+          {
+            "id": "RTGSCRHANDLING",
+            "label": "Credit Handling Of Inward Messages"
+          },
+          {
+            "id": "RTGSCRHANDLINGAUTH",
+            "label": "Verification Of Credit Handling Inward Messages"
+          },
+          {
+            "id": "TRANSACTIONMST",
+            "label": "RTGS/NEFT ENTRY"
+          },
+          {
+            "id": "NEFTOUT",
+            "label": "RTGS/NEFT Outword Transaction Authorise"
+          },
+          {
+            "id": "NEFTBULKUPLODE",
+            "label": "NEFTBULKUPLODE Menu(Not Registered)"
+          },
+          {
+            "id": "NEFTRTGSBULKFORMSTAGE",
+            "label": "NEFTRTGSBULKFORMSTAGE Menu(Not Registered)"
+          },
+          {
+            "id": "IMPSOE",
+            "label": "IMPSOE Menu(Not Registered)"
+          },
+          {
+            "id": "NEFTRTGSAUTHLIMITHANDLE",
+            "label": "NEFTRTGSAUTHLIMITHANDLE Menu(Not Registered)"
+          }
+        ]
+      },
+      {
+        "id": "DestinationMandate",
+        "label": "Mandate Management",
+        "items": [
+          {
+            "id": "UploadMandateHandling",
+            "label": "Sponsor Mandate File Upload"
+          },
+          {
+            "id": "MandateHandling",
+            "label": "Sponsor Mandate Data Entry"
+          },
+          {
+            "id": "MandateXmlAndZipGeneration",
+            "label": "Sponsor Mandate XML and ZIP Generation"
+          },
+          {
+            "id": "MandateXmlUploadUtility",
+            "label": "Sponsor Mandate XML Response upload"
+          },
+          {
+            "id": "OUTWARDECSSEQGEN",
+            "label": "Sponsor Mandate Debit File Generation"
+          },
+          {
+            "id": "ManageDestinationMandateUtility",
+            "label": "DEST MANDATE FILE UPLOAD"
+          },
+          {
+            "id": "MandateHandlingProcessing",
+            "label": "DEST MANDATE HANDELLING"
+          },
+          {
+            "id": "ACKFILECRDEST",
+            "label": "DEST MANDATE RESPONSE GENERATION"
+          }
+        ]
+      },
+      {
+        "id": "BILLPAYMENT",
+        "label": "Utility bill payment",
+        "items": [
+          {
+            "id": "BILLPAYMENTUTILITY",
+            "label": "Bill Payment Utility"
+          },
+          {
+            "id": "BILLERACCOUNT",
+            "label": "Biller Account Linkage"
+          }
+        ]
+      },
+      {
+        "id": "aadharMst",
+        "label": "Aadhar Based Payment System",
+        "items": [
+          {
+            "id": "AADHARUPLOAD",
+            "label": "AADHAR File Upload"
+          },
+          {
+            "id": "CUSTOMERADHARCARDLINK",
+            "label": "Aadhar Link To Customer Account"
+          },
+          {
+            "id": "RESPONSEFILEUPLOAD",
+            "label": "RESPONSEFILEUPLOAD Menu(Not Registered)"
+          },
+          {
+            "id": "AADHARLINK",
+            "label": "Aadhar Link Master"
+          },
+          {
+            "id": "AADHARMAPPERFILE",
+            "label": "Mapper File Generation"
+          }
+        ]
+      },
+      {
+        "id": "ECSLinkMasters",
+        "label": "ECS",
+        "items": [
+          {
+            "id": "ECSLinkMst",
+            "label": "ECS Link Master"
+          }
+        ]
+      },
+      {
+        "id": "CASATRANSFER",
+        "label": "CASA Transfer Process",
+        "items": [
+          {
+            "id": "CASATRANSFERPR",
+            "label": "CASA Transfer Process"
+          }
+        ]
+      },
+      {
+        "id": "INVOICEFACTORY",
+        "label": "Invoice Factoring",
+        "items": [
+          {
+            "id": "BULKTRANSACTION",
+            "label": "Bulk Transaction"
+          }
+        ]
+      },
+      {
+        "id": "STATEGOVFIN",
+        "label": "STATE Govt Finance",
+        "items": [
+          {
+            "id": "BANKRECEIPT",
+            "label": "Bank Receipt"
+          },
+          {
+            "id": "RECEIPTAUTHPRINT",
+            "label": "Receipt Authorize /Print"
+          },
+          {
+            "id": "BANKPAYMENT",
+            "label": "Party Payment"
+          },
+          {
+            "id": "POAFILEGEN",
+            "label": "POA File Generation"
+          },
+          {
+            "id": "LIQUIDATIONAUTHPRINT",
+            "label": "Liquidation Authorize /Print"
+          },
+          {
+            "id": "LIQUIORDER",
+            "label": "Liquidation"
+          },
+          {
+            "id": "STATEGFDP",
+            "label": "State GFDP payment"
+          },
+          {
+            "id": "INVESTMENTORDER",
+            "label": "Investment"
+          }
+        ]
+      },
+      {
+        "id": "TOKEN",
+        "label": "Token",
+        "items": [
+          {
+            "id": "WTOKEN",
+            "label": "W Token"
+          }
+        ]
+      },
+      {
+        "id": "PFMS",
+        "label": "PFMS",
+        "items": [
+          {
+            "id": "CPSMS",
+            "label": "CPSMS Verification and Authorisation"
+          }
+        ]
+      }
+    ]
+  }
+]

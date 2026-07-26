@@ -1,0 +1,46 @@
+{
+  "name": "cbs-ng10x-automation",
+  "version": "2.0.0",
+  "description": "Enterprise CBS NG10X Automation Framework - Playwright + TypeScript",
+  "scripts": {
+    "test": "playwright test",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:sanity": "playwright test --grep @sanity",
+    "test:regression": "playwright test --grep @regression",
+    "test:e2e": "playwright test --grep @e2e",
+    "test:database": "playwright test --grep @database",
+    "test:masters": "playwright test src/modules/Administration/TenantAndBranchManagement/StateMaster/tests/create.spec.ts src/modules/Administration/TenantAndBranchManagement/DistrictMaster/tests/create.spec.ts src/modules/Administration/TenantAndBranchManagement/Subdivisionthana/tests/create.spec.ts src/modules/Administration/TenantAndBranchManagement/BlockmunicipalMaster/tests/create.spec.ts src/modules/Administration/TenantAndBranchManagement/VillageMaster/tests/create.spec.ts src/modules/Administration/TenantAndBranchManagement/UrbanMaster/tests/create.spec.ts --workers 6",
+    "test:ui": "playwright test --ui",
+    "test:headed": "playwright test --headed",
+    "test:debug": "playwright test --debug",
+    "report": "playwright show-report",
+    "allure:generate": "allure generate allure-results --clean -o allure-report",
+    "allure:open": "allure open allure-report",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix",
+    "format": "prettier --write src/**/*.ts",
+    "typecheck": "tsc --noEmit",
+    "create:excel": "node scripts/create-excel.js",
+    "menu:capture": "node scripts/capture-menus.js",
+    "menu:folders": "node scripts/create-menu-folders.js",
+    "menu:all": "npm run menu:capture && npm run menu:folders"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "@types/mssql": "^12.3.0",
+    "@types/node": "^22.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.0.0",
+    "@typescript-eslint/parser": "^8.0.0",
+    "allure-playwright": "^3.0.0",
+    "eslint": "^9.0.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.7.0"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^9.0.0",
+    "dotenv": "^16.0.0",
+    "exceljs": "^4.4.0",
+    "mssql": "^11.0.0",
+    "winston": "^3.0.0"
+  }
+}

@@ -1,0 +1,369 @@
+{
+  "screen": "CountryMaster",
+  "label": "Country Master",
+  "fields": [
+    {
+      "id": "menuSearchBox",
+      "name": "",
+      "type": "text",
+      "placeholder": "Menu search",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "countryCode",
+      "name": "countryCode",
+      "type": "text",
+      "placeholder": "Country Code",
+      "label": "Country Code",
+      "disabled": false,
+      "maxlength": "4",
+      "options": []
+    },
+    {
+      "id": "countryName",
+      "name": "countryName",
+      "type": "text",
+      "placeholder": "Country Name",
+      "label": "Country Name",
+      "disabled": false,
+      "maxlength": "50",
+      "options": []
+    },
+    {
+      "id": "countryAbbrevation",
+      "name": "countryAbbrevation",
+      "type": "text",
+      "placeholder": "Country Abbreviation",
+      "label": "Country Abbreviation",
+      "disabled": false,
+      "maxlength": "2",
+      "options": []
+    },
+    {
+      "id": "numCountyCd",
+      "name": "numCountyCd",
+      "type": "text",
+      "placeholder": "Numeric Country Code",
+      "label": "Numeric Country Code",
+      "disabled": false,
+      "maxlength": "4",
+      "options": []
+    },
+    {
+      "id": "countryType",
+      "name": "countryType",
+      "type": "select",
+      "placeholder": "",
+      "label": "Country Type",
+      "disabled": false,
+      "maxlength": ""
+    },
+    {
+      "id": "isdCode",
+      "name": "isdCode",
+      "type": "select",
+      "placeholder": "",
+      "label": "ISD Code",
+      "disabled": false,
+      "maxlength": ""
+    },
+    {
+      "id": "zone",
+      "name": "zone",
+      "type": "select",
+      "placeholder": "",
+      "label": "Zone",
+      "disabled": false,
+      "maxlength": ""
+    },
+    {
+      "id": "region",
+      "name": "region",
+      "type": "select",
+      "placeholder": "",
+      "label": "Region",
+      "disabled": false,
+      "maxlength": ""
+    },
+    {
+      "id": "restrictedY",
+      "name": "restrictedYN",
+      "type": "radio",
+      "placeholder": "",
+      "label": "Yes",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "restrictedN",
+      "name": "restrictedYN",
+      "type": "radio",
+      "placeholder": "",
+      "label": "Yes",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "gracePrdY",
+      "name": "gracePrdYN",
+      "type": "radio",
+      "placeholder": "",
+      "label": "Yes",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "gracePrdN",
+      "name": "gracePrdYN",
+      "type": "radio",
+      "placeholder": "",
+      "label": "Yes",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "gracePrd",
+      "name": "gracePrd",
+      "type": "text",
+      "placeholder": "Grace Period",
+      "label": "Grace Period",
+      "disabled": true,
+      "maxlength": "9",
+      "options": []
+    },
+    {
+      "id": "ecgcCoverY",
+      "name": "ecgcCoverYN",
+      "type": "radio",
+      "placeholder": "",
+      "label": "Yes",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "ecgcCoverN",
+      "name": "ecgcCoverYN",
+      "type": "radio",
+      "placeholder": "",
+      "label": "Yes",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "isAplhanumericY",
+      "name": "isAplhanumericYN",
+      "type": "radio",
+      "placeholder": "",
+      "label": "Yes",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "isAplhanumericN",
+      "name": "isAplhanumericYN",
+      "type": "radio",
+      "placeholder": "",
+      "label": "Yes",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "pinLength",
+      "name": "pinLength",
+      "type": "text",
+      "placeholder": "Pincode Length",
+      "label": "Pincode Length",
+      "disabled": false,
+      "maxlength": "2",
+      "options": []
+    },
+    {
+      "id": "lockloginId",
+      "name": "lockloginId",
+      "type": "text",
+      "placeholder": "Enter username here",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "lockpwd",
+      "name": "lockpwd",
+      "type": "password",
+      "placeholder": "Enter your password here",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "searchBox",
+      "name": "search",
+      "type": "text",
+      "placeholder": "Enter keyword here",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "level1",
+      "name": "",
+      "type": "select",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": ""
+    },
+    {
+      "id": "level2",
+      "name": "",
+      "type": "select",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": ""
+    },
+    {
+      "id": "qmenul1l2",
+      "name": "qmenul1l2",
+      "type": "select",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": ""
+    },
+    {
+      "id": "branchCode",
+      "name": "branchCode",
+      "type": "text",
+      "placeholder": "",
+      "label": "Branch Code",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "branchName",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "Branch Name",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "okButtonforShowDiffPopUp",
+      "name": "okButtonforShowDiffPopUp",
+      "type": "button",
+      "placeholder": "",
+      "label": "",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "createdBy123",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "Created By",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "createdDate",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "Created Date",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "createdTime",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "Created Time",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "lastmodifBy",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "Last Modified By",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "lastmodifDate",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "Last Modified Date",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "lastmodifTime",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "Last Modified Time",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "status",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "Status",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "rev",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "REV",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    },
+    {
+      "id": "rejectedReson",
+      "name": "",
+      "type": "text",
+      "placeholder": "",
+      "label": "Rejected Reason",
+      "disabled": false,
+      "maxlength": "",
+      "options": []
+    }
+  ]
+}
