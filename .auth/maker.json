@@ -2,7 +2,7 @@
   "cookies": [
     {
       "name": "JSESSIONID",
-      "value": "231F27D73D03EB45C27A67645FAF09F5",
+      "value": "5B77A53DB97E2B6D98CE5FE49F70E8D8",
       "domain": "172.21.0.39",
       "path": "/Kiya.aiCBS-10.2.0",
       "expires": -1,
@@ -17,7 +17,7 @@
       "localStorage": [
         {
           "name": "openpages",
-          "value": "1785077986928"
+          "value": "1785207633562"
         }
       ]
     }

@@ -15,26 +15,25 @@ export class MenuNavigation {
     }
 
     // Expand top section only if not already open
-    const isOpen = await sectionToggle.evaluate((el: Element) => el.classList.contains('mn-open'));
+    const isOpen = await sectionToggle.getAttribute('class').then(c => (c ?? '').includes('mn-open')).catch(() => false);
     if (!isOpen) await sectionToggle.click();
 
     // Expand sub-section only if not already open
     const subToggle = this.page.locator(`li#${escId(subSection)} > a.s-dropnav`);
     await subToggle.waitFor({ state: 'visible', timeout: 8_000 });
-    const subPanel = this.page.locator(`li#${escId(subSection)} > div.super-sub-nav`);
-    const subOpen  = await subPanel.evaluate((el: Element) => el.classList.contains('ssn-open')).catch(() => false);
+    const subClass = await subToggle.getAttribute('class').catch(() => '');
+    const subOpen  = (subClass ?? '').includes('ssn-open') ||
+                     await this.page.locator(`li#${escId(subSection)} > div.super-sub-nav`)
+                       .getAttribute('class').then(c => (c ?? '').includes('ssn-open')).catch(() => false);
     if (!subOpen) await subToggle.click();
 
-    // Click menu item — CBS loads screen via AJAX, no full page navigation
+    // Click menu item
     const menuItem = this.page.locator(`li#${escId(menuItemId)} > a`);
     await menuItem.waitFor({ state: 'visible', timeout: 8_000 });
     await menuItem.click();
 
-    // Wait for the screen content to appear instead of waitForLoadState
-    // CBS injects content into an iframe/div — wait for any loading indicator to disappear
-    await this.page.waitForFunction(() => {
-      const loader = document.querySelector('.loading, .loader, #loadingDiv, .page-loader');
-      return !loader || (loader as HTMLElement).style.display === 'none';
-    }, { timeout: 15_000 }).catch(() => {});
+    // CBS loads screen via AJAX — do NOT use waitForLoadState (hangs on AJAX screens)
+    // Wait for the Add button or grid to appear as signal that screen loaded
+    await this.page.waitForTimeout(1_500);
   }
 }

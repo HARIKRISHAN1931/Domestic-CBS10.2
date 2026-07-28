@@ -11,9 +11,7 @@ export abstract class BasePage {
   protected get modal(): ModalComponent { return new ModalComponent(this.page); }
   protected get grid():  GridComponent  { return new GridComponent(this.page); }
 
-  protected loc(selector: string): Locator {
-    return this.page.locator(selector);
-  }
+  protected loc(selector: string): Locator { return this.page.locator(selector); }
 
   async fill(locator: Locator, value: string): Promise<void> {
     if (!value) return;
@@ -27,71 +25,54 @@ export abstract class BasePage {
 
   async selectOption(locator: Locator, value: string): Promise<void> {
     if (!value) return;
-    await locator.selectOption(value).catch(() =>
-      locator.selectOption({ label: value }).catch(() => {})
-    );
+    const ok = await locator.waitFor({ state: 'visible', timeout: 3_000 }).then(() => true).catch(() => false);
+    if (!ok) return;
+    const v = value.trim();
+    const done = await locator.selectOption(v).then(() => true).catch(() => false);
+    if (!done) await locator.selectOption({ label: v }).catch(() => {});
   }
 
   protected async step<T>(name: string, fn: () => Promise<T>): Promise<T> {
     return test.step(name, fn);
   }
 
-  async expectVisible(locator: Locator): Promise<void> {
-    await expect(locator).toBeVisible();
-  }
+  async expectVisible(locator: Locator): Promise<void> { await expect(locator).toBeVisible(); }
+  async expectText(locator: Locator, text: string): Promise<void> { await expect(locator).toContainText(text); }
 
-  async expectText(locator: Locator, text: string): Promise<void> {
-    await expect(locator).toContainText(text);
-  }
+  // CBS pages block page.evaluate (CSP) — waitForAjax is a no-op
+  async waitForAjax(): Promise<void> {}
 
-  async waitForAjax(maxWaitMs = CBS_TIMEOUTS.AJAX): Promise<void> {
-    await this.page.waitForLoadState('domcontentloaded').catch(() => {});
-    await this.page.evaluate((maxMs: number) => new Promise<void>((resolve) => {
-      const deadline = Date.now() + maxMs;
-      const check = () => {
-        const jq = (window as any).jQuery;
-        if (jq && jq.active > 0 && Date.now() < deadline) setTimeout(check, 100);
-        else resolve();
-      };
-      check();
-    }), maxWaitMs).catch(() => {});
-  }
-
+  /**
+   * Recover the active CBS app page after CBS navigation.
+   * Excludes: about:blank, LoginPage tab.
+   * CBS app pages contain '/Kiya.aiCBS' in their URL.
+   */
   protected async switchToActivePage(): Promise<void> {
     let ctx: import('@playwright/test').BrowserContext;
     try { ctx = this.page.context(); } catch { return; }
-    const pages = ctx.pages().filter(p => !p.isClosed());
-    const active = pages[pages.length - 1];
-    if (active && active !== this.page) {
-      this.page = active;
-      await this.page.waitForLoadState('domcontentloaded').catch(() => {});
-    }
+    if (!this.page.isClosed()) return;   // current page still alive — no switch needed
+    const appPages = ctx.pages().filter(p =>
+      !p.isClosed() &&
+      p.url() !== 'about:blank' &&
+      !p.url().includes('LoginPage')
+    );
+    if (!appPages.length) return;
+    this.page = appPages[appPages.length - 1];
   }
 
-  async switchToScreen(): Promise<void> {
-    await this.switchToActivePage();
-  }
+  async switchToScreen(): Promise<void> { await this.switchToActivePage(); }
 
-  async getSuccessToast(timeout = CBS_TIMEOUTS.TOAST): Promise<string> {
-    return this.toast.getSuccess(timeout);
-  }
-
-  async getErrorToast(timeout = CBS_TIMEOUTS.ELEMENT): Promise<string> {
-    return this.toast.getError(timeout);
-  }
-
-  async assertNoErrorToast(timeout = CBS_TIMEOUTS.SHORT): Promise<void> {
-    return this.toast.assertNoError(timeout);
-  }
+  async getSuccessToast(timeout = CBS_TIMEOUTS.TOAST): Promise<string> { return this.toast.getSuccess(timeout); }
+  async getErrorToast(timeout = CBS_TIMEOUTS.ELEMENT): Promise<string>  { return this.toast.getError(timeout); }
+  async assertNoErrorToast(timeout = CBS_TIMEOUTS.SHORT): Promise<void> { return this.toast.assertNoError(timeout); }
 
   async assertMandatoryError(fieldId: string): Promise<void> {
     const errorLoc        = this.loc(`#${fieldId} ~ .error-msg, [data-field="${fieldId}"] .error-msg`);
     const parentMandatory = this.page.locator(`#${fieldId}`).locator('xpath=ancestor::*[contains(@class,"control-mandatory")]');
     const hasMandatory    = await parentMandatory.first().isVisible().catch(() => false);
     const hasError        = await errorLoc.first().isVisible().catch(() => false);
-    if (!hasMandatory && !hasError) {
+    if (!hasMandatory && !hasError)
       throw new Error(`[UI] Expected mandatory validation for #${fieldId} but none visible`);
-    }
   }
 
   async getSessionInfo(): Promise<{ operationalDate: string; branchCode: string }> {

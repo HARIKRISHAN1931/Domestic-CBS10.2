@@ -1,15 +1,8 @@
 import { test as base, Page, Browser, BrowserContext } from '@playwright/test';
-import { LoginPage } from '../auth/LoginPage';
 import { config } from '../config/config';
 import { CBS_SELECTORS } from '../config/selectors';
 import { CBS_TIMEOUTS } from '../config/timeouts';
 import { DatabaseConnectionManager } from '../database/DatabaseConnectionManager';
-import path from 'path';
-import fs from 'fs';
-
-export const STORAGE_STATE_DIR     = path.join(process.cwd(), '.auth');
-export const MAKER_STORAGE_STATE   = path.join(STORAGE_STATE_DIR, 'maker.json');
-export const CHECKER_STORAGE_STATE = path.join(STORAGE_STATE_DIR, 'checker.json');
 
 type CbsFixtures = {
   authenticatedPage:        Page;
@@ -19,71 +12,81 @@ type CbsFixtures = {
   db:                       DatabaseConnectionManager;
 };
 
+/**
+ * CBS login flow:
+ *   1. Open login tab → goto app URL
+ *   2. Fill credentials → click login
+ *   3. CBS opens the app in a NEW popup tab
+ *   4. Return that popup tab as the active page
+ *
+ * No session caching — always fresh login.
+ * One context, one window per test.
+ */
 async function createSession(
   browser: Browser,
-  storageFile: string,
   username: string,
   password: string
 ): Promise<{ context: BrowserContext; page: Page }> {
-  if (fs.existsSync(storageFile)) {
-    const context = await browser.newContext({ baseURL: config.baseUrl, storageState: storageFile });
-    const page    = await context.newPage();
-    await page.goto(`${config.baseUrl}${config.appPath}`);
-    await page.waitForLoadState('domcontentloaded');
-    const isLoggedIn = await page.locator(CBS_SELECTORS.HAMBURGER)
-      .isVisible({ timeout: CBS_TIMEOUTS.SHORT }).catch(() => false);
-    if (isLoggedIn) {
-      await page.evaluate(() => { window.moveTo(0, 0); window.resizeTo(screen.width, screen.height); });
-      return { context, page };
-    }
-    await context.close();
+
+  const context  = await browser.newContext({ baseURL: config.baseUrl });
+  const loginTab = await context.newPage();
+
+  await loginTab.goto(`${config.baseUrl}${config.appPath}`, { waitUntil: 'domcontentloaded' });
+
+  // Handle stale-session relogin prompt if CBS shows it
+  const reloginBtn = loginTab.locator('#relogin');
+  if (await reloginBtn.isVisible({ timeout: 2_000 }).catch(() => false)) {
+    await reloginBtn.click();
+    await loginTab.waitForLoadState('domcontentloaded');
   }
 
-  const context   = await browser.newContext({ baseURL: config.baseUrl });
-  const loginPage = new LoginPage(await context.newPage());
-  await loginPage.goto();
-  const page = await loginPage.loginAndGetAppPage(context, username, password);
-  await page.locator(CBS_SELECTORS.HAMBURGER).waitFor({ state: 'visible', timeout: CBS_TIMEOUTS.LOGIN });
-  await page.evaluate(() => { window.moveTo(0, 0); window.resizeTo(screen.width, screen.height); });
-  if (!fs.existsSync(STORAGE_STATE_DIR)) fs.mkdirSync(STORAGE_STATE_DIR, { recursive: true });
-  await context.storageState({ path: storageFile });
-  return { context, page };
+  await loginTab.locator('#loginId').fill(username);
+  await loginTab.locator('#loginId').press('Tab');
+  await loginTab.locator('#uiPwd').fill(password);
+
+  // CBS opens the app in a NEW popup tab on login click
+  const [appPage] = await Promise.all([
+    context.waitForEvent('page', { timeout: 30_000 }),
+    loginTab.locator('#userLogin').click(),
+  ]);
+
+  await appPage.waitForLoadState('domcontentloaded');
+  await appPage.bringToFront();
+  await appPage.locator(CBS_SELECTORS.HAMBURGER).waitFor({ state: 'visible', timeout: CBS_TIMEOUTS.LOGIN });
+
+  return { context, page: appPage };
 }
 
 export const test = base.extend<CbsFixtures>({
   makerContext: async ({ browser }, use) => {
-    const { context } = await createSession(browser, MAKER_STORAGE_STATE, config.auth.username, config.auth.password);
+    const { context } = await createSession(browser, config.auth.username, config.auth.password);
     await use(context);
     await context.close().catch(() => {});
   },
 
   checkerContext: async ({ browser }, use) => {
-    const { context } = await createSession(browser, CHECKER_STORAGE_STATE, config.auth.checkerUsername, config.auth.checkerPassword);
+    const { context } = await createSession(browser, config.auth.checkerUsername, config.auth.checkerPassword);
     await use(context);
     await context.close().catch(() => {});
   },
 
   authenticatedPage: async ({ browser }, use) => {
-    const { context, page } = await createSession(browser, MAKER_STORAGE_STATE, config.auth.username, config.auth.password);
+    const { context, page } = await createSession(browser, config.auth.username, config.auth.password);
     await use(page);
     await context.close().catch(() => {});
   },
 
   checkerAuthenticatedPage: async ({ browser }, use) => {
-    const { context, page } = await createSession(browser, CHECKER_STORAGE_STATE, config.auth.checkerUsername, config.auth.checkerPassword);
+    const { context, page } = await createSession(browser, config.auth.checkerUsername, config.auth.checkerPassword);
     await use(page);
     await context.close().catch(() => {});
   },
 
   db: async ({}, use) => {
     const db = new DatabaseConnectionManager();
-    if (config.db.host) {
-      await db.connect();
-    }
+    if (config.db.host) await db.connect();
     await use(db);
-    if (config.db.host) {
-      await db.disconnect();
-    }
+    if (config.db.host) await db.disconnect();
   },
 });
 
