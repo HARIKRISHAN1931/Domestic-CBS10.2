@@ -8,4 +8,7 @@
       </list>
     </option>
   </component>
+  <component name="qConnectionManager">
+    <option name="activeConnectionId" value="sso-session:d-9f677d5c74" />
+  </component>
 </project>

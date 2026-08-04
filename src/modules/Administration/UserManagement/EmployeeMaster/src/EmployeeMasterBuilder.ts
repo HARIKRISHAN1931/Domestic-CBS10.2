@@ -36,31 +36,31 @@ export class EmployeeMasterBuilder {
     bloodGroup:     '1',              // A+
     education:      '4',              // POST GRADUATE
     religion:       '1',              // HINDU
-    caste:          '1',              // value=1 (captured)
-    subCaste:       '1',              // value=1 (captured)
-    status:         '1',              // Active
+    caste:          '1',              // 1-BRAHMIN (value=1, loads after religion)
+    // subCaste intentionally omitted — no sub-castes in this CBS instance
+    status:         '1',              // Active (force-set, field is disabled)
     retireDate:     '31-01-2059',
     postBr:         '101',             // F2 lookup — search by branch code
     repoMngr:       'demo1',           // F2 lookup — search by user ID
-    dept:           '10-ADMINISTRATION', // Select2 — exact option text
-    maritalStatus:  '1-UNMARRIED',        // Select2 — exact option text
+    dept:           '1-CORPORATE',        // Select2 — exact option text (captured)
+    maritalStatus:  '1-UNMARRIED',        // Select2 — exact option text (captured)
     idProof:        '1',              // AADHAR
-    idNumber:       `9857${RUN_SUFFIX}8797`,
+    idNumber:       `98${RUN_SUFFIX}8797`,
     issueDate:      '13-07-2016',
     docIssuedBy:    '8',              // UIDAI
     idProofName:    'Test Employee',
     addrIdType:     '1',              // AADHAR
-    addrIdNo:       `9857${RUN_SUFFIX}8797`,
+    addrIdNo:       `98${RUN_SUFFIX}8797`,
     address1:       '123 Main Street',
     address2:       'Near Park',
     address3:       'Hyderabad',
     country:        'IND',
-    state:          '19-WEST BENGAL',    // Select2 — exact option text (captured)
-    city:           '306',            // value=306 (captured — numeric)
+    state:          'WEST BENGAL',     // Select2 text search — sel2 finds '19-WEST BENGAL'
+    city:           '306',             // value=306 = PURBA BARDHAMAN (Purba Burdwan)
     postalCode:     '505001',
     email:          `test.emp${RUN_SUFFIX}@bank.com`,
-    mobile:         '9876543210',
-    // Upload Document & Address Proof — dummy white PNG
+    mobile:         `9${RUN_SUFFIX}210`,  // unique per run — CBS rejects duplicate mobile
+    isdMobile:      '+91',            // mandatory per CBS validateForm()
     docUpload:      require('path').resolve(__dirname, '../data/test-doc.png'),
     docUpload1:     require('path').resolve(__dirname, '../data/test-doc.png'),
   };
@@ -90,6 +90,7 @@ export class EmployeeMasterBuilder {
   withSpouseName(v: string):      this { this.data.empSpouseName   = v; return this; }
   withIdProof(v: string):         this { this.data.idProof         = v; return this; }
   withIdNumber(v: string):        this { this.data.idNumber        = v; return this; }
+  withAddrIdNo(v: string):         this { this.data.addrIdNo         = v; return this; }
   withAddress1(v: string):        this { this.data.address1        = v; return this; }
   withAddress2(v: string):        this { this.data.address2        = v; return this; }
   withAddress3(v: string):        this { this.data.address3        = v; return this; }
@@ -100,9 +101,41 @@ export class EmployeeMasterBuilder {
 
   build(): EmployeeMasterData { return { ...this.data }; }
 
-  /** Only the 3 mandatory fields — used for negative/boundary tests */
+  /** All CBS-mandatory fields only (no optional fields like bloodGroup, religion, remark etc.) */
   buildMandatoryOnly(): EmployeeMasterData {
-    return { empId: this.data.empId, empFName: this.data.empFName, joinDate: this.data.joinDate };
+    return {
+      empId:          `EMPM1${RUN_SUFFIX}`,
+      userSalutation: '1',
+      empFName:       'Test',
+      empLName:       'Mandatory',
+      designation:    '1 -BANK BRANCH MANAGER',
+      joinDate:       '01-01-2025',
+      birthDate:      '01-01-1999',
+      employmentType: '1',
+      education:      '4',
+      status:         '1',
+      postBr:         '101',
+      dept:           '1-CORPORATE',
+      repoMngr:       'demo1',
+      maritalStatus:  '1-UNMARRIED',
+      idProof:        '1',
+      idNumber:       `91${RUN_SUFFIX}0001`,
+      issueDate:      '13-07-2016',
+      docIssuedBy:    '8',
+      idProofName:    'Test Mandatory',
+      addrIdType:     '1',
+      addrIdNo:       `91${RUN_SUFFIX}0001`,
+      address1:       '1 Test Street',
+      country:        'IND',
+      state:          'WEST BENGAL',
+      city:           '306',
+      postalCode:     '700001',
+      email:          `mand.emp${RUN_SUFFIX}@bank.com`,
+      mobile:         `4${RUN_SUFFIX}001`,
+      isdMobile:      '+91',
+      docUpload:      require('path').resolve(__dirname, '../data/test-doc.png'),
+      docUpload1:     require('path').resolve(__dirname, '../data/test-doc.png'),
+    };
   }
 
   /** Female employee — salutation MRS, app will auto-set gender to FEMALE */
@@ -110,42 +143,51 @@ export class EmployeeMasterBuilder {
     return {
       ...this.data,
       empId:          `EMPF${RUN_SUFFIX}`,
-      userSalutation: '2',   // MRS → FEMALE
+      userSalutation: '2',
       empFName:       'Priya',
       empLName:       'Sharma',
       email:          `priya.emp${RUN_SUFFIX}@bank.com`,
+      mobile:         `8${RUN_SUFFIX}210`,
+      idNumber:       `82${RUN_SUFFIX}0001`,
+      addrIdNo:       `82${RUN_SUFFIX}0001`,
     };
   }
 
-  /** Retainer employee */
   buildRetainer(): EmployeeMasterData {
     return {
       ...this.data,
       empId:          `EMPR${RUN_SUFFIX}`,
-      employmentType: '2',   // Retainer
+      employmentType: '2',
       email:          `retainer.emp${RUN_SUFFIX}@bank.com`,
+      mobile:         `7${RUN_SUFFIX}210`,
+      idNumber:       `72${RUN_SUFFIX}0001`,
+      addrIdNo:       `72${RUN_SUFFIX}0001`,
     };
   }
 
-  /** Married employee — includes spouse name */
   buildMarried(): EmployeeMasterData {
     return {
       ...this.data,
       empId:          `EMPM${RUN_SUFFIX}`,
-      maritalStatus:  'MARRIED',
+      maritalStatus:  '2-MARRIED',
       empSpouseName:  'Spouse Name',
       email:          `married.emp${RUN_SUFFIX}@bank.com`,
+      mobile:         `6${RUN_SUFFIX}210`,
+      idNumber:       `62${RUN_SUFFIX}0001`,
+      addrIdNo:       `62${RUN_SUFFIX}0001`,
     };
   }
 
-  /** Retired employee — includes retirement date */
   buildRetired(): EmployeeMasterData {
     return {
       ...this.data,
       empId:          `EMPRET${RUN_SUFFIX}`,
-      status:         '3',   // Retired
+      status:         '3',
       retireDate:     '01-01-2024',
       email:          `retired.emp${RUN_SUFFIX}@bank.com`,
+      mobile:         `5${RUN_SUFFIX}210`,
+      idNumber:       `52${RUN_SUFFIX}0001`,
+      addrIdNo:       `52${RUN_SUFFIX}0001`,
     };
   }
 }

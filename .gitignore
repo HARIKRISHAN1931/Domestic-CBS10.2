@@ -8,6 +8,7 @@ screenshots/
 videos/
 logs/
 auth-state.json
+created-employees.json
 .env
 .env.dev
 .env.qa
