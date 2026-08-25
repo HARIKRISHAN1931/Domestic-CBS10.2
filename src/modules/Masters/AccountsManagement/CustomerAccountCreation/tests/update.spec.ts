@@ -7,7 +7,7 @@ import { MenuNavigation } from '../../../../../common/components/MenuNavigation'
 import { AccountOpeningFormData } from '../src/AccountOpeningPage';
 
 const DATA_FILE = path.resolve(__dirname, '../data/CustomerAccountCreation.xlsx');
-const NAV       = (page: any) => new MenuNavigation(page).navigate('Masters', 'accountsMgmt', 'PRDACNOMST');
+const NAV       = (page: any) => new MenuNavigation(page).navigate('Masters', 'AccountsManagement', 'PRDACNOMST');
 
 test.describe('Customer Account Creation (PRDACNOMST) > Update', () => {
 

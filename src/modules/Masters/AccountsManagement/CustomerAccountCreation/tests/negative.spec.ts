@@ -3,7 +3,7 @@ import { AccountOpeningPage } from '../src/AccountOpeningPage';
 import { AccountOpeningBuilder } from '../src/AccountOpeningBuilder';
 import { MenuNavigation } from '../../../../../common/components/MenuNavigation';
 
-const NAV = (page: any) => new MenuNavigation(page).navigate('Masters', 'accountsMgmt', 'PRDACNOMST');
+const NAV = (page: any) => new MenuNavigation(page).navigate('Masters', 'AccountsManagement', 'PRDACNOMST');
 
 test.describe('Customer Account Creation (PRDACNOMST) > Negative', () => {
 

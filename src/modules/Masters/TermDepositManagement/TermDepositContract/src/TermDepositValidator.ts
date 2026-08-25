@@ -1,18 +1,34 @@
 import { expect } from '@playwright/test';
-import { TdContractDbRow } from './TermDepositRepository';
+import { TermDepositPage } from './TermDepositPage';
+import { TermDepositRepository } from './TermDepositRepository';
 
 export class TermDepositValidator {
-  validateCreated(toast: string): void {
-    expect(toast, 'TD contract success toast must appear').toBeTruthy();
+  constructor(
+    private readonly page: TermDepositPage,
+    private readonly repo: TermDepositRepository,
+  ) {}
+
+  async verifyPendingInGrid(searchText: string): Promise<void> {
+    await this.page.switchToPendingTab();
+    expect(
+      await this.page.isRecordInPendingGrid(searchText),
+      `${searchText} must appear in pending grid`
+    ).toBe(true);
   }
 
-  validateDbRecord(row: TdContractDbRow | null, tdAcctId: string): void {
-    expect(row, `TD contract ${tdAcctId} must exist in D020004`).not.toBeNull();
-    expect(row!.isActive, 'isActive must be 1').toBe(1);
+  async verifyInDatabase(prdAcctId: string): Promise<void> {
+    const record = await this.repo.findByAccountId(prdAcctId);
+    expect(record, `TD contract ${prdAcctId} must exist in DB`).not.toBeNull();
   }
 
-  validateDbAuthorized(row: TdContractDbRow | null, tdAcctId: string): void {
-    expect(row, `TD contract ${tdAcctId} must exist in D020004`).not.toBeNull();
-    expect(row!.authStatus, 'authStatus must be A after authorize').toBe('A');
+  async verifyAuthorized(prdAcctId: string): Promise<void> {
+    const record = await this.repo.findAuthorized(prdAcctId);
+    expect(record, `TD contract ${prdAcctId} must be authorized in DB`).not.toBeNull();
+    expect(record?.authStatus).toBe('A');
+  }
+
+  async verifyCustomerHasContracts(customerId: string): Promise<void> {
+    const count = await this.repo.countByCustomer(customerId);
+    expect(count, `Customer ${customerId} must have at least one TD contract`).toBeGreaterThan(0);
   }
 }

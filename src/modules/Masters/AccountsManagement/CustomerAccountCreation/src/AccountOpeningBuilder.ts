@@ -2,53 +2,56 @@ import { expect } from '@playwright/test';
 import { AccountOpeningFormData } from './AccountOpeningPage';
 import { AccountOpeningDbRow } from './AccountOpeningRepository';
 
-const RUN_SUFFIX = Date.now().toString().slice(-6);
+// ── All module/product/scheme combinations captured from live CBS (customer 1395042) ──
+// Each entry = one account to create
+export const ALL_MODULE_COMBINATIONS: AccountOpeningFormData[] = [
+  // Module 11
+  { moduleCode: '11', productCode: '1',     schemeCode: '1'    },
+  { moduleCode: '11', productCode: '66',    schemeCode: '66'   },
+  { moduleCode: '11', productCode: '90',    schemeCode: '01'   },
+  { moduleCode: '11', productCode: '97',    schemeCode: '12'   },
+  // Module 12
+  { moduleCode: '12', productCode: '11',    schemeCode: '63'   },
+  { moduleCode: '12', productCode: '121',   schemeCode: '11'   },
+  { moduleCode: '12', productCode: '1001',  schemeCode: '1001' },
+  { moduleCode: '12', productCode: '1818',  schemeCode: '1818' },
+  // Module 13
+  { moduleCode: '13', productCode: '1300',  schemeCode: '01'   },
+  { moduleCode: '13', productCode: '23121', schemeCode: '01'   },
+  { moduleCode: '13', productCode: '23131', schemeCode: '01'   },
+  { moduleCode: '13', productCode: '23133', schemeCode: '11'   },
+  // Module 14
+  { moduleCode: '14', productCode: '15103', schemeCode: '01'   },
+  { moduleCode: '14', productCode: '15104', schemeCode: '04'   },
+  // Module 30
+  { moduleCode: '30', productCode: '23101', schemeCode: '01'   },
+  { moduleCode: '30', productCode: '23123', schemeCode: '01'   },
+  { moduleCode: '30', productCode: '23151', schemeCode: '01'   },
+  { moduleCode: '30', productCode: '23155', schemeCode: '01'   },
+  // Module 47
+  { moduleCode: '47', productCode: '47',    schemeCode: '99'   },
+  { moduleCode: '47', productCode: '4747',  schemeCode: '01'   },
+  { moduleCode: '47', productCode: '47001', schemeCode: '01'   },
+  { moduleCode: '47', productCode: '55555', schemeCode: '01'   },
+  // Module 99
+  { moduleCode: '99', productCode: '991',   schemeCode: '01'   },
+  { moduleCode: '99', productCode: '992',   schemeCode: '01'   },
+  { moduleCode: '99', productCode: '11101', schemeCode: '01'   },
+  { moduleCode: '99', productCode: '11133', schemeCode: '01'   },
+];
 
 export class AccountOpeningBuilder {
-  private data: AccountOpeningFormData = {
-    // ── Defaults — update with captured values from live CBS PRDACNOMST screen ──
-    customerId:      'CUST001',          // existing customer ID in CBS
-    acType:          'SAVINGS',          // Select2 — exact option text (capture from live app)
-    branchCode:      '101',              // F2 lookup — branch code
-    openDate:        '01-01-2025',
-    operMode:        '1',               // 1=Single, 2=Joint, etc.
-    nomineeName:     `Nominee${RUN_SUFFIX}`,
-    nomineeRelation: '1',               // native select value
-    nomineeDob:      '01-01-1990',
-    nomineeAddr:     '123 Test Street',
-    remark:          `Auto test ${RUN_SUFFIX}`,
+  private base: AccountOpeningFormData = {
+    customerNumber: '1395042',
+    nomineeYN:      'N',
   };
 
-  withCustomerId(v: string):      this { this.data.customerId      = v; return this; }
-  withAcType(v: string):          this { this.data.acType          = v; return this; }
-  withBranchCode(v: string):      this { this.data.branchCode      = v; return this; }
-  withOpenDate(v: string):        this { this.data.openDate        = v; return this; }
-  withMinBal(v: string):          this { this.data.minBal          = v; return this; }
-  withOperMode(v: string):        this { this.data.operMode        = v; return this; }
-  withNomineeName(v: string):     this { this.data.nomineeName     = v; return this; }
-  withNomineeRelation(v: string): this { this.data.nomineeRelation = v; return this; }
-  withNomineeDob(v: string):      this { this.data.nomineeDob      = v; return this; }
-  withNomineeAddr(v: string):     this { this.data.nomineeAddr     = v; return this; }
-  withRemark(v: string):          this { this.data.remark          = v; return this; }
-
-  build(): AccountOpeningFormData { return { ...this.data }; }
-
-  buildMandatoryOnly(): AccountOpeningFormData {
-    return {
-      customerId: 'CUST001',
-      acType:     'SAVINGS',
-      branchCode: '101',
-      openDate:   '01-01-2025',
-      operMode:   '1',
-    };
+  forCombination(combo: AccountOpeningFormData): AccountOpeningFormData {
+    return { ...this.base, ...combo };
   }
 
-  buildJointAccount(): AccountOpeningFormData {
-    return {
-      ...this.data,
-      operMode: '2',   // Joint
-      remark:   `Joint account test ${RUN_SUFFIX}`,
-    };
+  buildAll(): AccountOpeningFormData[] {
+    return ALL_MODULE_COMBINATIONS.map(c => this.forCombination(c));
   }
 }
 
@@ -69,12 +72,8 @@ export class AccountOpeningValidator {
     expect(toast, 'Success toast must appear after reject').toBeTruthy();
   }
 
-  validateDeleted(toast: string): void {
-    expect(toast, 'Success toast must appear after delete').toBeTruthy();
-  }
-
-  validateDbRecord(row: AccountOpeningDbRow | null, customerId: string): void {
-    expect(row, `Account for customer ${customerId} must exist in DB`).not.toBeNull();
+  validateDbRecord(row: AccountOpeningDbRow | null, label: string): void {
+    expect(row, `Account for ${label} must exist in DB`).not.toBeNull();
   }
 
   validateDbPending(row: AccountOpeningDbRow | null, accountNo: string): void {
@@ -85,10 +84,5 @@ export class AccountOpeningValidator {
   validateDbAuthorized(row: AccountOpeningDbRow | null, accountNo: string): void {
     expect(row, `Account ${accountNo} must exist in DB after authorize`).not.toBeNull();
     expect(row!.authStatus, 'authStatus must be A after authorize').toBe('A');
-  }
-
-  validateDbActive(row: AccountOpeningDbRow | null, accountNo: string): void {
-    expect(row, `Account ${accountNo} must be active in DB`).not.toBeNull();
-    expect(row!.isActive, 'isActive must be 1').toBe(1);
   }
 }

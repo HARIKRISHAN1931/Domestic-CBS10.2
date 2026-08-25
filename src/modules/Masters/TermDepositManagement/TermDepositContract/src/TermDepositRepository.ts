@@ -1,80 +1,93 @@
-import { BaseRepository } from '../../../framework/base/BaseRepository';
+import { BaseRepository } from '../../../../../framework/base/BaseRepository';
 
-export interface TdContractDbRow {
+export interface TDContractDbRow {
   prdAcctId:     string;
-  custNo:        number;
-  depositAmt:    number;
-  depositTerm:   number;
-  termUnit:      string;
-  repaymentMode: string;
-  maturityAmt:   number;
-  maturityDate:  string;
-  authStatus:    string;
-  isActive:      number;
+  customerId:    string;
   productCode:   string;
   schemeCode:    string;
-  intRate:       number;
-}
-
-export interface TdInterestPayoutDbRow {
-  prdAcctId:       string;
-  srNo:            number;
-  interestFreq:    string;
-  paymentMode:     string;
-  creditAcNo:      string;
-  instrAmt:        number;
-  instrPercentage: number;
-  authStatus:      string;
-  isActive:        number;
-}
-
-export interface TdMaturityDisposalDbRow {
-  prdAcctId:       string;
-  srNo:            number;
-  rollOverType:    string;
-  autoRollOver:    string;
-  paymentMode:     string;
-  creditAcNo:      string;
-  instrAmt:        number;
-  instrPercentage: number;
-  authStatus:      string;
-  isActive:        number;
+  depositAmount: number;
+  depositMonths: number;
+  depositDays:   number;
+  openDate:      string;
+  maturityDate:  string;
+  depositStatus: string;   // 1=NOT AUTHORIZED 2=AUTHORIZED 3=FUNDS RECEIVED 4=MATURED 6=CLOSED 98=CANCELLED
+  authStatus:    string;   // U=Unauthorized A=Authorized R=Rejected
+  isActive:      number;
+  branchCode:    string;
+  applRate:      number;
+  matAmount:     number;
 }
 
 export class TermDepositRepository extends BaseRepository {
-  async findContractByAcct(tdAcctId: string): Promise<TdContractDbRow | null> {
-    return this.queryOne<TdContractDbRow>(
-      `SELECT prdAcctId, custNo, depositAmt, depositTerm, termUnit, repaymentMode,
-              maturityAmt, maturityDate, authStatus, isActive, productCode, schemeCode, intRate
-       FROM D020004 WHERE prdAcctId = @tdAcctId AND isActive = 1`,
-      { tdAcctId }
+
+  async findByAccountId(prdAcctId: string): Promise<TDContractDbRow | null> {
+    return this.queryOne<TDContractDbRow>(
+      `SELECT prdAcctId, customerId, productCode, schemeCode, depositAmount,
+              depositMonths, depositDays, openDate, maturityDate, depositStatus,
+              authStatus, isActive, branchCode, applRate, matAmount
+         FROM D020004
+        WHERE prdAcctId = @prdAcctId`,
+      { prdAcctId }
     );
   }
 
-  async findContractsByCustomer(customerCode: string): Promise<TdContractDbRow[]> {
-    return this.query<TdContractDbRow>(
-      `SELECT TOP 5 prdAcctId, custNo, depositAmt, depositTerm, termUnit, repaymentMode,
-              maturityAmt, maturityDate, authStatus, isActive
-       FROM D020004 WHERE custNo = @customerCode AND isActive = 1 ORDER BY prdAcctId DESC`,
-      { customerCode }
+  async findContractsByCustomer(customerId: string): Promise<TDContractDbRow[]> {
+    return this.query<TDContractDbRow>(
+      `SELECT prdAcctId, customerId, productCode, schemeCode, depositAmount,
+              depositMonths, depositDays, openDate, maturityDate, depositStatus,
+              authStatus, isActive, branchCode, applRate, matAmount
+         FROM D020004
+        WHERE customerId = @customerId AND isActive = 1
+        ORDER BY openDate DESC`,
+      { customerId }
     );
   }
 
-  async findInterestPayout(tdAcctId: string): Promise<TdInterestPayoutDbRow | null> {
-    return this.queryOne<TdInterestPayoutDbRow>(
-      `SELECT TOP 1 prdAcctId, srNo, interestFreq, paymentMode, creditAcNo,
-              instrAmt, instrPercentage, authStatus, isActive
-       FROM D020006 WHERE prdAcctId = @tdAcctId AND isActive = 1`,
-      { tdAcctId }
+  async findPending(): Promise<TDContractDbRow[]> {
+    return this.query<TDContractDbRow>(
+      `SELECT prdAcctId, customerId, productCode, schemeCode, depositAmount,
+              depositMonths, depositDays, openDate, maturityDate, depositStatus,
+              authStatus, isActive, branchCode, applRate, matAmount
+         FROM D020004
+        WHERE authStatus IN ('U','P') AND isActive = 1`
     );
   }
 
-  async findMaturityDisposal(tdAcctId: string): Promise<TdMaturityDisposalDbRow | null> {
-    return this.queryOne<TdMaturityDisposalDbRow>(
-      `SELECT TOP 1 prdAcctId, srNo, rollOverType, autoRollOver, paymentMode, creditAcNo,
-              instrAmt, instrPercentage, authStatus, isActive
-       FROM D020007 WHERE prdAcctId = @tdAcctId AND isActive = 1`,
-      { tdAcctId }
+  async findAuthorized(prdAcctId: string): Promise<TDContractDbRow | null> {
+    return this.queryOne<TDContractDbRow>(
+      `SELECT prdAcctId, customerId, productCode, schemeCode, depositAmount,
+              depositMonths, depositDays, openDate, maturityDate, depositStatus,
+              authStatus, isActive, branchCode, applRate, matAmount
+         FROM D020004
+        WHERE prdAcctId = @prdAcctId AND authStatus = 'A' AND isActive = 1`,
+      { prdAcctId }
     );
+  }
+
+  async findByProduct(productCode: string): Promise<TDContractDbRow[]> {
+    return this.query<TDContractDbRow>(
+      `SELECT prdAcctId, customerId, productCode, schemeCode, depositAmount,
+              depositMonths, depositDays, openDate, maturityDate, depositStatus,
+              authStatus, isActive, branchCode, applRate, matAmount
+         FROM D020004
+        WHERE productCode = @productCode AND isActive = 1`,
+      { productCode }
+    );
+  }
+
+  async countByCustomer(customerId: string): Promise<number> {
+    const row = await this.queryOne<{ cnt: number }>(
+      `SELECT COUNT(*) AS cnt FROM D020004 WHERE customerId = @customerId AND isActive = 1`,
+      { customerId }
+    );
+    return row?.cnt ?? 0;
+  }
+
+  async countByStatus(depositStatus: string): Promise<number> {
+    const row = await this.queryOne<{ cnt: number }>(
+      `SELECT COUNT(*) AS cnt FROM D020004 WHERE depositStatus = @depositStatus AND isActive = 1`,
+      { depositStatus }
+    );
+    return row?.cnt ?? 0;
   }
 }

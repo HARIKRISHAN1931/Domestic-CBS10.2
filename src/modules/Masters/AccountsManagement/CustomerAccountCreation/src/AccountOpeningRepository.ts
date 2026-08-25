@@ -3,21 +3,22 @@ import { BaseRepository } from '../../../../../framework/base/BaseRepository';
 export interface AccountOpeningDbRow {
   accountNo:   string;
   customerId:  string;
-  acType:      string;
+  moduleCode:  string;
+  productCode: string;
+  schemeCode:  string;
   branchCode:  string;
   openDate:    string;
   authStatus:  string;   // U=Unauthorized P=Pending A=Authorized R=Rejected
-  isActive:    number;   // 1=active 0=inactive
+  isActive:    number;
   operMode:    string;
-  balance:     number;
 }
 
 export class AccountOpeningRepository extends BaseRepository {
 
   async findByAccountNo(accountNo: string): Promise<AccountOpeningDbRow | null> {
     return this.queryOne<AccountOpeningDbRow>(
-      `SELECT accountNo, customerId, acType, branchCode, openDate,
-              authStatus, isActive, operMode, balance
+      `SELECT accountNo, customerId, moduleCode, productCode, schemeCode,
+              branchCode, openDate, authStatus, isActive, operMode
          FROM PRDACNOMST
         WHERE accountNo = @accountNo`,
       { accountNo }
@@ -26,18 +27,28 @@ export class AccountOpeningRepository extends BaseRepository {
 
   async findByCustomerId(customerId: string): Promise<AccountOpeningDbRow[]> {
     return this.query<AccountOpeningDbRow>(
-      `SELECT accountNo, customerId, acType, branchCode, openDate,
-              authStatus, isActive, operMode, balance
+      `SELECT accountNo, customerId, moduleCode, productCode, schemeCode,
+              branchCode, openDate, authStatus, isActive, operMode
          FROM PRDACNOMST
         WHERE customerId = @customerId AND isActive = 1`,
       { customerId }
     );
   }
 
+  async findByModuleProduct(moduleCode: string, productCode: string): Promise<AccountOpeningDbRow[]> {
+    return this.query<AccountOpeningDbRow>(
+      `SELECT accountNo, customerId, moduleCode, productCode, schemeCode,
+              branchCode, openDate, authStatus, isActive, operMode
+         FROM PRDACNOMST
+        WHERE moduleCode = @moduleCode AND productCode = @productCode AND isActive = 1`,
+      { moduleCode, productCode }
+    );
+  }
+
   async findPending(): Promise<AccountOpeningDbRow[]> {
     return this.query<AccountOpeningDbRow>(
-      `SELECT accountNo, customerId, acType, branchCode, openDate,
-              authStatus, isActive, operMode, balance
+      `SELECT accountNo, customerId, moduleCode, productCode, schemeCode,
+              branchCode, openDate, authStatus, isActive, operMode
          FROM PRDACNOMST
         WHERE authStatus IN ('U','P') AND isActive = 1`
     );
@@ -45,28 +56,18 @@ export class AccountOpeningRepository extends BaseRepository {
 
   async findAuthorized(accountNo: string): Promise<AccountOpeningDbRow | null> {
     return this.queryOne<AccountOpeningDbRow>(
-      `SELECT accountNo, customerId, acType, branchCode, openDate,
-              authStatus, isActive, operMode, balance
+      `SELECT accountNo, customerId, moduleCode, productCode, schemeCode,
+              branchCode, openDate, authStatus, isActive, operMode
          FROM PRDACNOMST
         WHERE accountNo = @accountNo AND authStatus = 'A' AND isActive = 1`,
       { accountNo }
     );
   }
 
-  async findByAcType(acType: string): Promise<AccountOpeningDbRow[]> {
-    return this.query<AccountOpeningDbRow>(
-      `SELECT accountNo, customerId, acType, branchCode, openDate,
-              authStatus, isActive, operMode, balance
-         FROM PRDACNOMST
-        WHERE acType = @acType AND isActive = 1`,
-      { acType }
-    );
-  }
-
-  async countByAuthStatus(authStatus: string): Promise<number> {
+  async countByCustomer(customerId: string): Promise<number> {
     const row = await this.queryOne<{ cnt: number }>(
-      `SELECT COUNT(*) AS cnt FROM PRDACNOMST WHERE authStatus = @authStatus AND isActive = 1`,
-      { authStatus }
+      `SELECT COUNT(*) AS cnt FROM PRDACNOMST WHERE customerId = @customerId AND isActive = 1`,
+      { customerId }
     );
     return row?.cnt ?? 0;
   }

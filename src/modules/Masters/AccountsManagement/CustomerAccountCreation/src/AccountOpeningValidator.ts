@@ -8,11 +8,11 @@ export class AccountOpeningValidator {
     private readonly repo: AccountOpeningRepository,
   ) {}
 
-  async verifyPendingInGrid(customerId: string): Promise<void> {
+  async verifyPendingInGrid(searchText: string): Promise<void> {
     await this.page.switchToPendingTab();
     expect(
-      await this.page.isRecordInPendingGrid(customerId),
-      `${customerId} must appear in pending grid`
+      await this.page.isRecordInPendingGrid(searchText),
+      `${searchText} must appear in pending grid`
     ).toBe(true);
   }
 
@@ -25,10 +25,5 @@ export class AccountOpeningValidator {
     const record = await this.repo.findAuthorized(accountNo);
     expect(record, `Account ${accountNo} must be authorized in DB`).not.toBeNull();
     expect(record?.authStatus).toBe('A');
-  }
-
-  async verifyFieldError(fieldId: string): Promise<void> {
-    const errorDiv = this.page.page.locator(`.control-error[id*="${fieldId}"], #${fieldId}-error`).first();
-    await expect(errorDiv).toBeVisible({ timeout: 5_000 });
   }
 }

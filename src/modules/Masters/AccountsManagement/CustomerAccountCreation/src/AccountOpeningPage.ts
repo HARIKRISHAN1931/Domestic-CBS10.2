@@ -2,29 +2,37 @@ import { Locator, expect } from '@playwright/test';
 import { BasePage } from '../../../../../framework/base/BasePage';
 
 export interface AccountOpeningFormData extends Record<string, unknown> {
-  customerId?:      string;
-  acType?:          string;   // Select2 — product/scheme code e.g. '1-SAVINGS'
-  branchCode?:      string;   // F2 lookup
-  intRate?:         string;   // Interest Rate (optional, auto-populated)
-  openDate?:        string;   // DD-MM-YYYY
-  minBal?:          string;   // Minimum Balance
-  operMode?:        string;   // Operation Mode — native select
-  nomineeName?:     string;
-  nomineeRelation?: string;   // native select
-  nomineeDob?:      string;   // DD-MM-YYYY
-  nomineeAddr?:     string;
-  remark?:          string;
+  customerNumber?: string;
+  moduleCode?:     string;
+  productCode?:    string;
+  schemeCode?:     string;
+  modeOfOperation?: string;
+  documentFileNumber?: string;
+  additionalInformation1?: string;
+  additionalInformation2?: string;
+  // Nominee
+  nomineeYN?:      'Y' | 'N';
+  // Statement
+  stmtFreq?:       string;
+  stmtMode?:       string;
+  // Address
+  addressType?:    string;
+  address1?:       string;
+  address2?:       string;
+  address3?:       string;
+  countryCode?:    string;
+  stateCode?:      string;
+  districtCode?:   string;
 }
 
 export class AccountOpeningPage extends BasePage {
-  readonly pageTitle  = 'Customer Account Creation';
-  readonly menuCode   = 'PRDACNOMST';
-  readonly listUrl    = '/accountList';
-  readonly createUrl  = '/addAccount';
+  readonly pageTitle = 'Customer Account Creation';
+  readonly menuCode  = 'PRDACNOMST';
+  readonly listUrl   = '/accountList';
+  readonly createUrl = '/createNewAccnt';
 
   private f = (id: string): Locator => this.page.locator(`#${id}`).first();
 
-  // fill + Tab so CBS jQuery blur handler marks field as valid
   private inp = async (id: string, val: string): Promise<void> => {
     if (!val) return;
     const loc = this.f(id);
@@ -35,7 +43,7 @@ export class AccountOpeningPage extends BasePage {
     await this.page.waitForTimeout(80);
   };
 
-  // native <select>: poll until enabled → selectOption → Tab
+  // native <select>: poll until enabled → selectOption → wait for dependent AJAX
   private sel = async (id: string, val: string, pollMs = 8_000): Promise<void> => {
     if (!val) return;
     const loc = this.f(id);
@@ -50,7 +58,7 @@ export class AccountOpeningPage extends BasePage {
     await this.page.waitForTimeout(150);
   };
 
-  // Select2: click container → type to filter → click matching option
+  // Select2 (stateCode / districtCode)
   private sel2 = async (id: string, searchText?: string): Promise<void> => {
     const container = this.page.locator(`#select2-${id}-container`).first();
     await container.waitFor({ state: 'visible', timeout: 10_000 }).catch(() => {});
@@ -78,26 +86,23 @@ export class AccountOpeningPage extends BasePage {
     await this.page.waitForTimeout(300);
   };
 
-  // F2 popup lookup: click F2 button → wait for #add-popnew → fill search → click first result
-  private f2Lookup = async (fieldId: string, searchTerm: string): Promise<void> => {
-    if (!searchTerm) return;
-    await this.page.locator(`#${fieldId}F2`).first().click();
-    const popup = this.page.locator('#add-popnew');
-    await popup.waitFor({ state: 'visible', timeout: 10_000 });
-    await this.page.waitForTimeout(600);
-    await popup.locator('input:visible').first().fill(searchTerm);
-    await popup.locator('button:visible').filter({ hasText: /search/i }).first().click();
-    await this.page.waitForTimeout(1_000);
-    await popup.locator('table tbody tr:visible').first().click();
-    await this.page.waitForTimeout(300);
+  // Poll until a select has options loaded (AJAX cascade)
+  private waitForOptions = async (id: string, timeoutMs = 10_000): Promise<void> => {
+    const loc = this.f(id);
+    const deadline = Date.now() + timeoutMs;
+    while (Date.now() < deadline) {
+      const count = await loc.locator('option').count().catch(() => 0);
+      if (count > 1) return;
+      await this.page.waitForTimeout(300);
+    }
   };
 
   // ── List page ────────────────────────────────────────────────────────────────
   async openCreateForm(): Promise<void> {
-    const btn = this.page.locator('#btnAddAccount, a.button.add, button.button.add').first();
+    const btn = this.page.locator('a.button.add, button.button.add, #btnAddAccount').first();
     await btn.waitFor({ state: 'visible', timeout: 15_000 });
     await btn.click({ force: true });
-    await this.f('customerId').waitFor({ state: 'visible', timeout: 30_000 });
+    await this.f('customerNumber').waitFor({ state: 'visible', timeout: 30_000 });
   }
 
   async searchRecord(searchText: string): Promise<void> {
@@ -109,7 +114,7 @@ export class AccountOpeningPage extends BasePage {
 
   async clickEdit(): Promise<void> {
     await this.page.locator('a.button.edit, button.button.edit').first().click();
-    await this.f('customerId').waitFor({ state: 'visible', timeout: 15_000 });
+    await this.f('customerNumber').waitFor({ state: 'visible', timeout: 15_000 });
   }
 
   async clickDelete(): Promise<string> {
@@ -123,45 +128,63 @@ export class AccountOpeningPage extends BasePage {
 
   // ── Form fill ────────────────────────────────────────────────────────────────
   async fillForm(data: AccountOpeningFormData): Promise<void> {
-    // Customer ID — Tab triggers AJAX to load customer details
-    if (data.customerId !== undefined) {
-      await this.inp('customerId', data.customerId);
-      await this.page.waitForTimeout(1_000);
+    // Customer ID — Tab triggers AJAX to load customer name/branch
+    if (data.customerNumber !== undefined) {
+      await this.inp('customerNumber', data.customerNumber);
+      await this.page.waitForTimeout(1_500);
     }
 
-    // Account Type — Select2 (product/scheme)
-    if (data.acType !== undefined) await this.sel2('acType', data.acType);
+    // Module → wait for options → select → wait for productCode AJAX
+    if (data.moduleCode !== undefined) {
+      await this.waitForOptions('moduleCode');
+      await this.sel('moduleCode', data.moduleCode);
+      await this.waitForOptions('productCode');
+    }
 
-    // Branch Code — F2 lookup
-    if (data.branchCode !== undefined) await this.f2Lookup('branchCode', data.branchCode);
+    // Product → wait for options → select → wait for schemeCode AJAX
+    if (data.productCode !== undefined) {
+      await this.waitForOptions('productCode');
+      await this.sel('productCode', data.productCode);
+      await this.waitForOptions('schemeCode');
+    }
 
-    // Open Date
-    if (data.openDate !== undefined) {
-      await this.inp('openDate', data.openDate);
+    // Scheme → wait for options → select → wait for modeOfOperation AJAX
+    if (data.schemeCode !== undefined) {
+      await this.waitForOptions('schemeCode');
+      await this.sel('schemeCode', data.schemeCode);
+      await this.page.waitForTimeout(500);
+    }
+
+    // Mode of Operation
+    if (data.modeOfOperation !== undefined) await this.sel('modeOfOperation', data.modeOfOperation);
+
+    // Nominee radio
+    if (data.nomineeYN !== undefined) {
+      const radio = this.page.locator(`#nominee${data.nomineeYN}`).first();
+      await radio.click({ force: true }).catch(() => {});
       await this.page.waitForTimeout(200);
     }
 
-    // Minimum Balance
-    if (data.minBal !== undefined) await this.inp('minBal', data.minBal);
+    // Optional fields
+    if (data.documentFileNumber    !== undefined) await this.inp('documentFileNumber',    data.documentFileNumber);
+    if (data.additionalInformation1 !== undefined) await this.inp('additionalInformation1', data.additionalInformation1);
+    if (data.additionalInformation2 !== undefined) await this.inp('additionalInformation2', data.additionalInformation2);
 
-    // Operation Mode — native select
-    if (data.operMode !== undefined) await this.sel('operMode', data.operMode);
+    // Statement
+    if (data.stmtFreq !== undefined) await this.sel('stmtFreq', data.stmtFreq);
+    if (data.stmtMode !== undefined) await this.sel('stmtMode', data.stmtMode);
 
-    // Nominee section
-    if (data.nomineeName     !== undefined) await this.inp('nomineeName',     data.nomineeName);
-    if (data.nomineeRelation !== undefined) await this.sel('nomineeRelation', data.nomineeRelation);
-    if (data.nomineeDob      !== undefined) await this.inp('nomineeDob',      data.nomineeDob);
-    if (data.nomineeAddr     !== undefined) await this.inp('nomineeAddr',     data.nomineeAddr);
-
-    // Remark
-    if (data.remark !== undefined) await this.inp('remark', data.remark);
+    // Address
+    if (data.addressType  !== undefined) await this.sel('addressType',  data.addressType);
+    if (data.address1     !== undefined) await this.inp('address1',     data.address1);
+    if (data.address2     !== undefined) await this.inp('address2',     data.address2);
+    if (data.address3     !== undefined) await this.inp('address3',     data.address3);
+    if (data.countryCode  !== undefined) await this.sel('countryCode',  data.countryCode);
+    if (data.stateCode    !== undefined) await this.sel2('stateCode',   data.stateCode);
+    if (data.districtCode !== undefined) await this.sel2('districtCode', data.districtCode);
   }
 
   // ── Save ─────────────────────────────────────────────────────────────────────
-  // CBS save flow (same as all CBS screens):
-  //   1. Click #saveCustomer → cbs.core.js adds 'tinymodal-showing' to #tm-saveconfirm
-  //   2. Click #submitForm (Yes) → validateForm() → POST submit
-  //   3. Wait for .msg-toast.msg-success em
   async save(): Promise<string> {
     await this.page.keyboard.press('Escape');
     await this.page.waitForTimeout(300);
@@ -186,30 +209,21 @@ export class AccountOpeningPage extends BasePage {
     const msg       = (await anyToast.innerText()).trim();
     if (!isSuccess) {
       const errorFields: string[] = [];
-      const errorDivs = await this.page.locator('.control-error').all();
-      for (const div of errorDivs) {
+      for (const div of await this.page.locator('.control-error').all()) {
         if (!await div.isVisible().catch(() => false)) continue;
         const id  = await div.getAttribute('id').catch(() => '');
-        const txt = await div.innerText().catch(() => '');
-        const firstLine = txt.trim().split('\n')[0].trim();
-        if (firstLine) errorFields.push(`${id}: ${firstLine}`);
+        const txt = (await div.innerText().catch(() => '')).trim().split('\n')[0].trim();
+        if (txt) errorFields.push(`${id}: ${txt}`);
       }
-      throw new Error(`Save failed. Toast: "${msg}". Error fields: [${errorFields.join(' | ')}]`);
+      throw new Error(`Save failed. Toast: "${msg}". Errors: [${errorFields.join(' | ')}]`);
     }
-    await this.page.waitForURL(/accountList/, { timeout: 15_000 }).catch(() => {});
+    await this.page.waitForURL(/accountList|createNewAccnt/, { timeout: 15_000 }).catch(() => {});
     return msg;
   }
 
   // ── CRUD ─────────────────────────────────────────────────────────────────────
   async create(data: AccountOpeningFormData): Promise<string> {
     await this.fillForm(data);
-    return this.save();
-  }
-
-  async update(searchText: string, data: Partial<AccountOpeningFormData>): Promise<string> {
-    await this.searchRecord(searchText);
-    await this.clickEdit();
-    await this.fillForm(data as AccountOpeningFormData);
     return this.save();
   }
 
@@ -268,12 +282,6 @@ export class AccountOpeningPage extends BasePage {
       .isVisible({ timeout: 8_000 }).catch(() => false);
     if (inDt) return true;
     return this.page.locator('table tbody tr')
-      .filter({ hasText: searchText }).first()
-      .isVisible({ timeout: 5_000 }).catch(() => false);
-  }
-
-  async isRecordInAuthorizedGrid(searchText: string): Promise<boolean> {
-    return this.page.locator('#dt-authdata tbody tr')
       .filter({ hasText: searchText }).first()
       .isVisible({ timeout: 5_000 }).catch(() => false);
   }
