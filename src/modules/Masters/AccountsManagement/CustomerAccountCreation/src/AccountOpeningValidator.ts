@@ -8,24 +8,27 @@ export class AccountOpeningValidator {
     private readonly repo: AccountOpeningRepository,
   ) {}
 
-  async verifyAccountNumberGenerated(): Promise<string> {
-    const accountNumber = await this.page.getAccountNumber();
-    expect(accountNumber).toBeTruthy();
-    return accountNumber;
+  async verifyPendingInGrid(customerId: string): Promise<void> {
+    await this.page.switchToPendingTab();
+    expect(
+      await this.page.isRecordInPendingGrid(customerId),
+      `${customerId} must appear in pending grid`
+    ).toBe(true);
   }
 
-  async verifyAccountInDatabase(accountNumber: string, expectedType: string): Promise<void> {
-    const record = await this.repo.findByAccountNumber(accountNumber);
-    expect(record).not.toBeNull();
-    expect(record?.accountType).toBe(expectedType);
+  async verifyInDatabase(accountNo: string): Promise<void> {
+    const record = await this.repo.findByAccountNo(accountNo);
+    expect(record, `Account ${accountNo} must exist in DB`).not.toBeNull();
   }
 
-  async verifyAuthorized(accountNumber: string): Promise<void> {
-    const record = await this.repo.findByAccountNumber(accountNumber);
-    expect(record?.status).toBe('AUTHORIZED');
+  async verifyAuthorized(accountNo: string): Promise<void> {
+    const record = await this.repo.findAuthorized(accountNo);
+    expect(record, `Account ${accountNo} must be authorized in DB`).not.toBeNull();
+    expect(record?.authStatus).toBe('A');
   }
 
-  async verifyFieldError(fieldName: string): Promise<void> {
-    await expect(this.page.getByTestId(`error-${fieldName}`)).toBeVisible();
+  async verifyFieldError(fieldId: string): Promise<void> {
+    const errorDiv = this.page.page.locator(`.control-error[id*="${fieldId}"], #${fieldId}-error`).first();
+    await expect(errorDiv).toBeVisible({ timeout: 5_000 });
   }
 }
