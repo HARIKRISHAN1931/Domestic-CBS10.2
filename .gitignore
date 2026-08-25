@@ -9,6 +9,8 @@ videos/
 logs/
 auth-state.json
 created-employees.json
+created-users.json
+created-customers.json
 .env
 .env.dev
 .env.qa

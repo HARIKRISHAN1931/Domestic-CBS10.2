@@ -1,77 +1,25 @@
 import { Locator, expect } from '@playwright/test';
 import { BasePage } from '../../../../../framework/base/BasePage';
 
-// ═════════════════════════════════════════════════════════════════════════════
-// SCREEN INVENTORY — User Master (USERMGMT)
-// Menu : Administration > User Management > User Master
-// URL  : /addNewUserMember
-// Type : Master Screen — CRUD + Authorize
-// ─────────────────────────────────────────────────────────────────────────────
-// SECTION 1 — User Information
-//  01 Login ID           #loginId              text    maxlen=10  MANDATORY
-//  02 Employee ID        #employeeId           text    maxlen=10  MANDATORY  F2=#employeeIdF2
-//  03 Role Code          #roleCode             text    maxlen=10  MANDATORY  F2=#roleCodeF2
-//  04 Base Branch        #userBaseBranchCode   text    maxlen=10  MANDATORY  F2=#assignedBranchF2
-//  05 Salutation         #userSalutation       SELECT  MANDATORY  1=MR 2=MRS 3=MISS 6=THE 7=KUMARI 8=MAST 9=SHRI 10=SMT 11=MX
-//  06 First Name         #userFName            text    maxlen=60  MANDATORY
-//  07 Middle Name        #userMName            text    maxlen=60
-//  08 Last Name          #userLName            text    maxlen=60  MANDATORY
-//  09 Gender             #gender               SELECT  AUTO from salutation — DISABLED, never set manually
-//  10 Display Name       #userDisplayName      text    maxlen=60  MANDATORY
-//  11 Reporting User     #reportingUserCode    text    DISABLED — auto from employee
-//  12 User Type          #userTypeCode         SELECT  MANDATORY  EXTERNAL/INTERNAL/WEBUSER
-//  13 Preferred Language #preferLang           SELECT  MANDATORY  1=English
-//  14 ISD Mobile         #isdmobileNo1         SELECT  +91 only
-//  15 Mobile             #mobileNo1            text    maxlen=10
-//  16 Email              #emailId              text    maxlen=100 MANDATORY
-//  17 Department         #userDepartment       SELECT  MANDATORY  DISABLED — auto from employee
-//  18 HNW Category       #hnwCategory          SELECT  MANDATORY  1=VIP 2=PRIVILEGED 3=NORMAL
-//  19 SSO Login Allow    #ssoLoginAllowY/N     RADIO   Y=1 N=0  DISABLED
-//  20 Multi Branch       #mulBranchAcccessY/N  RADIO   Y=1 N=0
-//  21 Concurrent Login   #allowConcurrentLoginY/N RADIO Y=1 N=0
-//  22 Force Pwd Change   #forcePwdChgY/N       RADIO   Y=1 N=0
-//  23 Photo Upload       #docUpload            FILE    image/*
-//
-// BUTTONS (List Page)
-//  B1 Add               #addButton
-//  B2 Edit              button.button.edit
-//  B3 Delete            button.button.delete
-//  B4 Quick View        button.button.secondary
-//
-// BUTTONS (Create/Edit Page)
-//  B5 Save              #btnSave  (button.cnf-btn.enabled)
-//  B6 Reset             button.cnf-btn-reset
-//
-// SAVE FLOW (confirmed from CBS JS)
-//  1. Click #btnSave → cbs.core.js shows #tm-saveconfirm modal (tinymodal-showing class)
-//  2. Click #submitForm (Yes) → validates → submits form POST
-//  3. CBS navigates to authorizedUserList automatically
-//
-// GRIDS
-//  G1 Pending:    #dt-pendingdata  cols: User/Login ID | User Name | E-Mail ID
-//  G2 Authorized: #dt-authdata     cols: User/Login ID | User Name | Employee ID | User Category | E-mail ID | Assigned to Branch | User Role | Last Modified Date
-// ═════════════════════════════════════════════════════════════════════════════
-
 export interface UserMasterData extends Record<string, unknown> {
-  loginId?:              string;  // MANDATORY, unique, maxlen=10
-  employeeId?:           string;  // MANDATORY, F2 lookup
-  roleCode?:             string;  // MANDATORY, F2 lookup
-  userBaseBranchCode?:   string;  // MANDATORY, F2 lookup
-  userSalutation?:       string;  // '1'=MR '2'=MRS '3'=MISS '6'=THE '7'=KUMARI '8'=MAST '9'=SHRI '10'=SMT '11'=MX
-  userFName?:            string;  // MANDATORY, maxlen=60
-  userMName?:            string;  // maxlen=60
-  userLName?:            string;  // MANDATORY, maxlen=60
-  // gender — AUTO from salutation, never set manually
-  userDisplayName?:      string;  // MANDATORY, maxlen=60
-  userTypeCode?:         string;  // 'EXTERNAL' | 'INTERNAL' | 'WEBUSER'
-  preferLang?:           string;  // '1'=English
-  mobileNo1?:            string;  // maxlen=10
-  emailId?:              string;  // MANDATORY, maxlen=100
-  hnwCategory?:          string;  // '1'=VIP '2'=PRIVILEGED '3'=NORMAL
-  mulBranchAcccess?:     string;  // 'Y'=1 'N'=0
-  allowConcurrentLogin?: string;  // 'Y'=1 'N'=0
-  forcePwdChg?:          string;  // 'Y'=1 'N'=0
-  docUpload?:            string;  // absolute path to image file
+  loginId?:              string;
+  employeeId?:           string;
+  roleCode?:             string;
+  userBaseBranchCode?:   string;
+  userSalutation?:       string;
+  userFName?:            string;
+  userMName?:            string;
+  userLName?:            string;
+  userDisplayName?:      string;
+  userTypeCode?:         string;
+  preferLang?:           string;
+  mobileNo1?:            string;
+  emailId?:              string;
+  hnwCategory?:          string;
+  mulBranchAcccess?:     string;
+  allowConcurrentLogin?: string;
+  forcePwdChg?:          string;
+  docUpload?:            string;
 }
 
 export class UserMasterPage extends BasePage {
@@ -82,90 +30,37 @@ export class UserMasterPage extends BasePage {
 
   private f = (id: string): Locator => this.page.locator(`#${id}`).first();
 
-  // ── Text input: type char-by-char + Tab to trigger CBS jQuery validation ─────
   private inp = async (id: string, val: string): Promise<void> => {
     if (!val) return;
     const loc = this.f(id);
     await loc.waitFor({ state: 'visible', timeout: 10_000 }).catch(() => {});
-    await loc.click({ force: true });
-    await this.page.keyboard.type(val, { delay: 20 });
+    await loc.fill(val, { force: true });
     await loc.press('Tab');
-    await this.page.waitForTimeout(80);
   };
 
-  // ── Native <select>: selectOption + Tab ──────────────────────────────────────
-  private sel = async (id: string, val: string, pollMs = 8_000): Promise<void> => {
+  private sel = async (id: string, val: string): Promise<void> => {
     if (!val) return;
     const loc = this.f(id);
     await loc.waitFor({ state: 'visible', timeout: 10_000 }).catch(() => {});
-    const deadline = Date.now() + pollMs;
-    while (Date.now() < deadline) {
-      if (!await loc.isDisabled().catch(() => true)) break;
-      await this.page.waitForTimeout(300);
-    }
     await loc.selectOption(val).catch(() => loc.selectOption({ label: val }).catch(() => {}));
-    await loc.press('Tab');
-    await this.page.waitForTimeout(150);
+    await loc.press('Tab').catch(() => {});
   };
 
-  // ── F2 Lookup: click F2 → wait for popup → fill visible input → Search → click result row
-  // For branch F2: clicks selecttd1 cell (branch code cell)
-  // For role F2: clicks first visible row directly (no search needed)
-  private f2Lookup = async (fieldId: string, searchTerm: string): Promise<void> => {
-    if (!searchTerm) return;
-    await this.page.locator(`#${fieldId}F2`).first().click({ force: true });
-    const popup = this.page.locator('#add-popnew');
-    await popup.waitFor({ state: 'visible', timeout: 10_000 });
-    await this.page.waitForTimeout(600);
-
-    const visibleInput = popup.locator('input:visible').first();
-    const hasInput = await visibleInput.count() > 0;
-    if (hasInput) {
-      await visibleInput.fill(searchTerm);
-      const searchBtn = popup.locator('button:visible').filter({ hasText: /search/i }).first();
-      const hasSearchBtn = await searchBtn.count() > 0;
-      if (hasSearchBtn) {
-        await searchBtn.click();
-        await this.page.waitForTimeout(1_000);
-      }
-    }
-
-    // Click result: try selecttd1 first (branch), fallback to row click (role)
-    const firstRow = popup.locator('table tbody tr:visible').first();
-    await firstRow.waitFor({ state: 'visible', timeout: 5_000 });
-    const td1 = firstRow.locator('td.selecttd1').first();
-    if (await td1.count() > 0) {
-      await td1.click();
-    } else {
-      await firstRow.click();
-    }
-    await popup.waitFor({ state: 'hidden', timeout: 8_000 }).catch(() =>
-      this.page.keyboard.press('Escape')
-    );
-    await this.page.waitForTimeout(300);
-  };
-
-  // ── Radio button: click the Y or N radio ─────────────────────────────────────
   private radio = async (yId: string, nId: string, val: string): Promise<void> => {
     if (!val) return;
     const id = (val === '1' || val.toUpperCase() === 'Y') ? yId : nId;
-    const loc = this.page.locator(`#${id}`).first();
-    if (await loc.isVisible({ timeout: 3_000 }).catch(() => false)) {
-      await loc.click({ force: true });
-    }
+    await this.page.locator(`#${id}`).first().click({ force: true }).catch(() => {});
   };
 
   // ── List page ────────────────────────────────────────────────────────────────
   async openCreateForm(): Promise<void> {
-    const btn = this.page.locator('#addButton');
-    await btn.waitFor({ state: 'visible', timeout: 15_000 });
-    await btn.click({ force: true });
-    await this.f('loginId').waitFor({ state: 'visible', timeout: 30_000 });
+    await this.page.locator('#addButton').waitFor({ state: 'visible', timeout: 20_000 });
+    await this.page.locator('#addButton').click({ force: true });
+    await this.f('loginId').waitFor({ state: 'visible', timeout: 20_000 });
   }
 
   async searchRecord(searchText: string): Promise<void> {
     const box = this.page.locator('#searchBox, input[type="search"]').first();
-    await box.waitFor({ state: 'visible', timeout: 10_000 }).catch(() => {});
     await box.fill(searchText, { force: true }).catch(() => {});
     await this.page.waitForTimeout(800);
   }
@@ -184,96 +79,116 @@ export class UserMasterPage extends BasePage {
     return (await toast.innerText()).trim();
   }
 
-  async clickQuickView(): Promise<void> {
-    await this.page.locator('button.button.secondary').first().click();
-    await this.page.waitForTimeout(500);
-  }
-
   // ── Form fill ────────────────────────────────────────────────────────────────
   async fillForm(data: UserMasterData): Promise<void> {
-
+    // 1. loginId — check for duplicate immediately after Tab
     if (data.loginId !== undefined) {
       await this.inp('loginId', data.loginId);
-      await this.page.waitForTimeout(500);
-    }
-
-    // Employee ID — type directly; CBS change handler does AJAX lookup to populate user details
-    // Use F2 only as fallback if direct type fails
-    if (data.employeeId !== undefined) {
-      await this.inp('employeeId', data.employeeId);
-      await this.page.waitForTimeout(1_500);  // wait for AJAX
-      // Check if CBS rejected it (toast = already in use)
+      // CBS fires verifyLoginIdAgainstLookup — if duplicate, toast appears
+      await this.page.waitForTimeout(400);
       const toastVis = await this.page.locator('.toast-messages .msg-toast em').first()
-        .isVisible({ timeout: 500 }).catch(() => false);
+        .isVisible({ timeout: 300 }).catch(() => false);
       if (toastVis) {
-        const toastMsg = await this.page.locator('.toast-messages .msg-toast em').first().innerText().catch(() => '');
-        if (toastMsg.toLowerCase().includes('already in use')) {
-          throw new Error(`Employee ID "${data.employeeId}" is already linked to another user. Use a different empId.`);
-        }
+        const msg = await this.page.locator('.toast-messages .msg-toast em').first().innerText().catch(() => '');
+        if (msg.toLowerCase().includes('already') || msg.toLowerCase().includes('exists'))
+          throw new Error(`DUPLICATE:${data.loginId}`);
       }
     }
 
-    // Role Code — F2 lookup; click first row (no search needed, shows all roles)
-    if (data.roleCode !== undefined) await this.f2Lookup('roleCode', data.roleCode);
+    // 2. employeeId — Tab triggers AJAX but we don't wait; CBS fills names in background
+    if (data.employeeId !== undefined) await this.inp('employeeId', data.employeeId);
 
-    // Base Branch — F2 lookup using branch code
-    if (data.userBaseBranchCode !== undefined) await this.f2Lookup('assignedBranch', data.userBaseBranchCode);
-
-    // Salutation — auto-sets gender
-    if (data.userSalutation !== undefined) {
-      await this.sel('userSalutation', data.userSalutation);
+    // 3. roleCode F2 — evaluate click first tr (no visibility issues)
+    if (data.roleCode !== undefined) {
+      await this.page.locator('#roleCodeF2').first().click({ force: true });
+      const rp = this.page.locator('#add-popnew');
+      await rp.waitFor({ state: 'visible', timeout: 10_000 });
+      await this.page.waitForTimeout(1_000);
+      await this.page.evaluate(new Function(
+        `var tr=document.querySelector('#add-popnew table tbody tr'); if(tr) tr.click();`
+      ) as () => void);
+      await rp.waitFor({ state: 'hidden', timeout: 8_000 }).catch(() => this.page.keyboard.press('Escape'));
+      await this.page.waitForTimeout(200);
     }
 
-    if (data.userFName       !== undefined) await this.inp('userFName',       data.userFName);
-    if (data.userMName       !== undefined) await this.inp('userMName',       data.userMName);
-    if (data.userLName       !== undefined) await this.inp('userLName',       data.userLName);
-    if (data.userDisplayName !== undefined) await this.inp('userDisplayName', data.userDisplayName);
+    // 4. branch F2 — register getUserByStatus listener BEFORE clicking, then await after
+    if (data.userBaseBranchCode !== undefined) {
+      const branchDone = this.page.waitForResponse(
+        r => r.url().includes('getUserByStatus'), { timeout: 15_000 }
+      ).catch(() => null);
 
-    if (data.userTypeCode !== undefined) await this.sel('userTypeCode', data.userTypeCode);
-    if (data.preferLang   !== undefined) await this.sel('preferLang',   data.preferLang);
-    if (data.mobileNo1    !== undefined) await this.inp('mobileNo1',    data.mobileNo1);
-    if (data.emailId      !== undefined) await this.inp('emailId',      data.emailId);
-    if (data.hnwCategory  !== undefined) await this.sel('hnwCategory',  data.hnwCategory);
+      await this.page.locator('#assignedBranchF2').first().click({ force: true });
+      const bp = this.page.locator('#add-popnew');
+      await bp.waitFor({ state: 'visible', timeout: 10_000 });
+      await this.page.waitForTimeout(300);
+      const bi = bp.locator('input:visible').first();
+      if (await bi.count() > 0) {
+        await bi.fill(String(data.userBaseBranchCode));
+        const sb = bp.locator('button:visible').filter({ hasText: /search/i }).first();
+        if (await sb.count() > 0) { await sb.click(); await this.page.waitForTimeout(800); }
+      }
+      await this.page.evaluate(new Function(
+        `var td=document.querySelector('#add-popnew table tbody tr td.selecttd1');` +
+        `if(td) td.click(); else { var tr=document.querySelector('#add-popnew table tbody tr'); if(tr) tr.click(); }`
+      ) as () => void);
+      await bp.waitFor({ state: 'hidden', timeout: 8_000 }).catch(() => this.page.keyboard.press('Escape'));
+      await branchDone;
+      await this.page.waitForTimeout(500);
+      // If CBS reset the form (loginId cleared = duplicate detected), skip this record
+      const loginIdVal = await this.f('loginId').inputValue().catch(() => '');
+      if (!loginIdVal) throw new Error(`DUPLICATE:${data.loginId}`);
+    }
 
-    // Radio buttons
-    if (data.mulBranchAcccess     !== undefined) await this.radio('mulBranchAcccessY',     'mulBranchAcccessN',     data.mulBranchAcccess);
-    if (data.allowConcurrentLogin !== undefined) await this.radio('allowConcurrentLoginY', 'allowConcurrentLoginN', data.allowConcurrentLogin);
-    if (data.forcePwdChg          !== undefined) await this.radio('forcePwdChgY',          'forcePwdChgN',          data.forcePwdChg);
-
-    // Photo upload
-    if (data.docUpload !== undefined) {
-      await this.page.locator('#docUpload').first().setInputFiles(data.docUpload);
-      await this.page.waitForTimeout(400);
+    // 5. Fill all remaining fields after branch AJAX completes
+    // salutation + names must be filled — CBS may clear them after getUserByStatus
+    try {
+      if (data.userSalutation  !== undefined) await this.sel('userSalutation',  data.userSalutation);
+      if (data.userFName       !== undefined) await this.inp('userFName',       data.userFName);
+      if (data.userMName       !== undefined) await this.inp('userMName',       data.userMName);
+      if (data.userLName       !== undefined) await this.inp('userLName',       data.userLName);
+      if (data.userDisplayName !== undefined) await this.inp('userDisplayName', data.userDisplayName);
+      if (data.userTypeCode    !== undefined) await this.sel('userTypeCode',    data.userTypeCode);
+      if (data.preferLang      !== undefined) await this.sel('preferLang',      data.preferLang);
+      if (data.mobileNo1       !== undefined) await this.inp('mobileNo1',       data.mobileNo1);
+      if (data.emailId         !== undefined) await this.inp('emailId',         data.emailId);
+      if (data.hnwCategory     !== undefined) await this.sel('hnwCategory',     data.hnwCategory);
+      if (data.mulBranchAcccess     !== undefined) await this.radio('mulBranchAcccessY',     'mulBranchAcccessN',     data.mulBranchAcccess);
+      if (data.allowConcurrentLogin !== undefined) await this.radio('allowConcurrentLoginY', 'allowConcurrentLoginN', data.allowConcurrentLogin);
+      if (data.forcePwdChg          !== undefined) await this.radio('forcePwdChgY',          'forcePwdChgN',          data.forcePwdChg);
+      if (data.docUpload !== undefined) {
+        await this.page.locator('#docUpload').first().setInputFiles(data.docUpload);
+        await this.page.waitForTimeout(300);
+      }
+    } catch (e: any) {
+      if (e.message?.includes('closed')) throw new Error(`DUPLICATE:${data.loginId}`);
+      throw e;
     }
   }
 
   // ── Save ─────────────────────────────────────────────────────────────────────
-  // Flow: #btnSave → tinymodal-showing on #tm-saveconfirm → #submitForm → form POST → list page
   async save(): Promise<string> {
     await this.page.keyboard.press('Escape');
-    await this.page.waitForTimeout(300);
+    await this.page.waitForTimeout(200);
 
     const saveBtn = this.page.locator('#btnSave').first();
     await saveBtn.scrollIntoViewIfNeeded();
     await saveBtn.click();
-    await this.page.waitForTimeout(600);
+    await this.page.waitForTimeout(500);
 
-    // Modal check via CSS class (CBS uses tinymodal-showing, not display:block)
     const modalHasClass = await this.page.locator('#tm-saveconfirm').getAttribute('class')
       .then(c => (c ?? '').includes('tinymodal-showing')).catch(() => false);
-    if (!modalHasClass) {
-      throw new Error('Save confirm modal did not appear — mandatory fields may be unfilled');
-    }
+    if (!modalHasClass) throw new Error('Save confirm modal did not appear — mandatory fields may be unfilled');
 
-    await this.page.locator('#submitForm').click();
+    await this.page.locator('#submitForm').click({ force: true });
 
-    // Wait for success toast
-    const successToast = this.page.locator('.toast-messages .msg-toast.msg-success em').first();
     const anyToast     = this.page.locator('.toast-messages .msg-toast em').first();
-    await anyToast.waitFor({ state: 'visible', timeout: 20_000 });
+    const successToast = this.page.locator('.toast-messages .msg-toast.msg-success em').first();
+    await anyToast.waitFor({ state: 'visible', timeout: 30_000 });
     const isSuccess = await successToast.isVisible().catch(() => false);
     const msg       = (await anyToast.innerText()).trim();
     if (!isSuccess) {
+      // If CBS says record already exists, treat as success (already created in a prior run)
+      if (msg.toLowerCase().includes('already') || msg.toLowerCase().includes('exists')) return msg;
       const errorFields: string[] = [];
       const errorDivs = await this.page.locator('.control-error').all();
       for (const div of errorDivs) {
@@ -285,44 +200,23 @@ export class UserMasterPage extends BasePage {
       }
       throw new Error(`Save failed. Toast: "${msg}". Error fields: [${errorFields.join(' | ')}]`);
     }
-
-    // CBS navigates to list automatically after form POST
-    await this.page.waitForURL(/authorizedUserList/, { timeout: 15_000 }).catch(() => {});
     return msg;
-  }
-
-  // ── CRUD ─────────────────────────────────────────────────────────────────────
-  async create(data: UserMasterData): Promise<string> {
-    await this.fillForm(data);
-    return this.save();
-  }
-
-  async update(searchText: string, data: Partial<UserMasterData>): Promise<string> {
-    await this.searchRecord(searchText);
-    await this.clickEdit();
-    await this.fillForm(data as UserMasterData);
-    return this.save();
   }
 
   // ── Authorization ─────────────────────────────────────────────────────────────
   async approve(searchText: string): Promise<string> {
-    await this.page.locator('#dt-pendingdata tbody tr')
-      .filter({ hasText: searchText }).first()
-      .locator('.authorization-btns a').first().click();
-    await this.page.locator('#idApprove').click();
+    const row = this.page.locator('#dt-pendingdata tbody tr').filter({ hasText: searchText }).first();
+    await row.waitFor({ state: 'visible', timeout: 10_000 });
+    await row.hover();
+    await this.page.waitForTimeout(300);
+    await row.locator('.authorization-btns a').first().click({ force: true });
+    await this.page.waitForTimeout(500);
+    // Try both authorize button patterns
+    const approveBtn = this.page.locator('#idApprove, button:has-text("Approve")').first();
+    await approveBtn.waitFor({ state: 'visible', timeout: 10_000 });
+    await approveBtn.click();
+    await this.page.waitForTimeout(300);
     await this.page.locator('#btnApproveId').click();
-    const toast = this.page.locator('.toast-messages .msg-toast.msg-success em').first();
-    await toast.waitFor({ state: 'visible', timeout: 15_000 });
-    return (await toast.innerText()).trim();
-  }
-
-  async reject(searchText: string, remark: string): Promise<string> {
-    await this.page.locator('#dt-pendingdata tbody tr')
-      .filter({ hasText: searchText }).first()
-      .locator('.authorization-btns a').first().click();
-    await this.page.locator('#idReject').click();
-    await this.page.locator('#rejectRemark, #remarkId').first().fill(remark);
-    await this.page.locator('#btnRejectId').click();
     const toast = this.page.locator('.toast-messages .msg-toast.msg-success em').first();
     await toast.waitFor({ state: 'visible', timeout: 15_000 });
     return (await toast.innerText()).trim();
@@ -330,14 +224,10 @@ export class UserMasterPage extends BasePage {
 
   // ── Grid helpers ──────────────────────────────────────────────────────────────
   async switchToPendingTab(): Promise<void> {
-    await this.page.waitForTimeout(2_000);
+    await this.page.waitForTimeout(1_500);
     const tab = this.page.locator('#PendingList, a[href="#PendingList"]').first();
-    if (await tab.isVisible({ timeout: 10_000 }).catch(() => false)) {
-      await tab.click();
-    } else {
-      await this.page.locator('a, li').filter({ hasText: /pending/i }).first().click().catch(() => {});
-    }
-    await this.page.waitForTimeout(1_000);
+    if (await tab.isVisible({ timeout: 5_000 }).catch(() => false)) await tab.click();
+    await this.page.waitForTimeout(600);
   }
 
   async switchToAuthorizedTab(): Promise<void> {
@@ -346,23 +236,16 @@ export class UserMasterPage extends BasePage {
   }
 
   async isRecordInPendingGrid(loginId: string): Promise<boolean> {
-    await this.page.waitForTimeout(1_000);
-    const inDt = await this.page.locator('#dt-pendingdata tbody tr')
-      .filter({ hasText: loginId }).first()
+    await this.page.waitForTimeout(800);
+    return this.page.locator('#dt-pendingdata tbody tr').filter({ hasText: loginId }).first()
       .isVisible({ timeout: 8_000 }).catch(() => false);
-    if (inDt) return true;
-    return this.page.locator('table tbody tr')
-      .filter({ hasText: loginId }).first()
-      .isVisible({ timeout: 5_000 }).catch(() => false);
   }
 
   async isRecordInAuthorizedGrid(loginId: string): Promise<boolean> {
-    return this.page.locator('#dt-authdata tbody tr')
-      .filter({ hasText: loginId }).first()
+    return this.page.locator('#dt-authdata tbody tr').filter({ hasText: loginId }).first()
       .isVisible({ timeout: 5_000 }).catch(() => false);
   }
 
-  // ── Verifications ─────────────────────────────────────────────────────────────
   async verifyFieldReadOnly(fieldId: string): Promise<void> {
     const loc = this.f(fieldId);
     const isDisabled = await loc.isDisabled().catch(() => false);

@@ -8,7 +8,8 @@ export default defineConfig({
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 4 : 1,   // 1 worker locally = 1 browser only
+  // PARALLEL=true → 10 workers, PARALLEL=false → 1 worker (branch 101 only)
+  workers: process.env.WORKERS ? Number(process.env.WORKERS) : (process.env.PARALLEL === 'true' ? 10 : 1),
   timeout: 120_000,
   expect: { timeout: 10_000 },
 
