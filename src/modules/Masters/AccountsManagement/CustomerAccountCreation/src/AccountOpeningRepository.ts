@@ -1,36 +1,74 @@
-import { BaseRepository } from '../../../../framework/base/BaseRepository';
-import { DatabaseConnectionManager } from '../../../../framework/database/DatabaseConnectionManager';
+import { BaseRepository } from '../../../../../framework/base/BaseRepository';
 
-interface AccountRecord {
-  accountNumber: string;
-  customerId: string;
-  accountType: string;
-  branchCode: string;
-  balance: number;
-  status: string;
+export interface AccountOpeningDbRow {
+  accountNo:   string;
+  customerId:  string;
+  moduleCode:  string;
+  productCode: string;
+  schemeCode:  string;
+  branchCode:  string;
+  openDate:    string;
+  authStatus:  string;   // U=Unauthorized P=Pending A=Authorized R=Rejected
+  isActive:    number;
+  operMode:    string;
 }
 
 export class AccountOpeningRepository extends BaseRepository {
-  constructor(db: DatabaseConnectionManager) { super(db); }
 
-  async findByAccountNumber(accountNumber: string): Promise<AccountRecord | null> {
-    return this.queryOne<AccountRecord>(
-      'SELECT AccountNumber, CustomerId, AccountType, BranchCode, Balance, Status FROM CBS_ACCOUNTS WHERE AccountNumber = @accountNumber',
-      { accountNumber },
+  async findByAccountNo(accountNo: string): Promise<AccountOpeningDbRow | null> {
+    return this.queryOne<AccountOpeningDbRow>(
+      `SELECT accountNo, customerId, moduleCode, productCode, schemeCode,
+              branchCode, openDate, authStatus, isActive, operMode
+         FROM PRDACNOMST
+        WHERE accountNo = @accountNo`,
+      { accountNo }
     );
   }
 
-  async findByCustomerId(customerId: string): Promise<AccountRecord[]> {
-    return this.query<AccountRecord>(
-      'SELECT AccountNumber, CustomerId, AccountType, BranchCode, Balance, Status FROM CBS_ACCOUNTS WHERE CustomerId = @customerId',
-      { customerId },
+  async findByCustomerId(customerId: string): Promise<AccountOpeningDbRow[]> {
+    return this.query<AccountOpeningDbRow>(
+      `SELECT accountNo, customerId, moduleCode, productCode, schemeCode,
+              branchCode, openDate, authStatus, isActive, operMode
+         FROM PRDACNOMST
+        WHERE customerId = @customerId AND isActive = 1`,
+      { customerId }
     );
   }
 
-  async deleteTestAccount(accountNumber: string): Promise<void> {
-    await this.execute(
-      'DELETE FROM CBS_ACCOUNTS WHERE AccountNumber = @accountNumber AND CreatedBy = @createdBy',
-      { accountNumber, createdBy: 'AUTOMATION' },
+  async findByModuleProduct(moduleCode: string, productCode: string): Promise<AccountOpeningDbRow[]> {
+    return this.query<AccountOpeningDbRow>(
+      `SELECT accountNo, customerId, moduleCode, productCode, schemeCode,
+              branchCode, openDate, authStatus, isActive, operMode
+         FROM PRDACNOMST
+        WHERE moduleCode = @moduleCode AND productCode = @productCode AND isActive = 1`,
+      { moduleCode, productCode }
     );
+  }
+
+  async findPending(): Promise<AccountOpeningDbRow[]> {
+    return this.query<AccountOpeningDbRow>(
+      `SELECT accountNo, customerId, moduleCode, productCode, schemeCode,
+              branchCode, openDate, authStatus, isActive, operMode
+         FROM PRDACNOMST
+        WHERE authStatus IN ('U','P') AND isActive = 1`
+    );
+  }
+
+  async findAuthorized(accountNo: string): Promise<AccountOpeningDbRow | null> {
+    return this.queryOne<AccountOpeningDbRow>(
+      `SELECT accountNo, customerId, moduleCode, productCode, schemeCode,
+              branchCode, openDate, authStatus, isActive, operMode
+         FROM PRDACNOMST
+        WHERE accountNo = @accountNo AND authStatus = 'A' AND isActive = 1`,
+      { accountNo }
+    );
+  }
+
+  async countByCustomer(customerId: string): Promise<number> {
+    const row = await this.queryOne<{ cnt: number }>(
+      `SELECT COUNT(*) AS cnt FROM PRDACNOMST WHERE customerId = @customerId AND isActive = 1`,
+      { customerId }
+    );
+    return row?.cnt ?? 0;
   }
 }
