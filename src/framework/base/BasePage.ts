@@ -27,7 +27,7 @@ export abstract class BasePage {
     if (!value) return;
     const ok = await locator.waitFor({ state: 'visible', timeout: 3_000 }).then(() => true).catch(() => false);
     if (!ok) return;
-    const v = value.trim();
+    const v = String(value).trim();
     const done = await locator.selectOption(v).then(() => true).catch(() => false);
     if (!done) await locator.selectOption({ label: v }).catch(() => {});
   }
@@ -50,7 +50,9 @@ export abstract class BasePage {
   protected async switchToActivePage(): Promise<void> {
     let ctx: import('@playwright/test').BrowserContext;
     try { ctx = this.page.context(); } catch { return; }
-    if (!this.page.isClosed()) return;   // current page still alive — no switch needed
+    // Check if current page is still responsive
+    const isAlive = await this.page.title().then(() => true).catch(() => false);
+    if (isAlive && !this.page.isClosed()) return;
     const appPages = ctx.pages().filter(p =>
       !p.isClosed() &&
       p.url() !== 'about:blank' &&

@@ -103,11 +103,19 @@ export class CustomerCreationPage extends BasePage {
   private async radio(id: string)             { const el = this.v(id); await el.scrollIntoViewIfNeeded().catch(() => {}); if (await el.isEnabled().catch(() => false)) { await el.click(); await this.waitForAjax(); } }
   private async vis(id: string)               { return this.v(id).isVisible().catch(() => false); }
   private async clickNext(anchorId?: string): Promise<void> {
-    const btn = this.loc('#nextBtn');
-    await btn.waitFor({ state: 'visible', timeout: 10_000 });
-    await btn.click();
-    await this.page.waitForLoadState('domcontentloaded').catch(() => {});
-    if (anchorId) await this.loc(`#${anchorId}`).waitFor({ state: 'attached', timeout: 20_000 });
+    try {
+      const btn = this.loc('#nextBtn');
+      await btn.waitFor({ state: 'visible', timeout: 10_000 });
+      await btn.click();
+    } catch {
+      await this.switchToActivePage();
+      const btn = this.loc('#nextBtn');
+      await btn.waitFor({ state: 'visible', timeout: 10_000 });
+      await btn.click();
+    }
+    await this.page.waitForTimeout(1_500);
+    await this.switchToActivePage();
+    if (anchorId) await this.loc(`#${anchorId}`).waitFor({ state: 'visible', timeout: 20_000 }).catch(() => {});
     await this.waitForAjax();
   }
 
@@ -126,14 +134,10 @@ export class CustomerCreationPage extends BasePage {
   }
 
   async openCreateForm(): Promise<void> {
-    // Wait for grid to fully load before clicking Add
-    await this.page.waitForLoadState('networkidle').catch(() => {});
-    const addBtn = this.page.locator('#addButton, button.add, #createButton').first();
+    await this.page.waitForTimeout(1_500);
+    const addBtn = this.page.locator('#addButton, button.add, #createButton, a[onclick*="add"], button[title*="Add"]').first();
     await addBtn.waitFor({ state: 'visible', timeout: 15_000 });
-    await Promise.all([
-      this.page.waitForURL('**/addNewMember**', { timeout: 15_000 }),
-      addBtn.click({ force: true }),
-    ]);
+    await addBtn.click({ force: true });
     await this.page.locator('#customerCategory').waitFor({ state: 'visible', timeout: 30_000 });
     await this.waitForAjax();
   }
@@ -166,7 +170,7 @@ export class CustomerCreationPage extends BasePage {
       }
       await this.sel('memberGender', data.memberGender);
     }
-    if (data.nationality       && await this.vis('nationality'))       await this.sel('nationality',       data.nationality);
+    if (data.nationality       && await this.vis('nationality'))       await this.sel2('nationality',      data.nationality);
     if (data.mbrMaritalStatus  && await this.vis('mbrMaritalStatus'))  await this.sel('mbrMaritalStatus',  data.mbrMaritalStatus);
     if (data.residentialStatus && await this.vis('residentialStatus')) await this.sel('residentialStatus', data.residentialStatus);
     if (data.residentYn)   { const rid = data.residentYn   === 'Y' ? 'residentY'   : 'residentN';   if (await this.vis(rid)) await this.radio(rid); }
@@ -190,7 +194,6 @@ export class CustomerCreationPage extends BasePage {
       }
     }
     await this.loc('#addressType, #address1').first().waitFor({ state: 'visible', timeout: 10_000 }).catch(() => {});
-    if (data.addressType && await this.vis('addressType')) await this.sel('addressType', data.addressType);
     if (data.address1    && await this.vis('address1'))    await this.inp('address1',    data.address1);
     if (data.address2    && await this.vis('address2'))    await this.inp('address2',    data.address2);
     if (data.address3    && await this.vis('address3'))    await this.inp('address3',    data.address3);
@@ -198,21 +201,31 @@ export class CustomerCreationPage extends BasePage {
     if (data.stateCode    && await this.vis('stateCode'))    { await this.sel('stateCode',    data.stateCode);    await this.waitForAjax(); }
     if (data.districtCode && await this.vis('districtCode')) { await this.sel('districtCode', data.districtCode); await this.waitForAjax(); }
     if (data.area         && await this.vis('area'))         { await this.sel('area',         data.area);         await this.waitForAjax(); }
-    if (data.municipalityBlock && await this.vis('municipalityBlock')) await this.sel('municipalityBlock', data.municipalityBlock);
     if (data.ruralUrban   && await this.vis('ruralUrban'))   { await this.sel('ruralUrban', data.ruralUrban); await this.waitForAjax(); }
-    if (data.villCode     && await this.vis('villCode'))     await this.sel2('villCode',  data.villCode);
-    if (data.urbanCode    && await this.vis('urbanCode'))    await this.sel2('urbanCode', data.urbanCode);
+    if (data.municipalityBlock && await this.vis('municipalityBlock')) { await this.sel('municipalityBlock', data.municipalityBlock); await this.waitForAjax(); }
+    // villCode/urbanCode are select2 — check container visibility
+    if (data.villCode) {
+      const vcCont = this.loc('#select2-villCode-container');
+      if (await vcCont.isVisible({ timeout: 1_500 }).catch(() => false)) await this.sel2('villCode', data.villCode);
+    }
+    if (data.urbanCode) {
+      const ucCont = this.loc('#select2-urbanCode-container');
+      if (await ucCont.isVisible({ timeout: 1_500 }).catch(() => false)) await this.sel2('urbanCode', data.urbanCode);
+    }
     if (data.pinCode && await this.vis('pinCode')) { await this.inp('pinCode', data.pinCode); await this.v('pinCode').press('Tab'); await this.waitForAjax(); }
+    // Set addressType AFTER location cascade to avoid CBS resetting it
+    if (data.addressType && await this.vis('addressType')) await this.sel('addressType', data.addressType);
     if (data.phone     && await this.vis('phone'))     await this.inp('phone',     data.phone);
     if (data.mobileNo1 && await this.vis('mobileNo1')) await this.inp('mobileNo1', data.mobileNo1);
     if (data.emailId   && await this.vis('emailId'))   await this.inp('emailId',   data.emailId);
     if (data.homeTelNo && await this.vis('homeTelNo')) await this.inp('homeTelNo', data.homeTelNo);
     if (data.ownership && await this.vis('ownership')) await this.sel('ownership', data.ownership);
     const addBtn = this.v('btnAddBusiComm');
-    if (await addBtn.isVisible({ timeout: 5_000 }).catch(() => false)) { await addBtn.click({ force: true }); await this.waitForAjax(); }
+    if (await addBtn.isVisible({ timeout: 5_000 }).catch(() => false)) { await addBtn.click({ force: true }); await this.waitForAjax(); await this.switchToActivePage(); }
   }
 
   async fillAdditionalDetails(data: CustomerData): Promise<void> {
+    await this.switchToActivePage();
     await this.clickNext('KYCAvailableY');
     if (data.KYCAvailableYn) { const rid = data.KYCAvailableYn === 'Y' ? 'KYCAvailableY' : 'KYCAvailableN'; if (await this.vis(rid)) await this.radio(rid); }
     if (data.pepYn)          { const rid = data.pepYn          === 'Y' ? 'pepY'          : 'pepN';          if (await this.vis(rid)) await this.radio(rid); }
@@ -268,7 +281,7 @@ export class CustomerCreationPage extends BasePage {
   }
 
   async save(): Promise<string> {
-    const btn = this.page.locator('#saveDepositeparamDetails').first();
+    const btn = this.page.locator('#saveMemberDetails, #saveCustomerDetails, #saveDepositeparamDetails, button[id*="save"], input[id*="save"]').filter({ visible: true }).first();
     await btn.waitFor({ state: 'visible', timeout: 10_000 });
     await btn.click();
     await this.modal.confirmSave();

@@ -22,7 +22,7 @@ export class ExcelHelper {
       const record: Record<string, unknown> = {};
       row.eachCell({ includeEmpty: true }, (cell, colNumber) => {
         const header = headers[colNumber - 1];
-        if (header) record[header] = cell.value ?? '';
+        if (header) record[header] = cell.value != null ? String(cell.value) : '';
       });
       if (Object.values(record).some((v) => v !== '')) rows.push(record as T);
     });
