@@ -1,20 +1,25 @@
-import { BaseRepository } from '../../../../framework/base/BaseRepository';
-import { DatabaseConnectionManager } from '../../../../framework/database/DatabaseConnectionManager';
-
-interface CustomerRecord {
-  customerId: string;
-  mobileNumber: string;
-  email: string;
-  status: string;
-}
+import { BaseRepository } from '../../../../../framework/base/BaseRepository';
+import { CustomerDbRow } from './CustomerCreationRepository';
 
 export class CustomerModificationRepository extends BaseRepository {
-  constructor(db: DatabaseConnectionManager) { super(db); }
+  async findByCustomerNumber(custNo: string): Promise<CustomerDbRow | null> {
+    return this.queryOne<CustomerDbRow>(
+      `SELECT custNo, custName, authStatus, isActive FROM D009011 WHERE custNo = @custNo AND isActive = 1`,
+      { custNo }
+    );
+  }
 
-  async findByCustomerId(customerId: string): Promise<CustomerRecord | null> {
-    return this.queryOne<CustomerRecord>(
-      'SELECT CustomerId, MobileNumber, Email, Status FROM CBS_CUSTOMERS WHERE CustomerId = @customerId',
-      { customerId },
+  async findMobile(custNo: string): Promise<{ mobileNo1: string } | null> {
+    return this.queryOne<{ mobileNo1: string }>(
+      `SELECT mobileNo1 FROM D010055 WHERE custNo = @custNo AND isActive = 1`,
+      { custNo }
+    );
+  }
+
+  async findEmail(custNo: string): Promise<{ emailId: string } | null> {
+    return this.queryOne<{ emailId: string }>(
+      `SELECT emailId FROM D010055 WHERE custNo = @custNo AND isActive = 1`,
+      { custNo }
     );
   }
 }

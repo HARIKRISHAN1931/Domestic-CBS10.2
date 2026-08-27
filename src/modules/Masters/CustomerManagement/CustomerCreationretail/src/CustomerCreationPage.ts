@@ -213,6 +213,7 @@ export class CustomerCreationPage extends BasePage {
   }
 
   async fillAdditionalDetails(data: CustomerData): Promise<void> {
+    await this.switchToActivePage();
     await this.clickNext('KYCAvailableY');
     if (data.KYCAvailableYn) { const rid = data.KYCAvailableYn === 'Y' ? 'KYCAvailableY' : 'KYCAvailableN'; if (await this.vis(rid)) await this.radio(rid); }
     if (data.pepYn)          { const rid = data.pepYn          === 'Y' ? 'pepY'          : 'pepN';          if (await this.vis(rid)) await this.radio(rid); }
@@ -245,32 +246,68 @@ export class CustomerCreationPage extends BasePage {
   }
 
   async fillDocumentDetails(data: CustomerData): Promise<void> {
+    await this.switchToActivePage();
     await this.clickNext();
     await this.waitForAjax();
-    await this.page.waitForTimeout(1000);
-    const docs = [
-      { proofType: data.proofType || '2', docType: data.docType || '' },
-      { proofType: '1', docType: '' },
-    ];
-    for (const doc of docs) {
-      await this.v('proofType').waitFor({ state: 'visible', timeout: 8_000 }).catch(() => {});
-      if (!await this.vis('proofType')) break;
-      await this.sel('proofType', doc.proofType);
-      if (doc.docType && await this.vis('docType') && await this.v('docType').isEnabled().catch(() => false)) await this.sel('docType', doc.docType);
-      if (data.idNumber         && await this.vis('idNumber'))         await this.inp('idNumber',         data.idNumber);
-      if (data.issuedDate       && await this.vis('issuedDate'))       await this.inp('issuedDate',       data.issuedDate);
-      if (data.expiryDate       && await this.vis('expiryDate'))       await this.inp('expiryDate',       data.expiryDate);
-      if (data.nameAsInDocument && await this.vis('nameAsInDocument')) await this.inp('nameAsInDocument', data.nameAsInDocument);
-      await this.sel('issuedByCountry', data.issuedByCountry || '1').catch(() => {});
-      const addDocBtn = this.loc('#btnAdd').first();
-      if (await addDocBtn.isVisible({ timeout: 3_000 }).catch(() => false)) { await addDocBtn.scrollIntoViewIfNeeded(); await addDocBtn.click(); await this.waitForAjax(); await this.page.waitForTimeout(500); }
+    // Wait for document tab to render
+    await this.v('proofType').waitFor({ state: 'visible', timeout: 15_000 }).catch(() => {});
+    if (!await this.vis('proofType')) return;
+
+    // Select proof type
+    const pt = data.proofType || '2';
+    await this.sel('proofType', pt);
+    await this.waitForAjax();
+    await this.page.waitForTimeout(500);
+
+    // Select docType — auto-pick first non-empty option if not specified
+    const docTypeSel = this.v('docType');
+    if (await docTypeSel.isVisible({ timeout: 3_000 }).catch(() => false) &&
+        await docTypeSel.isEnabled().catch(() => false)) {
+      if (data.docType) {
+        await this.sel('docType', data.docType);
+      } else {
+        const firstVal = await docTypeSel.evaluate((el: any) => {
+          const opts = Array.from(el.options) as any[];
+          const found = opts.find((o: any) => o.value !== '');
+          return found ? found.value : '';
+        }).catch(() => '');
+        if (firstVal) await docTypeSel.selectOption(firstVal).catch(() => {});
+      }
+      await this.waitForAjax();
+      await this.page.waitForTimeout(400);
+    }
+
+    if (data.idNumber         && await this.vis('idNumber'))         await this.inp('idNumber',         data.idNumber);
+    if (data.issuedDate       && await this.vis('issuedDate'))       await this.inp('issuedDate',       data.issuedDate);
+    if (data.expiryDate       && await this.vis('expiryDate'))       await this.inp('expiryDate',       data.expiryDate);
+    if (data.nameAsInDocument && await this.vis('nameAsInDocument')) await this.inp('nameAsInDocument', data.nameAsInDocument);
+    if (data.recievedDate     && await this.vis('recievedDate'))     await this.inp('recievedDate',     data.recievedDate);
+    if (data.issuedBy         && await this.vis('issuedBy'))         await this.inp('issuedBy',         data.issuedBy);
+    await this.sel('issuedByCountry', data.issuedByCountry || '1').catch(() => {});
+
+    // Add the document row
+    const addDocBtn = this.loc('#btnAdd').first();
+    const addDocBtnVisible = await addDocBtn.isVisible({ timeout: 5_000 }).catch(() => false);
+    if (addDocBtnVisible) {
+      await addDocBtn.scrollIntoViewIfNeeded();
+      await addDocBtn.evaluate((el: any) => el.click());
+      await this.waitForAjax();
+      await this.page.waitForTimeout(800);
+    } else {
+      // Try alternate add button selectors CBS uses
+      const altAdd = this.loc('button:has-text("Add"), #addDocBtn, .add-doc-btn, input[value="Add"]').first();
+      if (await altAdd.isVisible({ timeout: 3_000 }).catch(() => false)) {
+        await altAdd.evaluate((el: any) => el.click());
+        await this.waitForAjax();
+        await this.page.waitForTimeout(800);
+      }
     }
   }
 
   async save(): Promise<string> {
     const btn = this.page.locator('#saveDepositeparamDetails').first();
-    await btn.waitFor({ state: 'visible', timeout: 10_000 });
-    await btn.click();
+    await btn.waitFor({ state: 'attached', timeout: 10_000 });
+    await btn.evaluate((el: any) => el.click());
     await this.modal.confirmSave();
     await this.switchToActivePage();
     const errToast = this.page.locator('.toast-messages .msg-toast.msg-error em').first();

@@ -1,35 +1,44 @@
-import { Page, Locator } from '@playwright/test';
-import { BasePage } from '../../../../framework/base/BasePage';
-import { TableComponent } from '../../../../common/components/TableComponent';
-import { CBS_CONSTANTS } from '../../../../common/constants/cbs.constants';
+import { Locator } from '@playwright/test';
+import { BasePage } from '../../../../../framework/base/BasePage';
 
 export class CustomerInquiryPage extends BasePage {
   readonly pageTitle = 'Customer Inquiry';
-  readonly pageUrl = CBS_CONSTANTS.ROUTES.CUSTOMER_INQUIRY;
 
-  constructor(page: Page) { super(page); }
+  private v = (id: string): Locator => this.loc(`#${id}`);
 
-  private get customerIdInput(): Locator { return this.page.getByLabel('Customer ID'); }
-  private get panInput(): Locator { return this.page.getByLabel('PAN Number'); }
-  private get mobileInput(): Locator { return this.page.getByLabel('Mobile Number'); }
-  private get searchButton(): Locator { return this.page.getByRole('button', { name: 'Search' }); }
-
-  get resultsTable(): TableComponent {
-    return new TableComponent(this.page, this.page.locator('table.results-table'));
+  /** Search by customer number in the grid search box. */
+  async searchByCustomerNumber(custNo: string): Promise<void> {
+    const box = this.loc('#dt-authdata_filter input, #dt-pendingdata_filter input').first();
+    await box.waitFor({ state: 'visible', timeout: 10_000 });
+    await box.fill(custNo);
+    await this.page.waitForTimeout(800);
   }
 
-  async searchByCustomerId(customerId: string): Promise<void> {
-    await this.fillField(this.customerIdInput, customerId);
-    await this.clickAndWait(this.searchButton);
+  /** Open a customer record from the authorized grid for view/inquiry. */
+  async openRecord(custNo: string): Promise<void> {
+    await this.searchByCustomerNumber(custNo);
+    const row = this.loc('#dt-authdata tbody tr').filter({ hasText: custNo }).first();
+    await row.waitFor({ state: 'visible', timeout: 10_000 });
+    await row.locator('a').first().click();
+    await this.v('memberFName').waitFor({ state: 'visible', timeout: 20_000 });
+    await this.waitForAjax();
   }
 
-  async searchByPAN(pan: string): Promise<void> {
-    await this.fillField(this.panInput, pan);
-    await this.clickAndWait(this.searchButton);
+  async getCustomerName(): Promise<string> {
+    const first = await this.v('memberFName').inputValue().catch(() => '');
+    const last  = await this.v('memberLName').inputValue().catch(() => '');
+    return `${first} ${last}`.trim();
   }
 
-  async searchByMobile(mobile: string): Promise<void> {
-    await this.fillField(this.mobileInput, mobile);
-    await this.clickAndWait(this.searchButton);
+  async getCustomerCategory(): Promise<string> {
+    return this.v('customerCategory').inputValue().catch(() => '');
+  }
+
+  async getMobileNumber(): Promise<string> {
+    return this.v('mobileNo1').inputValue().catch(() => '');
+  }
+
+  async getEmailId(): Promise<string> {
+    return this.v('emailId').inputValue().catch(() => '');
   }
 }
