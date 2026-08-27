@@ -5,7 +5,7 @@ import { MenuNavigation } from '../../../../../common/components/MenuNavigation'
 import { SharedDataStore } from '../../../../../framework/utils/SharedDataStore';
 import { CorporateCustomerPage, CorporateCustomerData, CorporateCustomerValidator } from '../src/index';
 
-const DATA_FILE = path.join(process.cwd(), 'src/modules/Masters/CustomerManagement/CustomerCreationCorporate/data/corporate-customer.data.xlsx');
+const DATA_FILE = path.join(process.cwd(), 'src/modules/Customer/Corporate/CorporateCustomer/data/corporate-customer.data.xlsx');
 const DOC_FILE  = path.join(process.cwd(), 'src/modules/Masters/CustomerManagement/CustomerCreationCorporate/data/test-doc.png');
 const NAV = (page: any) => new MenuNavigation(page).navigate('Masters', 'customermgmt', 'CORPCUSTOMER');
 

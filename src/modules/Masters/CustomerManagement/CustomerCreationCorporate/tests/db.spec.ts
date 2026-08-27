@@ -4,7 +4,7 @@ import { ExcelHelper } from '../../../../../common/helpers/ExcelHelper';
 import { SharedDataStore } from '../../../../../framework/utils/SharedDataStore';
 import { CorporateCustomerRepository } from '../src/index';
 
-const DATA_FILE = path.join(process.cwd(), 'src/modules/Masters/CustomerManagement/CustomerCreationCorporate/data/corporate-customer.data.xlsx');
+const DATA_FILE = path.join(process.cwd(), 'src/modules/Customer/Corporate/CorporateCustomer/data/corporate-customer.data.xlsx');
 
 test.describe('Corporate Customer — DB Validation @database @regression', () => {
 
