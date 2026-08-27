@@ -8,7 +8,7 @@ import path from 'path';
 const DATA_FILE = path.join(process.cwd(), 'src/modules/Administration/TenantAndBranchManagement/UrbanMaster/data/urban-master.data.xlsx');
 const NAV = (page: any) => new MenuNavigation(page).navigate('Administration', 'setupAdm', 'URBANMASTER');
 
-test.describe('Urban Master > Create @smoke @regression', () => {
+test.describe('Urban Master > Create @sanity @regression', () => {
   test('should create urban master', async ({ authenticatedPage }) => {
     const rows   = await ExcelHelper.readSheet<UrbanMasterData>(DATA_FILE, 'Create');
     const data   = rows[0];

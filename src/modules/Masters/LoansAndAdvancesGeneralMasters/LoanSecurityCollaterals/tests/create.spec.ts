@@ -6,9 +6,9 @@ import path from 'path';
 
 const DATA_FILE = path.join(process.cwd(), 'src/modules/Loans/LoanMasters/loan-masters.data.xlsx');
 
-test.describe('Loan Masters @smoke @regression', () => {
+test.describe('Loan Masters @sanity @regression', () => {
 
-  test('should create loan collateral @smoke', async ({ page }) => {
+  test('should create loan collateral @sanity', async ({ page }) => {
     test.setTimeout(120_000);
     const rows = await ExcelHelper.readSheet<LoanCollateralData>(DATA_FILE, 'Collateral');
     const data = rows[0];
@@ -21,7 +21,7 @@ test.describe('Loan Masters @smoke @regression', () => {
     validator.validateCreated(toast);
   });
 
-  test('should create loan security @smoke', async ({ page }) => {
+  test('should create loan security @sanity', async ({ page }) => {
     test.setTimeout(120_000);
     const rows = await ExcelHelper.readSheet<LoanSecurityData>(DATA_FILE, 'Security');
     const data = rows[0];
@@ -34,7 +34,7 @@ test.describe('Loan Masters @smoke @regression', () => {
     validator.validateCreated(toast);
   });
 
-  test('should create loan surety @smoke', async ({ page }) => {
+  test('should create loan surety @sanity', async ({ page }) => {
     test.setTimeout(120_000);
     const rows = await ExcelHelper.readSheet<LoanSuretyData>(DATA_FILE, 'Surety');
     const data = rows[0];

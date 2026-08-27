@@ -8,7 +8,7 @@ import path from 'path';
 const DATA_FILE = path.join(process.cwd(), 'src/modules/Administration/TenantAndBranchManagement/Subdivisionthana/data/subdivisionthana.data.xlsx');
 const NAV = (page: any) => new MenuNavigation(page).navigate('Administration', 'setupAdm', 'AREAMASTER');
 
-test.describe('Sub-Division/Thana > Create @smoke @regression', () => {
+test.describe('Sub-Division/Thana > Create @sanity @regression', () => {
   test('should create sub-division/thana', async ({ authenticatedPage }) => {
     const rows   = await ExcelHelper.readSheet<SubdivisionthanaData>(DATA_FILE, 'Create');
     const data   = rows[0];

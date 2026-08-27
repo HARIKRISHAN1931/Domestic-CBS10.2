@@ -7,7 +7,7 @@ const DATA_FILE = path.resolve(__dirname, '../data/TermDepositContract.xlsx');
 
 test.describe('Term Deposit Contract > Database', () => {
 
-  test('should verify TD contracts exist in D020004 @database @smoke @regression', async ({ db }) => {
+  test('should verify TD contracts exist in D020004 @database @sanity @regression', async ({ db }) => {
     const rows = await ExcelHelper.readSheet<Record<string, string>>(DATA_FILE, 'Database');
     const repo = new TermDepositRepository(db);
     for (const row of rows) {

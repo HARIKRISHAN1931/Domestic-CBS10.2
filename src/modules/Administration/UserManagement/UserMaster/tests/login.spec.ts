@@ -63,7 +63,7 @@ async function loginAsUser(
 }
 
 // ─── SANITY: CLERK100 only ────────────────────────────────────────────────────
-test('should login as CLERK100 @sanity @smoke', async ({ browser }) => {
+test('should login as CLERK100 @sanity @sanity', async ({ browser }) => {
   test.setTimeout(60_000);
   const branch = config.branchUsers.find(b => b.branchCode === '100')!;
   const result = await loginAsUser(browser, branch.clerkUsername, branch.clerkPassword);

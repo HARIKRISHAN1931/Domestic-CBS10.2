@@ -1,0 +1,9 @@
+Use the saved @Role.md in F:\CBS NG10X Automation\CBS10.2\.amazonq\prompts
+
+Start with CBS Menu Code: **PRDACNOMST**
+
+Analyze the actual screen and existing framework first. Identify the screen name, all fields in UI order, controls, locators, validations, Create/Update/Authorize flows, negative scenarios, and required DB/API validation.
+
+Compare with the existing completed screens and reuse the same framework pattern.
+
+**Analysis only. Do not modify any files. Wait for my approval before implementation.**

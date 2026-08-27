@@ -1,4 +1,7 @@
 import { BaseRepository } from '../../../../../framework/base/BaseRepository';
+import { CBS_TABLES } from '../../../../../framework/config/tables';
+
+const T = CBS_TABLES.ACCOUNT.MASTER; // D009022
 
 export interface AccountOpeningDbRow {
   accountNo:   string;
@@ -8,7 +11,7 @@ export interface AccountOpeningDbRow {
   schemeCode:  string;
   branchCode:  string;
   openDate:    string;
-  authStatus:  string;   // U=Unauthorized P=Pending A=Authorized R=Rejected
+  authStatus:  string;   //P=Pending A=Authorized R=Rejected
   isActive:    number;
   operMode:    string;
 }
@@ -19,8 +22,7 @@ export class AccountOpeningRepository extends BaseRepository {
     return this.queryOne<AccountOpeningDbRow>(
       `SELECT accountNo, customerId, moduleCode, productCode, schemeCode,
               branchCode, openDate, authStatus, isActive, operMode
-         FROM PRDACNOMST
-        WHERE accountNo = @accountNo`,
+         FROM ${T} WHERE accountNo = @accountNo`,
       { accountNo }
     );
   }
@@ -29,8 +31,7 @@ export class AccountOpeningRepository extends BaseRepository {
     return this.query<AccountOpeningDbRow>(
       `SELECT accountNo, customerId, moduleCode, productCode, schemeCode,
               branchCode, openDate, authStatus, isActive, operMode
-         FROM PRDACNOMST
-        WHERE customerId = @customerId AND isActive = 1`,
+         FROM ${T} WHERE customerId = @customerId AND isActive = 1`,
       { customerId }
     );
   }
@@ -39,8 +40,7 @@ export class AccountOpeningRepository extends BaseRepository {
     return this.query<AccountOpeningDbRow>(
       `SELECT accountNo, customerId, moduleCode, productCode, schemeCode,
               branchCode, openDate, authStatus, isActive, operMode
-         FROM PRDACNOMST
-        WHERE moduleCode = @moduleCode AND productCode = @productCode AND isActive = 1`,
+         FROM ${T} WHERE moduleCode = @moduleCode AND productCode = @productCode AND isActive = 1`,
       { moduleCode, productCode }
     );
   }
@@ -49,8 +49,7 @@ export class AccountOpeningRepository extends BaseRepository {
     return this.query<AccountOpeningDbRow>(
       `SELECT accountNo, customerId, moduleCode, productCode, schemeCode,
               branchCode, openDate, authStatus, isActive, operMode
-         FROM PRDACNOMST
-        WHERE authStatus IN ('U','P') AND isActive = 1`
+         FROM ${T} WHERE authStatus IN ('U','P') AND isActive = 1`
     );
   }
 
@@ -58,16 +57,23 @@ export class AccountOpeningRepository extends BaseRepository {
     return this.queryOne<AccountOpeningDbRow>(
       `SELECT accountNo, customerId, moduleCode, productCode, schemeCode,
               branchCode, openDate, authStatus, isActive, operMode
-         FROM PRDACNOMST
-        WHERE accountNo = @accountNo AND authStatus = 'A' AND isActive = 1`,
+         FROM ${T} WHERE accountNo = @accountNo AND authStatus = 'A' AND isActive = 1`,
       { accountNo }
     );
   }
 
   async countByCustomer(customerId: string): Promise<number> {
     const row = await this.queryOne<{ cnt: number }>(
-      `SELECT COUNT(*) AS cnt FROM PRDACNOMST WHERE customerId = @customerId AND isActive = 1`,
+      `SELECT COUNT(*) AS cnt FROM ${T} WHERE customerId = @customerId AND isActive = 1`,
       { customerId }
+    );
+    return row?.cnt ?? 0;
+  }
+
+  async countByAuthStatus(authStatus: string): Promise<number> {
+    const row = await this.queryOne<{ cnt: number }>(
+      `SELECT COUNT(*) AS cnt FROM ${T} WHERE authStatus = @authStatus AND isActive = 1`,
+      { authStatus }
     );
     return row?.cnt ?? 0;
   }

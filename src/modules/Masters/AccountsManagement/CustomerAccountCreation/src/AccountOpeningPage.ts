@@ -1,5 +1,9 @@
 import { Locator, expect } from '@playwright/test';
+import * as path from 'path';
 import { BasePage } from '../../../../../framework/base/BasePage';
+import { ExcelHelper } from '../../../../../common/helpers/ExcelHelper';
+
+const DATA_FILE = path.resolve(__dirname, '../data/CustomerAccountCreation.xlsx');
 
 export interface AccountOpeningFormData extends Record<string, unknown> {
   customerNumber?: string;
@@ -97,6 +101,19 @@ export class AccountOpeningPage extends BasePage {
     }
   };
 
+  // Poll until stmtMode disabled state stops changing (CBS AJAX settled)
+  private waitForStmtModeState = async (timeoutMs = 5_000): Promise<void> => {
+    const loc = this.f('stmtMode');
+    const deadline = Date.now() + timeoutMs;
+    let prev: boolean | null = null;
+    while (Date.now() < deadline) {
+      const cur = await loc.isDisabled().catch(() => true);
+      if (cur === prev) return; // state stable
+      prev = cur;
+      await this.page.waitForTimeout(300);
+    }
+  };
+
   // ── List page ────────────────────────────────────────────────────────────────
   async openCreateForm(): Promise<void> {
     const btn = this.page.locator('a.button.add, button.button.add, #btnAddAccount').first();
@@ -170,9 +187,17 @@ export class AccountOpeningPage extends BasePage {
     if (data.additionalInformation1 !== undefined) await this.inp('additionalInformation1', data.additionalInformation1);
     if (data.additionalInformation2 !== undefined) await this.inp('additionalInformation2', data.additionalInformation2);
 
-    // Statement
-    if (data.stmtFreq !== undefined) await this.sel('stmtFreq', data.stmtFreq);
-    if (data.stmtMode !== undefined) await this.sel('stmtMode', data.stmtMode);
+    // Statement — stmtFreq=4 means No Statement, stmtMode not required
+    if (data.stmtFreq !== undefined) {
+      await this.sel('stmtFreq', data.stmtFreq as string);
+      // poll until stmtMode state stabilizes (CBS AJAX)
+      await this.waitForStmtModeState();
+    }
+    if (data.stmtMode !== undefined) {
+      const stmtModeLoc = this.f('stmtMode');
+      const isDisabled = await stmtModeLoc.isDisabled().catch(() => true);
+      if (!isDisabled) await this.sel('stmtMode', data.stmtMode as string);
+    }
 
     // Address
     if (data.addressType  !== undefined) await this.sel('addressType',  data.addressType);
@@ -189,18 +214,20 @@ export class AccountOpeningPage extends BasePage {
     await this.page.keyboard.press('Escape');
     await this.page.waitForTimeout(300);
 
-    const saveBtn = this.page.locator('#saveCustomer').first();
+    // CBS Account Creation save button is #createAccount
+    const saveBtn = this.page.locator('#createAccount').first();
+    await saveBtn.waitFor({ state: 'visible', timeout: 15_000 });
     await saveBtn.scrollIntoViewIfNeeded();
     await saveBtn.click();
     await this.page.waitForTimeout(600);
 
-    const modalHasClass = await this.page.locator('#tm-saveconfirm').getAttribute('class')
-      .then(c => (c ?? '').includes('tinymodal-showing')).catch(() => false);
-    if (!modalHasClass) {
+    // Confirm modal — #submitForm inside confirm dialog
+    const submitBtn = this.page.locator('#submitForm').first();
+    const submitted = await submitBtn.isVisible({ timeout: 5_000 }).catch(() => false);
+    if (!submitted) {
       throw new Error('Save confirm modal did not appear — mandatory fields may be unfilled');
     }
-
-    await this.page.locator('#submitForm').click();
+    await submitBtn.click();
 
     const successToast = this.page.locator('.toast-messages .msg-toast.msg-success em').first();
     const anyToast     = this.page.locator('.toast-messages .msg-toast em').first();
@@ -221,8 +248,34 @@ export class AccountOpeningPage extends BasePage {
     return msg;
   }
 
+  private async storeCreatedAccount(msg: string, data: AccountOpeningFormData): Promise<void> {
+    const match = msg.match(/(\d{10,})/);
+    if (!match) return;
+    const accountNo = match[1];
+    await ExcelHelper.appendRow(DATA_FILE, 'Authorize', [
+      '@regression',
+      accountNo,
+      String(data.moduleCode  ?? ''),
+      String(data.productCode ?? ''),
+      String(data.schemeCode  ?? ''),
+      'Pending',
+      new Date().toLocaleString('en-IN'),
+    ]);
+    console.log(`[STORED→Authorize] Account: ${accountNo} | Module: ${data.moduleCode} | Product: ${data.productCode} | Scheme: ${data.schemeCode}`);
+  }
+
   // ── CRUD ─────────────────────────────────────────────────────────────────────
   async create(data: AccountOpeningFormData): Promise<string> {
+    await this.fillForm(data);
+    const msg = await this.save();
+    await this.storeCreatedAccount(msg, data);
+    return msg;
+  }
+
+  async update(customerNumber: string, data: AccountOpeningFormData): Promise<string> {
+    await this.searchRecord(customerNumber);
+    await this.page.waitForTimeout(800);
+    await this.clickEdit();
     await this.fillForm(data);
     return this.save();
   }
@@ -232,12 +285,12 @@ export class AccountOpeningPage extends BasePage {
     const row = this.page.locator('#dt-pendingdata tbody tr').filter({ hasText: searchText }).first();
     await row.waitFor({ state: 'visible', timeout: 10_000 });
     await row.hover();
-    await this.page.waitForTimeout(300);
-    await row.locator('.authorization-btns a').first().click({ force: true });
     await this.page.waitForTimeout(500);
-    await this.page.locator('button:has-text("Approve")').first().click();
-    await this.page.waitForTimeout(300);
-    await this.page.locator('#btnApproveId').click();
+    await row.locator('a[href*="callAuthRejectfn"], a.show-btns').first().click({ force: true });
+    await this.page.locator('#approveBtn').waitFor({ state: 'visible', timeout: 10_000 });
+    await this.page.locator('#approveBtn').click();
+    await this.page.waitForTimeout(500);
+    await this.page.locator('#btnApproveId').click({ force: true });
     const toast = this.page.locator('.toast-messages .msg-toast.msg-success em').first();
     await toast.waitFor({ state: 'visible', timeout: 15_000 });
     return (await toast.innerText()).trim();
@@ -247,12 +300,12 @@ export class AccountOpeningPage extends BasePage {
     const row = this.page.locator('#dt-pendingdata tbody tr').filter({ hasText: searchText }).first();
     await row.waitFor({ state: 'visible', timeout: 10_000 });
     await row.hover();
-    await this.page.waitForTimeout(300);
-    await row.locator('.authorization-btns a').first().click({ force: true });
     await this.page.waitForTimeout(500);
-    await this.page.locator('#idReject').click();
-    await this.page.locator('#rejectRemark, #remarkId').first().fill(remark);
-    await this.page.locator('#btnRejectId').click();
+    await row.locator('a[href*="callAuthRejectfn"], a.show-btns').first().click({ force: true });
+    await this.page.locator('#rejectBtn').waitFor({ state: 'visible', timeout: 10_000 });
+    await this.page.locator('#rejectBtn').click();
+    await this.page.waitForTimeout(500);
+    await this.page.locator('#btnRejectId').click({ force: true });
     const toast = this.page.locator('.toast-messages .msg-toast.msg-success em').first();
     await toast.waitFor({ state: 'visible', timeout: 15_000 });
     return (await toast.innerText()).trim();
@@ -298,4 +351,30 @@ export class AccountOpeningPage extends BasePage {
     const isReadonly = await loc.getAttribute('readonly').then(v => v !== null).catch(() => false);
     expect(isDisabled || isReadonly, `Field #${fieldId} must be read-only`).toBe(true);
   }
+  // ── Auth mode validation ──────────────────────────────────────────────────────
+  // In authorization view all form inputs/selects must be read-only or disabled
+  async verifyAllFieldsReadOnly(): Promise<{ editableFields: string[] }> {
+    const editableFields: string[] = [];
+    const fieldIds = [
+      'customerNumber', 'moduleCode', 'productCode', 'schemeCode',
+      'modeOfOperation', 'nomineeY', 'nomineeN',
+      'documentFileNumber', 'additionalInformation1', 'additionalInformation2',
+      'stmtFreq', 'stmtMode', 'addressType',
+      'address1', 'address2', 'address3', 'countryCode',
+    ];
+    for (const id of fieldIds) {
+      const loc = this.page.locator(`#${id}`).first();
+      const exists = await loc.isVisible({ timeout: 500 }).catch(() => false);
+      if (!exists) continue;
+      const isDisabled = await loc.isDisabled().catch(() => false);
+      const isReadonly = await loc.getAttribute('readonly').then(v => v !== null).catch(() => false);
+      const tagName    = await loc.evaluate((el: Element) => el.tagName.toLowerCase()).catch(() => '');
+      // select elements in CBS auth mode are disabled; inputs have readonly attr
+      if (!isDisabled && !isReadonly) {
+        editableFields.push(`#${id} (${tagName})`);
+      }
+    }
+    return { editableFields };
+  }
+
 }

@@ -10,7 +10,7 @@ const NAV = (page: any) => new MenuNavigation(page).navigate('Masters', 'td', 'T
 
 test.describe('Term Deposit Contract > Authorize', () => {
 
-  test('should approve pending TD contract @smoke @regression', async ({ checkerAuthenticatedPage }) => {
+  test('should approve pending TD contract @sanity @regression', async ({ checkerAuthenticatedPage }) => {
     test.setTimeout(120_000);
     const rows = await ExcelHelper.readSheet<Record<string, string>>(DATA_FILE, 'Authorize');
     const row  = rows[0];

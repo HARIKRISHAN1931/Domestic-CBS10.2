@@ -8,7 +8,7 @@ import path from 'path';
 const DATA_FILE = path.join(process.cwd(), 'src/modules/Administration/TenantAndBranchManagement/CountryMaster/data/country-master.data.xlsx');
 const NAV = (page: any) => new MenuNavigation(page).navigate('Administration', 'setupAdm', 'COUNTRYMST');
 
-test.describe('Country Master > Create @smoke @regression', () => {
+test.describe('Country Master > Create @sanity @regression', () => {
   test('should create country master', async ({ authenticatedPage }) => {
     const rows   = await ExcelHelper.readSheet<CountryMasterData>(DATA_FILE, 'Create');
     const data   = rows[0];

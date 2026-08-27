@@ -31,7 +31,7 @@ const createAndVerify = async (page: any, data: TDContractData, label: string) =
 
 test.describe('Term Deposit Contract > Create', () => {
 
-  test('should create FD Individual @smoke @sanity', async ({ authenticatedPage }) => {
+  test('should create FD Individual @sanity @sanity', async ({ authenticatedPage }) => {
     test.setTimeout(120_000);
     const data = new TermDepositBuilder().buildSanity();
     await createAndVerify(authenticatedPage, data, 'FD-INDIVIDUAL');

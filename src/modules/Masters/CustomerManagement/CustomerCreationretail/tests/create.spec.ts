@@ -8,7 +8,7 @@ import path from 'path';
 const DATA_FILE = path.join(process.cwd(), 'src/modules/Masters/CustomerManagement/CustomerCreationretail/data/customer-creation.data.xlsx');
 const NAV = (page: any) => new MenuNavigation(page).navigate('Masters', 'customermgmt', 'CUSTOMER');
 
-test.describe('Customer Creation Retail @smoke @regression', () => {
+test.describe('Customer Creation Retail @sanity @regression', () => {
 
   test('should create customer successfully', async ({ authenticatedPage }) => {
     const rows   = await ExcelHelper.readSheet<CustomerData>(DATA_FILE, 'Create');

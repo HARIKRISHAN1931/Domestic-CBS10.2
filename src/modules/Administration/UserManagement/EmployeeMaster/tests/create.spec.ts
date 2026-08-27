@@ -67,7 +67,7 @@ const loadRows = async (): Promise<EmployeeMasterData[]> => {
 test.describe('Employee Master > Create', () => {
 
   // ── SANITY: first row from Excel ─────────────────────────────────────────────
-  test('should create employee - sanity @sanity @smoke', async ({ authenticatedPage }) => {
+  test('should create employee - sanity @sanity @sanity', async ({ authenticatedPage }) => {
     test.setTimeout(180_000);
     const rows = await loadRows();
     const data = rows[0];

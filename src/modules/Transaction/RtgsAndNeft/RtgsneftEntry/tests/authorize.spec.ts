@@ -1,7 +1,7 @@
 import { test } from '../../../../../framework/fixtures/fixtures';
 
 test.describe('RtgsneftEntry', () => {
-  test('placeholder @smoke', async ({ page }) => {
+  test('placeholder @sanity', async ({ page }) => {
     // TODO
   });
 });

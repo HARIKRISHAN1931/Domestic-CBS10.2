@@ -20,7 +20,7 @@ const NAV = async (page: any) => {
 
 test.describe('Corporate Customer > Authorize', () => {
 
-  test('should authorize first created customer @sanity @smoke', async ({ checkerAuthenticatedPage }) => {
+  test('should authorize first created customer @sanity @sanity', async ({ checkerAuthenticatedPage }) => {
     test.setTimeout(120_000);
     const names  = loadCreated();
     const name   = names[0];

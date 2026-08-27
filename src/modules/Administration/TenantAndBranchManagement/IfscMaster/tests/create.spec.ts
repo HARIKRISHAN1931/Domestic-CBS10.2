@@ -7,7 +7,7 @@ import path from 'path';
 const DATA_FILE = path.join(process.cwd(), 'src/modules/Administration/TenantAndBranchManagement/IfscMaster/data/ifsc-master.data.xlsx');
 const NAV = (page: any) => new MenuNavigation(page).navigate('Administration', 'setupAdm', 'IFSCMST');
 
-test.describe('IFSC Master > Create @smoke @regression', () => {
+test.describe('IFSC Master > Create @sanity @regression', () => {
   test('should create ifsc master', async ({ authenticatedPage }) => {
     const [rows] = await Promise.all([ExcelHelper.readSheet<IfscMasterData>(DATA_FILE, 'Create')]);
     const data   = rows[0];

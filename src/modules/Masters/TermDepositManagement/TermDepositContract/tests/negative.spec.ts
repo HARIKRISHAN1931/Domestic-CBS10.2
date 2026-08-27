@@ -7,7 +7,7 @@ const NAV = (page: any) => new MenuNavigation(page).navigate('Masters', 'td', 'T
 
 test.describe('Term Deposit Contract > Negative', () => {
 
-  test('should fail save without customer code @smoke @regression', async ({ authenticatedPage }) => {
+  test('should fail save without customer code @sanity @regression', async ({ authenticatedPage }) => {
     test.setTimeout(60_000);
     const screen = new TermDepositPage(authenticatedPage);
     await NAV(authenticatedPage);
