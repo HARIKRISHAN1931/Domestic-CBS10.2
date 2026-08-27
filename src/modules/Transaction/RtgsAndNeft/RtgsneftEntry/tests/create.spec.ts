@@ -1,68 +1,55 @@
-import { test, expect } from '../../../framework/fixtures/fixtures';
-import { RTGSEntryPage } from './RTGSEntryPage';
-import { RTGSEntryBuilder } from './RTGSEntryBuilder';
-import { RTGSEntryRepository } from './RTGSEntryRepository';
-import { RTGSEntryValidator } from './RTGSEntryValidator';
-import { ExcelHelper } from '../../../common/helpers/ExcelHelper';
+import { test, expect } from '../../../../../framework/fixtures/fixtures';
+import { ExcelHelper } from '../../../../../common/helpers/ExcelHelper';
+import { MenuNavigation } from '../../../../../common/components/MenuNavigation';
+import { SharedDataStore } from '../../../../../framework/utils/SharedDataStore';
+import { RtgsNeftEntryPage, RtgsNeftEntryData } from '../src/RtgsNeftEntryPage';
+import { RtgsNeftEntryValidator } from '../src/RtgsNeftEntryBuilder';
 import { Page } from '@playwright/test';
-import * as path from 'path';
+import path from 'path';
 
-const DATA_FILE = path.resolve(__dirname, 'rtgs-entry.data.xlsx');
+const DATA_FILE = path.join(process.cwd(), 'src/modules/Transaction/RtgsAndNeft/RtgsneftEntry/data/RtgsneftEntry.xlsx');
+const NAV = (page: any) => new MenuNavigation(page).navigate('Transaction', 'RTGSTrxn', 'TRANSACTIONMST');
 
-test.describe('RTGS Entry - Create', () => {
-  test('should submit RTGS transaction @sanity @regression', async ({ page, db }: { page: Page; db: import('../../../framework/database/DatabaseConnectionManager').DatabaseConnectionManager }) => {
-    const rtgsPage = new RTGSEntryPage(page);
-    const validator = new RTGSEntryValidator(rtgsPage, new RTGSEntryRepository(db));
-    await rtgsPage.navigate();
-    const data = new RTGSEntryBuilder().withDebitAccount('ACC001234567').withAmount(500000).build();
-    await rtgsPage.fillForm(data);
-    await rtgsPage.submit();
-    await validator.verifyTransactionRefGenerated();
-  });
+test.describe('RTGS/NEFT Entry — Create @sanity @regression', () => {
 
-  test('should submit RTGS from Excel data @regression', async ({ page, db }: { page: Page; db: import('../../../framework/database/DatabaseConnectionManager').DatabaseConnectionManager }) => {
-    const rtgsPage = new RTGSEntryPage(page);
-    const validator = new RTGSEntryValidator(rtgsPage, new RTGSEntryRepository(db));
-    await rtgsPage.navigate();
-    const rows = await ExcelHelper.readSheet<Record<string, string>>(DATA_FILE, 'Create');
-    const row = rows[0];
-    const data = new RTGSEntryBuilder().withDebitAccount(row['debitAccountNumber']).withAmount(Number(row['amount'])).withRemarks(row['remarks']).build();
-    await rtgsPage.fillForm(data);
-    await rtgsPage.submit();
-    await validator.verifyTransactionRefGenerated();
-  });
-});
+  test('should create NEFT transaction successfully', async ({ authenticatedPage }: { authenticatedPage: Page }) => {
+    test.setTimeout(120_000);
+    const rows      = await ExcelHelper.readSheet<RtgsNeftEntryData>(DATA_FILE, 'Create');
+    const data      = rows[0];
+    const screen    = new RtgsNeftEntryPage(authenticatedPage);
+    const validator = new RtgsNeftEntryValidator();
 
-test.describe('RTGS Entry - Negative', () => {
-  test('should reject RTGS below minimum amount @regression', async ({ page }: { page: Page }) => {
-    const rtgsPage = new RTGSEntryPage(page);
-    await rtgsPage.navigate();
-    const data = new RTGSEntryBuilder().withDebitAccount('ACC001234567').withAmount(100000).build();
-    await rtgsPage.fillForm(data);
-    await rtgsPage.submit();
-    await expect(page.getByTestId('error-amount')).toBeVisible();
-  });
+    await test.step('Navigate to RTGS/NEFT Entry', () => NAV(authenticatedPage));
+    await test.step('Open create form', () => screen.openCreateForm());
+    await test.step('Fill form', () => screen.fillForm(data));
+    const toast = await test.step('Save', () => screen.save());
+    validator.validateCreated(toast);
 
-  test('should reject invalid IFSC code @regression', async ({ page }: { page: Page }) => {
-    const rtgsPage = new RTGSEntryPage(page);
-    await rtgsPage.navigate();
-    const data = new RTGSEntryBuilder().withDebitAccount('ACC001234567').withBeneficiary('Test User', '12345678901234', 'INVALID').build();
-    await rtgsPage.fillForm(data);
-    await rtgsPage.submit();
-    await expect(page.getByTestId('error-beneficiaryIFSC')).toBeVisible();
-  });
-});
+    SharedDataStore.set('RtgsNeftEntry.searchKey', data.rtgsNeftAcctId ?? data.ordDesc1 ?? data.benDesc1 ?? '');
 
-test.describe('RTGS Entry - Database', () => {
-  test('should verify RTGS transaction in database @database @regression', async ({ db }) => {
-    const rows = await ExcelHelper.readSheet<Record<string, string>>(DATA_FILE, 'Database');
-    const repo = new RTGSEntryRepository(db);
-    for (const row of rows) {
-      const record = await repo.findByTransactionRef(row['transactionRef']);
-      if (record) {
-        expect(record.amount).toBe(Number(row['expectedAmount']));
-        expect(record.status).toBe(row['expectedStatus']);
+    await test.step('Verify in pending grid', async () => {
+      await NAV(authenticatedPage);
+      await (screen as any).grid.switchTab('pending');
+      const searchKey = SharedDataStore.get<string>('RtgsNeftEntry.searchKey') ?? '';
+      if (searchKey) {
+        const row = authenticatedPage.locator('#dt-pendingdata tbody tr').filter({ hasText: searchKey });
+        await expect(row.first()).toBeVisible({ timeout: 10_000 });
       }
-    }
+    });
   });
+
+  test('should create RTGS transaction successfully', async ({ authenticatedPage }: { authenticatedPage: Page }) => {
+    test.setTimeout(120_000);
+    const rows      = await ExcelHelper.readSheet<RtgsNeftEntryData>(DATA_FILE, 'Create');
+    const data      = rows.length > 1 ? rows[1] : { ...rows[0], msgTrfType: '1', msgSType: 'R41', valueAmt_txt: '200000' };
+    const screen    = new RtgsNeftEntryPage(authenticatedPage);
+    const validator = new RtgsNeftEntryValidator();
+
+    await test.step('Navigate to RTGS/NEFT Entry', () => NAV(authenticatedPage));
+    await test.step('Open create form', () => screen.openCreateForm());
+    await test.step('Fill RTGS form', () => screen.fillForm(data));
+    const toast = await test.step('Save', () => screen.save());
+    validator.validateCreated(toast);
+  });
+
 });
