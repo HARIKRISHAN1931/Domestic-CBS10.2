@@ -52,7 +52,7 @@ const createAndVerify = async (page: any, data: UserMasterData, label: string) =
 
 test.describe('User Master > Create', () => {
 
-  test('should create user - sanity @sanity @smoke', async ({ authenticatedPage }) => {
+  test('should create user - sanity @sanity @sanity', async ({ authenticatedPage }) => {
     test.setTimeout(180_000);
     const rows = await loadRows();
     const already: string[] = fs.existsSync(CREATED_FILE)

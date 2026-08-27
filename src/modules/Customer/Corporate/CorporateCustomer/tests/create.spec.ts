@@ -59,7 +59,7 @@ const createAndVerify = async (
 
 test.describe('Corporate Customer > Create', () => {
 
-  test('should create corporate customer @sanity @smoke', async ({ authenticatedPage }) => {
+  test('should create corporate customer @sanity @sanity', async ({ authenticatedPage }) => {
     test.setTimeout(120_000);  // mandatory-only: ~1-2 min
     const rows = await loadRows();
     await createAndVerify(authenticatedPage, rows[0], `SANITY-${rows[0].memberFName}`, 'mandatory');

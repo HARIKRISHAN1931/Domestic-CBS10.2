@@ -10,7 +10,7 @@ import * as path from 'path';
 const DATA_FILE = path.resolve(__dirname, 'imps-entry.data.xlsx');
 
 test.describe('IMPS Entry - Create', () => {
-  test('should submit IMPS transaction @smoke @regression', async ({ page, db }: { page: Page; db: import('../../../framework/database/DatabaseConnectionManager').DatabaseConnectionManager }) => {
+  test('should submit IMPS transaction @sanity @regression', async ({ page, db }: { page: Page; db: import('../../../framework/database/DatabaseConnectionManager').DatabaseConnectionManager }) => {
     const impsPage = new IMPSEntryPage(page);
     const validator = new IMPSEntryValidator(impsPage, new IMPSEntryRepository(db));
     await impsPage.navigate();

@@ -6,7 +6,7 @@ import path from 'path';
 
 const DATA_FILE = path.join(process.cwd(), 'src/modules/Administration/TenantAndBranchManagement/BranchToBranchDataMapping/data/branch-to-branch-data-mapping.data.xlsx');
 
-test.describe('Branch To Branch Data Mapping > Create @smoke @regression', () => {
+test.describe('Branch To Branch Data Mapping > Create @sanity @regression', () => {
 
   test('should create branch to branch data mapping', async ({ authenticatedPage }) => {
     const rows = await ExcelHelper.readSheet<BranchToBranchDataMappingData>(DATA_FILE, 'Create');

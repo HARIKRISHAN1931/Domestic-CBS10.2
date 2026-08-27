@@ -1,5 +1,5 @@
 export enum TestTag {
-  Smoke = '@smoke',
+  Smoke = '@sanity',
   Sanity = '@sanity',
   Regression = '@regression',
   E2E = '@e2e',

@@ -22,7 +22,7 @@ test.describe('Loan Creation - Create', () => {
     if (createdLoanId) await new LoanCreationRepository(db).deleteTestLoan(createdLoanId);
   });
 
-  test('should create home loan @smoke @regression', async ({ db }) => {
+  test('should create home loan @sanity @regression', async ({ db }) => {
     const repo = new LoanCreationRepository(db);
     const validator = new LoanCreationValidator(loanPage, repo);
     const data = new LoanCreationBuilder().withCustomerId('CUST001').withLoanType('HOME_LOAN').withLoanAmount(5000000).withTenure(240).build();

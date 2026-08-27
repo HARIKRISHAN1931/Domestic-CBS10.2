@@ -16,7 +16,7 @@ const loadCreatedEmpIds = (): string[] => {
 test.describe('Employee Master > Authorize', () => {
 
   // ── SANITY: authorize first created employee ──────────────────────────────
-  test('should authorize first created employee @sanity @smoke', async ({ checkerAuthenticatedPage }) => {
+  test('should authorize first created employee @sanity @sanity', async ({ checkerAuthenticatedPage }) => {
     test.setTimeout(120_000);
     const empIds = loadCreatedEmpIds();
     const empId  = empIds[0];

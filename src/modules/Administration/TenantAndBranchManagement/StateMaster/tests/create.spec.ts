@@ -8,7 +8,7 @@ import path from 'path';
 const DATA_FILE = path.join(process.cwd(), 'src/modules/Administration/TenantAndBranchManagement/StateMaster/data/state-master.data.xlsx');
 const NAV = (page: any) => new MenuNavigation(page).navigate('Administration', 'setupAdm', 'STATEMST');
 
-test.describe('State Master > Create @smoke @regression', () => {
+test.describe('State Master > Create @sanity @regression', () => {
   test('should create state master', async ({ authenticatedPage }) => {
     const rows   = await ExcelHelper.readSheet<StateMasterData>(DATA_FILE, 'Create');
     const data   = rows[0];

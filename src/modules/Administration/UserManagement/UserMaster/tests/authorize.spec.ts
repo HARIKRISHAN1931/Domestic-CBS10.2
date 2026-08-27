@@ -15,7 +15,7 @@ const loadCreated = (): string[] => {
 
 test.describe('User Master > Authorize', () => {
 
-  test('should authorize first created user @sanity @smoke', async ({ checkerAuthenticatedPage }) => {
+  test('should authorize first created user @sanity @sanity', async ({ checkerAuthenticatedPage }) => {
     test.setTimeout(120_000);
     const loginIds = loadCreated();
     const screen    = new UserMasterPage(checkerAuthenticatedPage);

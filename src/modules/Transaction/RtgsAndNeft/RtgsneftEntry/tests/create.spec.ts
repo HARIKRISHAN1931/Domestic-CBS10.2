@@ -10,7 +10,7 @@ import * as path from 'path';
 const DATA_FILE = path.resolve(__dirname, 'rtgs-entry.data.xlsx');
 
 test.describe('RTGS Entry - Create', () => {
-  test('should submit RTGS transaction @smoke @regression', async ({ page, db }: { page: Page; db: import('../../../framework/database/DatabaseConnectionManager').DatabaseConnectionManager }) => {
+  test('should submit RTGS transaction @sanity @regression', async ({ page, db }: { page: Page; db: import('../../../framework/database/DatabaseConnectionManager').DatabaseConnectionManager }) => {
     const rtgsPage = new RTGSEntryPage(page);
     const validator = new RTGSEntryValidator(rtgsPage, new RTGSEntryRepository(db));
     await rtgsPage.navigate();

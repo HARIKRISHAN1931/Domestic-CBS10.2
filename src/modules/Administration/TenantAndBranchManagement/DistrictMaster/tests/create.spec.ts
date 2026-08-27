@@ -8,7 +8,7 @@ import path from 'path';
 const DATA_FILE = path.join(process.cwd(), 'src/modules/Administration/TenantAndBranchManagement/DistrictMaster/data/district-master.data.xlsx');
 const NAV = (page: any) => new MenuNavigation(page).navigate('Administration', 'setupAdm', 'DISTRICTMST');
 
-test.describe('District Master > Create @smoke @regression', () => {
+test.describe('District Master > Create @sanity @regression', () => {
   test('should create district master', async ({ authenticatedPage }) => {
     const rows   = await ExcelHelper.readSheet<DistrictMasterData>(DATA_FILE, 'Create');
     const data   = rows[0];

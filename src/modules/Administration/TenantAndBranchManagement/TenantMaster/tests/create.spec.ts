@@ -7,7 +7,7 @@ import path from 'path';
 const DATA_FILE = path.join(process.cwd(), 'src/modules/Administration/TenantAndBranchManagement/TenantMaster/data/tenant-master.data.xlsx');
 const NAV = (page: any) => new MenuNavigation(page).navigate('Administration', 'setupAdm', 'TENANTMST');
 
-test.describe('Tenant Master > Create @smoke @regression', () => {
+test.describe('Tenant Master > Create @sanity @regression', () => {
   test('should create tenant master', async ({ authenticatedPage }) => {
     const [rows] = await Promise.all([ExcelHelper.readSheet<TenantMasterData>(DATA_FILE, 'Create')]);
     const data   = rows[0];

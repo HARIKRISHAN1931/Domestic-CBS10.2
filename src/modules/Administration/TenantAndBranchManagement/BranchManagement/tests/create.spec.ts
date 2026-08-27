@@ -7,7 +7,7 @@ import path from 'path';
 const DATA_FILE = path.join(process.cwd(), 'src/modules/Administration/TenantAndBranchManagement/BranchManagement/data/branch-management.data.xlsx');
 const NAV = (page: any) => new MenuNavigation(page).navigate('Administration', 'setupAdm', 'BRANCHMGMT');
 
-test.describe('Branch Management > Create @smoke @regression', () => {
+test.describe('Branch Management > Create @sanity @regression', () => {
   test('should create branch management', async ({ authenticatedPage }) => {
     const [rows] = await Promise.all([ExcelHelper.readSheet<BranchManagementData>(DATA_FILE, 'Create')]);
     const data   = rows[0];

@@ -1,24 +1,18 @@
 import { expect } from '@playwright/test';
-import { CustomerModificationPage } from './CustomerModificationPage';
-import { CustomerModificationRepository } from './CustomerModificationRepository';
+import { CustomerDbRow } from './CustomerCreationRepository';
 
 export class CustomerModificationValidator {
-  constructor(
-    private readonly page: CustomerModificationPage,
-    private readonly repo: CustomerModificationRepository,
-  ) {}
-
-  async verifyUpdateSuccess(): Promise<void> {
-    await expect(this.page.successMessage).toBeVisible();
+  validateUpdated(toast: string): void {
+    expect(toast, 'Update success toast must be present').toBeTruthy();
   }
 
-  async verifyMobileUpdatedInDatabase(customerId: string, expectedMobile: string): Promise<void> {
-    const record = await this.repo.findByCustomerId(customerId);
-    expect(record).not.toBeNull();
-    expect(record?.mobileNumber).toBe(expectedMobile);
+  validateDbRecord(row: CustomerDbRow | null, custNo: string): void {
+    expect(row, `Customer ${custNo} must exist in D009011 after update`).not.toBeNull();
+    expect(row!.isActive, 'isActive must be 1').toBe(1);
   }
 
-  async verifyFieldError(fieldName: string): Promise<void> {
-    await expect(this.page.getByTestId(`error-${fieldName}`)).toBeVisible();
+  validateMobile(row: { mobileNo1: string } | null, expected: string): void {
+    expect(row, 'Mobile record must exist in D010055').not.toBeNull();
+    expect(row!.mobileNo1, `Mobile must be updated to ${expected}`).toBe(expected);
   }
 }

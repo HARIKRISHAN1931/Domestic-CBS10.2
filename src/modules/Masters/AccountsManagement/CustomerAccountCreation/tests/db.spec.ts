@@ -14,21 +14,20 @@ test.describe('Customer Account Creation (PRDACNOMST) > Database', () => {
       if (!row.accountNo) continue;
       const record = await repo.findByAccountNo(row.accountNo);
       expect(record, `Account ${row.accountNo} must exist in DB`).not.toBeNull();
-      if (row.expectedAcType)   expect(record!.acType).toBe(row.expectedAcType);
-      if (row.expectedStatus)   expect(record!.authStatus).toBe(row.expectedStatus);
+      if (row.expectedStatus) expect(record!.authStatus).toBe(row.expectedStatus);
+      if (row.expectedModuleCode) expect(record!.moduleCode).toBe(row.expectedModuleCode);
     }
   });
 
-  test('should verify authorized accounts in DB @database @regression', async ({ db }) => {
-    const repo    = new AccountOpeningRepository(db);
-    const pending = await repo.countByAuthStatus('U');
-    console.log(`Pending (Unauthorized) accounts in DB: ${pending}`);
+  test('should verify authorized accounts count in DB @database @regression', async ({ db }) => {
+    const repo       = new AccountOpeningRepository(db);
+    const pending    = await repo.countByAuthStatus('U');
     const authorized = await repo.countByAuthStatus('A');
-    console.log(`Authorized accounts in DB: ${authorized}`);
+    console.log(`Pending (U): ${pending} | Authorized (A): ${authorized}`);
     expect(authorized).toBeGreaterThanOrEqual(0);
   });
 
-  test('should verify account by customer ID in DB @database @regression', async ({ db }) => {
+  test('should verify account by customerNumber in DB @database @regression', async ({ db }) => {
     const rows = await ExcelHelper.readSheet<Record<string, string>>(DATA_FILE, 'Database');
     const repo = new AccountOpeningRepository(db);
     for (const row of rows) {
